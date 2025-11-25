@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroSection from '@/components/home/HeroSection';
+import PortfolioSlider from '@/components/home/PortfolioSlider';
 import ServicesSection from '@/components/home/ServicesSection';
 import PortfolioSection from '@/components/home/PortfolioSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
+      <PortfolioSlider />
       <ServicesSection />
       <PortfolioSection />
       <TestimonialsSection />
