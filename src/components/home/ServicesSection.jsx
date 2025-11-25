@@ -8,41 +8,60 @@ import {
   TrendingUp, 
   GraduationCap,
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Monitor,
+  MessageSquare,
+  Coins
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const services = [
   {
-    icon: Lightbulb,
-    title: 'Conseil & Stratégie',
-    description: 'Audit digital complet, définition de votre roadmap et accompagnement stratégique pour maximiser votre ROI.',
-    features: ['Audit digital', 'Stratégie de croissance', 'Roadmap produit'],
+    icon: Monitor,
+    title: 'Conception & Réalisation Numériques',
+    description: 'Création de solutions digitales innovantes, sites web et applications sur mesure.',
+    features: ['Sites web', 'Applications', 'Plateformes digitales'],
+    color: 'from-blue-500 to-cyan-500',
+    bgColor: 'bg-blue-500/10',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Consultation Projets Numériques',
+    description: 'Accompagnement expert sur tous types de projets numériques et digitaux.',
+    features: ['Audit technique', 'Recommandations', 'Suivi de projet'],
+    color: 'from-indigo-500 to-violet-500',
+    bgColor: 'bg-indigo-500/10',
+  },
+  {
+    icon: Coins,
+    title: 'Recherche de Financements',
+    description: 'Identification et obtention de financements pour la mise en œuvre de projets sociaux.',
+    features: ['Montage de dossiers', 'Subventions', 'Partenariats'],
     color: 'from-amber-500 to-orange-500',
     bgColor: 'bg-amber-500/10',
   },
   {
-    icon: Code2,
-    title: 'Développement',
-    description: 'Création de solutions web et mobiles performantes avec les dernières technologies du marché.',
-    features: ['Applications web', 'Applications mobiles', 'APIs & Intégrations'],
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-500/10',
+    icon: Lightbulb,
+    title: 'Conseil & Stratégie',
+    description: 'Audit digital complet, définition de votre roadmap et accompagnement stratégique.',
+    features: ['Audit digital', 'Stratégie de croissance', 'Roadmap produit'],
+    color: 'from-emerald-500 to-teal-500',
+    bgColor: 'bg-emerald-500/10',
   },
   {
     icon: TrendingUp,
     title: 'Marketing Digital',
     description: 'Stratégies d\'acquisition et de conversion optimisées pour accélérer votre croissance.',
     features: ['SEO & SEA', 'Social Media', 'Content Marketing'],
-    color: 'from-emerald-500 to-teal-500',
-    bgColor: 'bg-emerald-500/10',
+    color: 'from-rose-500 to-pink-500',
+    bgColor: 'bg-rose-500/10',
   },
   {
     icon: GraduationCap,
     title: 'Formation',
     description: 'Programmes de formation sur mesure pour monter en compétences vos équipes.',
     features: ['Workshops', 'E-learning', 'Coaching individuel'],
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-purple-500 to-fuchsia-500',
     bgColor: 'bg-purple-500/10',
   },
 ];
@@ -86,7 +105,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
