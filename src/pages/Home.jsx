@@ -1,10 +1,18 @@
-// Placeholder file, this should be overridden by the generated code
-
+import React from 'react';
+import HeroSection from '@/components/home/HeroSection';
+import ServicesSection from '@/components/home/ServicesSection';
+import PortfolioSection from '@/components/home/PortfolioSection';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
+import CTASection from '@/components/home/CTASection';
 
 export default function Home() {
-
   return (
-    <div>
-    </div>
+    <main>
+      <HeroSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <TestimonialsSection />
+      <CTASection />
+    </main>
   );
 }
