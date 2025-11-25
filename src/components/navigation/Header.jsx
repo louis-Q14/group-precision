@@ -129,7 +129,7 @@ export default function Header() {
                         <ChevronDown className="w-3 h-3" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="min-w-[180px] bg-white/80 backdrop-blur-md border-white/20">
+                    <DropdownMenuContent align="center" className="min-w-[180px] bg-white/40 backdrop-blur-md border-white/20">
                       <DropdownMenuItem asChild>
                         <Link to={createPageUrl(item.href)} className="font-medium">
                           Voir tout
