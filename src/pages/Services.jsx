@@ -135,7 +135,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
           >
-            Des solutions sur mesure pour chaque défi digital
+            Des solutions sur mesure pour chaque défi
           </motion.h1>
           
           <motion.p
