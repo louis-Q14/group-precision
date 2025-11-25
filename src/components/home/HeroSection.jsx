@@ -89,7 +89,7 @@ export default function HeroSection() {
             Créons ensemble votre{' '}
             <span className="relative">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86C] to-[#E8D5B5]">
-                succès digital
+                succès
               </span>
               <motion.span
                 initial={{ width: '0%' }}
