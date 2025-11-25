@@ -84,12 +84,12 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.2] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
           >
-            De la genèse de votre projet à son{' '}
+            Créons ensemble votre{' '}
             <span className="relative">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86C] to-[#E8D5B5]">
-                plein épanouissement
+                succès digital
               </span>
               <motion.span
                 initial={{ width: '0%' }}
@@ -107,8 +107,8 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
           >
-            Nous sommes à vos côtés à chaque étape. Notre mission : transformer votre vision 
-            en une réussite durable et prospère.
+            Stratégie, design et technologie. Nous accompagnons les entreprises ambitieuses 
+            dans leur transformation digitale avec des solutions sur mesure et des résultats mesurables.
           </motion.p>
 
           {/* CTA Form */}
