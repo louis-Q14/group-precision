@@ -84,11 +84,11 @@ const values = [
 ];
 
 const timeline = [
-  { year: '2012', title: 'Fondation', description: 'Création d\'Enterprise par Alexandre Martin' },
+  { year: '2012', title: 'Fondation', description: 'Création de PRECISIONS par Alexandre Martin' },
   { year: '2015', title: 'Première levée', description: 'Série A de 5M€ pour accélérer notre croissance' },
   { year: '2018', title: 'Expansion', description: 'Ouverture de bureaux à Londres et Berlin' },
   { year: '2020', title: '100 collaborateurs', description: 'Cap symbolique franchi malgré la crise' },
-  { year: '2023', title: 'Certification B Corp', description: 'Reconnaissance de notre engagement RSE' },
+  { year: '2023', title: 'Certification B Corp', description: 'Reconnaissance de l\'engagement RSE de PRECISIONS' },
   { year: '2024', title: 'Aujourd\'hui', description: '150+ projets, 45 experts, présence internationale' },
 ];
 

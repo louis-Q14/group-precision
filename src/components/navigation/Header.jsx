@@ -57,13 +57,13 @@ export default function Header() {
                   isScrolled ? 'bg-[#0A0A0B]' : 'bg-white'
                 }`}>
                   <span className={`text-xl font-bold ${isScrolled ? 'text-white' : 'text-[#0A0A0B]'}`}>
-                    E
+                    P
                   </span>
                 </div>
                 <span className={`text-xl font-semibold tracking-tight transition-colors duration-300 ${
                   isScrolled ? 'text-[#0A0A0B]' : 'text-white'
                 }`}>
-                  Enterprise
+                  PRECISIONS
                 </span>
               </motion.div>
             </Link>

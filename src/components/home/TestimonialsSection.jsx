@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const testimonials = [
   {
     id: 1,
-    content: "Enterprise a complètement transformé notre approche digitale. Leur expertise et leur engagement ont dépassé toutes nos attentes. Un partenaire de confiance pour notre croissance.",
+    content: "PRECISIONS a complètement transformé notre approche digitale. Leur expertise et leur engagement ont dépassé toutes nos attentes. Un partenaire de confiance pour notre croissance.",
     author: 'Marie Dupont',
     position: 'CEO',
     company: 'TechVision',
@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     id: 3,
-    content: "Professionnalisme, créativité et résultats. Enterprise a su nous accompagner à chaque étape avec une méthodologie rigoureuse et une vraie écoute de nos besoins.",
+    content: "Professionnalisme, créativité et résultats. PRECISIONS a su nous accompagner à chaque étape avec une méthodologie rigoureuse et une vraie écoute de nos besoins.",
     author: 'Sophie Bernard',
     position: 'CMO',
     company: 'LuxeBrand',

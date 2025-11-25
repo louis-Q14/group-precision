@@ -97,12 +97,12 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-                <span className="text-xl font-bold text-[#0A0A0B]">E</span>
+                <span className="text-xl font-bold text-[#0A0A0B]">P</span>
               </div>
-              <span className="text-xl font-semibold">Enterprise</span>
+              <span className="text-xl font-semibold">PRECISIONS</span>
             </div>
             <p className="text-gray-400 mb-8 max-w-sm">
-              Nous transformons vos ambitions digitales en réalité. Innovation, excellence et résultats mesurables.
+              PRECISIONS transforme vos ambitions digitales en réalité. Innovation, excellence et résultats mesurables.
             </p>
             <div className="space-y-3">
               <a href="mailto:contact@enterprise.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
@@ -178,7 +178,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} Enterprise. Tous droits réservés.
+              © {new Date().getFullYear()} PRECISIONS. Tous droits réservés.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (

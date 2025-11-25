@@ -87,7 +87,7 @@ const articles = [
   },
   {
     id: 6,
-    title: 'Enterprise annonce sa certification B Corp',
+    title: 'PRECISIONS annonce sa certification B Corp',
     slug: 'certification-b-corp',
     excerpt: 'Une étape majeure dans notre engagement pour un numérique responsable et éthique.',
     content: '',
