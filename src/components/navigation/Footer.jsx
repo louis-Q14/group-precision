@@ -10,8 +10,10 @@ import { base44 } from '@/api/base44Client';
 
 const footerLinks = {
   services: [
-    { name: 'Conseil Digital', href: 'Services' },
-    { name: 'Développement Web', href: 'Services' },
+    { name: 'Conception & Réalisation Numériques', href: 'Services' },
+    { name: 'Consultation', href: 'Services' },
+    { name: 'Recherche des Financements', href: 'Services' },
+    { name: 'Conseil & Stratégie', href: 'Services' },
     { name: 'Marketing Digital', href: 'Services' },
     { name: 'Formation', href: 'Services' },
   ],
