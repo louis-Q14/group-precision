@@ -12,11 +12,55 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const navItems = [
-  { name: 'Accueil', href: 'Home' },
-  { name: 'Services', href: 'Services' },
-  { name: 'Réalisations', href: 'Portfolio' },
-  { name: 'À propos', href: 'About' },
-  { name: 'Blog', href: 'Blog' },
+  { 
+    name: 'Accueil', 
+    href: 'Home',
+    subItems: [
+      { name: 'Notre mission', href: 'Home' },
+      { name: 'Nos valeurs', href: 'Home' },
+      { name: 'Témoignages', href: 'Home' },
+    ]
+  },
+  { 
+    name: 'Services', 
+    href: 'Services',
+    subItems: [
+      { name: 'Conseil & Stratégie', href: 'Services' },
+      { name: 'Développement', href: 'Services' },
+      { name: 'Marketing Digital', href: 'Services' },
+      { name: 'Formation', href: 'Services' },
+    ]
+  },
+  { 
+    name: 'Réalisations', 
+    href: 'Portfolio',
+    subItems: [
+      { name: 'Projets Web', href: 'Portfolio' },
+      { name: 'Applications Mobile', href: 'Portfolio' },
+      { name: 'Branding', href: 'Portfolio' },
+      { name: 'Marketing', href: 'Portfolio' },
+    ]
+  },
+  { 
+    name: 'À propos', 
+    href: 'About',
+    subItems: [
+      { name: 'Notre histoire', href: 'About' },
+      { name: 'Notre équipe', href: 'About' },
+      { name: 'Nos certifications', href: 'About' },
+      { name: 'Carrières', href: 'About' },
+    ]
+  },
+  { 
+    name: 'Blog', 
+    href: 'Blog',
+    subItems: [
+      { name: 'Insights', href: 'Blog' },
+      { name: 'Tutoriels', href: 'Blog' },
+      { name: 'Actualités', href: 'Blog' },
+      { name: 'Études de cas', href: 'Blog' },
+    ]
+  },
   { name: 'Contact', href: 'Contact' },
 ];
 
