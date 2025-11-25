@@ -5,12 +5,78 @@ import { motion } from 'framer-motion';
 import { 
   Lightbulb, Code2, TrendingUp, GraduationCap, ArrowRight, 
   CheckCircle, Sparkles, Target, Zap, Shield, Clock,
-  Users, BarChart3, Globe, Palette
+  Users, BarChart3, Globe, Palette, PenTool, MessageCircle, Coins
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 const services = [
+  {
+    id: 'conception',
+    icon: PenTool,
+    title: 'Conception & Réalisation',
+    subtitle: 'De l\'idée à la réalisation complète',
+    description: 'Nous concevons et réalisons vos projets de A à Z, du design initial à la mise en production, en garantissant qualité et respect des délais.',
+    features: [
+      'Études de faisabilité et conception',
+      'Design et prototypage',
+      'Développement sur mesure',
+      'Tests et validation',
+      'Mise en production',
+      'Suivi et optimisation'
+    ],
+    benefits: [
+      { icon: Target, text: 'Projet clé en main' },
+      { icon: Zap, text: 'Livraison rapide' },
+      { icon: Shield, text: 'Qualité garantie' },
+    ],
+    color: 'from-indigo-500 to-blue-500',
+    bgColor: 'bg-indigo-50',
+  },
+  {
+    id: 'consultation',
+    icon: MessageCircle,
+    title: 'Consultation',
+    subtitle: 'Un accompagnement expert personnalisé',
+    description: 'Bénéficiez de notre expertise pour guider vos décisions stratégiques et optimiser vos processus avec un accompagnement sur mesure.',
+    features: [
+      'Diagnostic approfondi',
+      'Analyse des besoins',
+      'Recommandations personnalisées',
+      'Plans d\'action concrets',
+      'Suivi régulier',
+      'Support dédié'
+    ],
+    benefits: [
+      { icon: Users, text: 'Expertise dédiée' },
+      { icon: Target, text: 'Solutions adaptées' },
+      { icon: Clock, text: 'Réactivité' },
+    ],
+    color: 'from-cyan-500 to-teal-500',
+    bgColor: 'bg-cyan-50',
+  },
+  {
+    id: 'financement',
+    icon: Coins,
+    title: 'Recherche des Financements',
+    subtitle: 'Optimisez le financement de vos projets',
+    description: 'Nous vous accompagnons dans l\'identification et l\'obtention des financements adaptés à vos projets : subventions, aides publiques, crédits.',
+    features: [
+      'Identification des aides disponibles',
+      'Montage des dossiers de demande',
+      'Optimisation fiscale (CIR, CII)',
+      'Recherche de subventions',
+      'Accompagnement BPI France',
+      'Suivi des demandes'
+    ],
+    benefits: [
+      { icon: Coins, text: 'Financements optimisés' },
+      { icon: Shield, text: 'Dossiers solides' },
+      { icon: BarChart3, text: 'Taux de succès élevé' },
+    ],
+    color: 'from-emerald-500 to-green-500',
+    bgColor: 'bg-emerald-50',
+  },
   {
     id: 'consulting',
     icon: Lightbulb,
@@ -34,28 +100,6 @@ const services = [
     bgColor: 'bg-amber-50',
   },
   {
-    id: 'development',
-    icon: Code2,
-    title: 'Développement',
-    subtitle: 'Des solutions techniques robustes et évolutives',
-    description: 'Notre équipe d\'experts conçoit et développe des applications web et mobiles performantes, scalables et sécurisées avec les dernières technologies.',
-    features: [
-      'Applications web modernes (React, Vue, Angular)',
-      'Applications mobiles natives et cross-platform',
-      'APIs RESTful et GraphQL',
-      'Architecture cloud et microservices',
-      'Intégrations tierces et CRM',
-      'Maintenance et évolutions'
-    ],
-    benefits: [
-      { icon: Globe, text: 'Solutions cross-platform' },
-      { icon: Shield, text: 'Sécurité renforcée' },
-      { icon: Zap, text: 'Performance optimale' },
-    ],
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-50',
-  },
-  {
     id: 'marketing',
     icon: TrendingUp,
     title: 'Marketing Digital',
@@ -74,8 +118,8 @@ const services = [
       { icon: Users, text: 'Audience qualifiée' },
       { icon: TrendingUp, text: 'Croissance durable' },
     ],
-    color: 'from-emerald-500 to-teal-500',
-    bgColor: 'bg-emerald-50',
+    color: 'from-rose-500 to-pink-500',
+    bgColor: 'bg-rose-50',
   },
   {
     id: 'formation',
@@ -96,7 +140,7 @@ const services = [
       { icon: Palette, text: 'Pédagogie innovante' },
       { icon: Clock, text: 'Formats flexibles' },
     ],
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-purple-500 to-violet-500',
     bgColor: 'bg-purple-50',
   },
 ];
@@ -109,7 +153,7 @@ const processSteps = [
 ];
 
 export default function Services() {
-  const [activeService, setActiveService] = useState('consulting');
+  const [activeService, setActiveService] = useState('conception');
 
   return (
     <main>
