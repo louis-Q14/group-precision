@@ -5,80 +5,14 @@ import { motion } from 'framer-motion';
 import { 
   Lightbulb, Code2, TrendingUp, GraduationCap, ArrowRight, 
   CheckCircle, Sparkles, Target, Zap, Shield, Clock,
-  Users, BarChart3, Globe, Palette, Monitor, MessageCircle, Coins
+  Users, BarChart3, Globe, Palette
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 const services = [
   {
-    id: 'conception',
-    icon: Monitor,
-    title: 'Conception & Réalisation Numériques',
-    subtitle: 'Des solutions techniques robustes et évolutives',
-    description: 'Notre équipe d\'experts conçoit et développe des applications web et mobiles performantes, scalables et sécurisées avec les dernières technologies.',
-    features: [
-      'Applications web modernes (React, Vue, Angular)',
-      'Applications mobiles natives et cross-platform',
-      'APIs RESTful et GraphQL',
-      'Architecture cloud et microservices',
-      'Intégrations tierces et CRM',
-      'Maintenance et évolutions'
-    ],
-    benefits: [
-      { icon: Globe, text: 'Solutions cross-platform' },
-      { icon: Shield, text: 'Sécurité renforcée' },
-      { icon: Zap, text: 'Performance optimale' },
-    ],
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    id: 'consultation',
-    icon: MessageCircle,
-    title: 'Consultation',
-    subtitle: 'Accompagnement personnalisé pour vos projets',
-    description: 'Nous analysons vos besoins spécifiques et vous accompagnons dans la définition et la mise en œuvre de vos projets digitaux.',
-    features: [
-      'Analyse approfondie des besoins',
-      'Étude de faisabilité',
-      'Recommandations personnalisées',
-      'Suivi et accompagnement continu',
-      'Optimisation des processus',
-      'Support décisionnel'
-    ],
-    benefits: [
-      { icon: Target, text: 'Solutions adaptées' },
-      { icon: Users, text: 'Accompagnement dédié' },
-      { icon: Zap, text: 'Réactivité garantie' },
-    ],
-    color: 'from-indigo-500 to-violet-500',
-    bgColor: 'bg-indigo-50',
-  },
-  {
-    id: 'financement',
-    icon: Coins,
-    title: 'Recherche des Financements',
-    subtitle: 'Trouvez les ressources pour vos projets',
-    description: 'Identification et accompagnement dans l\'obtention de financements publics et privés pour concrétiser vos ambitions digitales.',
-    features: [
-      'Identification des aides disponibles',
-      'Montage de dossiers de subventions',
-      'Accompagnement crédit d\'impôt',
-      'Recherche d\'investisseurs',
-      'Business plan et pitch deck',
-      'Suivi des demandes'
-    ],
-    benefits: [
-      { icon: Coins, text: 'Financement optimisé' },
-      { icon: Shield, text: 'Dossiers solides' },
-      { icon: Target, text: 'Taux de succès élevé' },
-    ],
-    color: 'from-emerald-500 to-teal-500',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    id: 'conseil',
+    id: 'consulting',
     icon: Lightbulb,
     title: 'Conseil & Stratégie',
     subtitle: 'Transformez votre vision en roadmap actionnable',
@@ -100,6 +34,28 @@ const services = [
     bgColor: 'bg-amber-50',
   },
   {
+    id: 'development',
+    icon: Code2,
+    title: 'Développement',
+    subtitle: 'Des solutions techniques robustes et évolutives',
+    description: 'Notre équipe d\'experts conçoit et développe des applications web et mobiles performantes, scalables et sécurisées avec les dernières technologies.',
+    features: [
+      'Applications web modernes (React, Vue, Angular)',
+      'Applications mobiles natives et cross-platform',
+      'APIs RESTful et GraphQL',
+      'Architecture cloud et microservices',
+      'Intégrations tierces et CRM',
+      'Maintenance et évolutions'
+    ],
+    benefits: [
+      { icon: Globe, text: 'Solutions cross-platform' },
+      { icon: Shield, text: 'Sécurité renforcée' },
+      { icon: Zap, text: 'Performance optimale' },
+    ],
+    color: 'from-blue-500 to-cyan-500',
+    bgColor: 'bg-blue-50',
+  },
+  {
     id: 'marketing',
     icon: TrendingUp,
     title: 'Marketing Digital',
@@ -118,8 +74,8 @@ const services = [
       { icon: Users, text: 'Audience qualifiée' },
       { icon: TrendingUp, text: 'Croissance durable' },
     ],
-    color: 'from-rose-500 to-pink-500',
-    bgColor: 'bg-rose-50',
+    color: 'from-emerald-500 to-teal-500',
+    bgColor: 'bg-emerald-50',
   },
   {
     id: 'formation',
@@ -153,7 +109,7 @@ const processSteps = [
 ];
 
 export default function Services() {
-  const [activeService, setActiveService] = useState('conception');
+  const [activeService, setActiveService] = useState('consulting');
 
   return (
     <main>

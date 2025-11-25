@@ -25,10 +25,8 @@ const navItems = [
     name: 'Services', 
     href: 'Services',
     subItems: [
-      { name: 'Conception & Réalisation Numériques', href: 'Services' },
-      { name: 'Consultation', href: 'Services' },
-      { name: 'Recherche des Financements', href: 'Services' },
       { name: 'Conseil & Stratégie', href: 'Services' },
+      { name: 'Développement', href: 'Services' },
       { name: 'Marketing Digital', href: 'Services' },
       { name: 'Formation', href: 'Services' },
     ]
