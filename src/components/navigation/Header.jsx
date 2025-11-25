@@ -115,17 +115,48 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={createPageUrl(item.href)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    isScrolled
-                      ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                item.subItems ? (
+                  <DropdownMenu key={item.name}>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                          isScrolled
+                            ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
+                            : 'text-white/80 hover:text-white hover:bg-white/10'
+                        }`}
+                      >
+                        {item.name}
+                        <ChevronDown className="w-3 h-3" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="center" className="min-w-[180px]">
+                      <DropdownMenuItem asChild>
+                        <Link to={createPageUrl(item.href)} className="font-medium">
+                          Voir tout
+                        </Link>
+                      </DropdownMenuItem>
+                      {item.subItems.map((subItem) => (
+                        <DropdownMenuItem key={subItem.name} asChild>
+                          <Link to={createPageUrl(subItem.href)}>
+                            {subItem.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={createPageUrl(item.href)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      isScrolled
+                        ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </nav>
 
