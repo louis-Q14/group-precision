@@ -145,7 +145,7 @@ export default function Services() {
             className="text-xl text-gray-400 max-w-3xl mx-auto"
           >
             De la stratégie à l'exécution, nous vous accompagnons à chaque étape 
-            de votre transformation digitale.
+                              de votre transformation.
           </motion.p>
         </div>
       </section>
