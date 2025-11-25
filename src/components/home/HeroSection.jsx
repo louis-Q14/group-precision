@@ -108,7 +108,7 @@ export default function HeroSection() {
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
           >
             Stratégie, design et technologie. Nous accompagnons les entreprises ambitieuses 
-            dans leur transformation digitale avec des solutions sur mesure et des résultats mesurables.
+            dans leur transformation avec des solutions sur mesure et des résultats mesurables.
           </motion.p>
 
           {/* CTA Form */}
