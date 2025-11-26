@@ -46,8 +46,6 @@ const portfolioImages = [
 const duplicatedImages = [...portfolioImages, ...portfolioImages];
 
 export default function PortfolioSlider({ embedded = false }) {
-  const [isHovered, setIsHovered] = React.useState(false);
-
   if (embedded) {
     return (
       <div className="overflow-hidden">
@@ -58,7 +56,7 @@ export default function PortfolioSlider({ embedded = false }) {
           <motion.div
             className="flex gap-4"
             animate={{
-              x: isHovered ? undefined : [0, -50 * portfolioImages.length * 6],
+              x: [0, -50 * portfolioImages.length * 6],
             }}
             transition={{
               x: {
@@ -74,10 +72,8 @@ export default function PortfolioSlider({ embedded = false }) {
                 key={`${item.id}-${index}`}
                 to={createPageUrl('Portfolio')}
                 className="flex-shrink-0 group"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
               >
-                <div className="relative w-[450px] h-[290px] rounded-xl overflow-hidden transition-transform duration-300 group-hover:scale-110">
+                <div className="relative w-[450px] h-[290px] rounded-xl overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
