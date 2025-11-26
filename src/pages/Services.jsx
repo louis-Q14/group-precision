@@ -15,15 +15,13 @@ const services = [
     id: 'conception',
         icon: PenTool,
         title: 'Développement des Projets',
-    subtitle: 'De l\'idée à la réalisation complète',
-    description: 'Nous concevons et réalisons vos projets de A à Z, du design initial à la mise en production, en garantissant qualité et respect des délais.',
+    subtitle: 'Votre partenaire pour la concrétisation de projets complexes',
+    description: 'À la confluence du conseil stratégique, de la communication, de l\'ingénierie et du management, PRECISIONS apporte une vision expert et une approche terrain unique. Nous intervenons sur l\'ensemble du cycle de vie de votre projet pour concevoir et livrer des solutions sur mesure.',
     features: [
-      'Études de faisabilité et conception',
-      'Design et prototypage',
-      'Développement sur mesure',
-      'Tests et validation',
-      'Mise en production',
-      'Suivi et optimisation'
+      '🔍 Émergence & Stratégie : De la formulation de l\'idée à l\'étude de faisabilité et l\'élaboration de la stratégie',
+      '💡 Financement & Mise en œuvre : Recherche de financements, lobbying, négociation d\'affaires et accompagnement à la réalisation',
+      '📈 Opérations & Suivi : Assistance administrative et suivi opérationnel pour garantir le succès et la pérennité',
+      'Notre promesse : transformer vos ambitions en réalisations tangibles'
     ],
     benefits: [
       { icon: Target, text: 'Projet clé en main' },
