@@ -64,17 +64,6 @@ export default function HeroSection() {
           style={{ opacity }}
           className="max-w-4xl mx-auto text-center"
         >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-gray-300">Leader de la transformation digitale</span>
-          </motion.div>
-
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
