@@ -89,7 +89,7 @@ export default function ServicesSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0B] mb-6"
           >
-            Des solutions complètes pour votre transformation digitale
+            Des solutions complètes pour votre transformation
           </motion.h2>
           
           <motion.p
