@@ -224,7 +224,9 @@ export default function Services() {
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Info */}
                 <div>
-
+                  <Badge className={`mb-4 ${service.bgColor} text-gray-900 border-0`}>
+                    {service.subtitle}
+                  </Badge>
                   <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6">
                     {service.title}
                   </h2>
