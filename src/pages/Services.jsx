@@ -23,11 +23,7 @@ const services = [
       '📈 Opérations & Suivi : Assistance administrative et suivi opérationnel pour garantir le succès et la pérennité',
       'Notre promesse : transformer vos ambitions en réalisations tangibles'
     ],
-    benefits: [
-      { icon: Target, text: 'Projet clé en main' },
-      { icon: Zap, text: 'Livraison rapide' },
-      { icon: Shield, text: 'Qualité garantie' },
-    ],
+    benefits: [],
     color: 'from-indigo-500 to-blue-500',
     bgColor: 'bg-indigo-50',
   },
