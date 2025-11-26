@@ -73,7 +73,7 @@ export default function PortfolioSlider({ embedded = false }) {
                 to={createPageUrl('Portfolio')}
                 className="flex-shrink-0 group"
               >
-                <div className="relative w-[280px] h-[180px] rounded-xl overflow-hidden">
+                <div className="relative w-[450px] h-[290px] rounded-xl overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
