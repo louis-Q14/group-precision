@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { base44 } from '@/api/base44Client';
+import PortfolioSlider from './PortfolioSlider';
 
 
 
@@ -135,12 +136,17 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
+      {/* Portfolio Slider */}
+      <div className="absolute bottom-24 left-0 right-0 z-20">
+        <PortfolioSlider embedded />
+      </div>
+
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

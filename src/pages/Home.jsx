@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <PortfolioSlider />
       <ServicesSection />
       <PortfolioSection />
       <TestimonialsSection />
