@@ -76,7 +76,7 @@ const services = [
     icon: Lightbulb,
     title: 'Conseil & Stratégie',
     subtitle: 'Transformez votre vision en roadmap actionnable',
-    description: 'Nous analysons votre écosystème digital, identifions les opportunités de croissance et définissons une stratégie sur mesure alignée avec vos objectifs business.',
+    description: 'Nous analysons votre écosystème, identifions les opportunités de croissance et définissons une stratégie sur mesure alignée avec vos objectifs business.',
     features: [
       'Audit digital complet (technique, UX, SEO)',
       'Analyse concurrentielle et benchmark',
