@@ -8,12 +8,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { base44 } from '@/api/base44Client';
 
-const stats = [
-  { value: '150+', label: 'Projets livrés' },
-  { value: '98%', label: 'Clients satisfaits' },
-  { value: '12', label: 'Années d\'expertise' },
-  { value: '45', label: 'Experts dédiés' },
-];
+
 
 export default function HeroSection() {
   const [email, setEmail] = useState('');
@@ -136,28 +131,7 @@ export default function HeroSection() {
             </Button>
           </motion.form>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+
         </motion.div>
       </div>
 
