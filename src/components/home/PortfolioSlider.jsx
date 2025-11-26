@@ -6,6 +6,12 @@ import { createPageUrl } from '@/utils';
 const portfolioImages = [
   {
     id: 1,
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
+    title: 'Projet HARCHIVE',
+    client: 'HARCHIVE',
+  },
+  {
+    id: 2,
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
     title: 'Fintech Revolution',
     client: 'NeoBank Corp',
