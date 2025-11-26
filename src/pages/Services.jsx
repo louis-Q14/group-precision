@@ -224,9 +224,7 @@ export default function Services() {
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Info */}
                 <div>
-                  <Badge className={`mb-4 ${service.bgColor} text-gray-900 border-0`}>
-                    {service.subtitle}
-                  </Badge>
+
                   <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6">
                     {service.title}
                   </h2>
@@ -235,16 +233,18 @@ export default function Services() {
                   </p>
 
                   {/* Benefits */}
-                  <div className="grid sm:grid-cols-3 gap-4 mb-8">
-                    {service.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-                          <benefit.icon className="w-5 h-5 text-white" />
+                  {service.benefits.length > 0 && (
+                    <div className="grid sm:grid-cols-3 gap-4 mb-8">
+                      {service.benefits.map((benefit, i) => (
+                        <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                          <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center`}>
+                            <benefit.icon className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
                         </div>
-                        <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
 
                   <Link to={createPageUrl('Contact')}>
                     <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
