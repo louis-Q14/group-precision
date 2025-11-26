@@ -30,7 +30,7 @@ const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: 'E-Commerce Premium',
     client: 'Luxe Fashion',
     category: 'retail',
@@ -41,7 +41,7 @@ const projects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: 'Plateforme SaaS',
     client: 'TechStart',
     category: 'tech',
@@ -52,7 +52,7 @@ const projects = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: 'App Santé',
     client: 'MedTech Plus',
     category: 'healthcare',
