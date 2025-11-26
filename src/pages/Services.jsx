@@ -13,8 +13,8 @@ import { Badge } from '@/components/ui/badge';
 const services = [
   {
     id: 'conception',
-    icon: PenTool,
-    title: 'Conception & Réalisation',
+        icon: PenTool,
+        title: 'Développement des Projets',
     subtitle: 'De l\'idée à la réalisation complète',
     description: 'Nous concevons et réalisons vos projets de A à Z, du design initial à la mise en production, en garantissant qualité et respect des délais.',
     features: [

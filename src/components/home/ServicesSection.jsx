@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button';
 const services = [
   {
     icon: PenTool,
-    title: 'Conception & Réalisation',
+    title: 'Développement des Projets',
     description: 'Création et développement de vos projets de A à Z, du design à la mise en production.',
     features: ['Design sur mesure', 'Développement complet', 'Mise en production'],
     color: 'from-indigo-500 to-blue-500',
