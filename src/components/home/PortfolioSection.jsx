@@ -9,17 +9,6 @@ import { Badge } from '@/components/ui/badge';
 const projects = [
   {
     id: 1,
-    title: 'Projet HARCHIVE',
-    client: 'HARCHIVE',
-    category: 'tech',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
-    metrics: [
-      { value: '100%', label: 'Réussite' },
-      { value: 'Livré', label: 'Statut' },
-    ],
-  },
-  {
-    id: 2,
     title: 'Fintech Revolution',
     client: 'NeoBank Corp',
     category: 'finance',
@@ -30,7 +19,7 @@ const projects = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     title: 'E-Commerce Premium',
     client: 'Luxe Fashion',
     category: 'retail',
@@ -41,7 +30,7 @@ const projects = [
     ],
   },
   {
-    id: 4,
+    id: 3,
     title: 'Plateforme SaaS',
     client: 'TechStart',
     category: 'tech',
@@ -52,7 +41,7 @@ const projects = [
     ],
   },
   {
-    id: 5,
+    id: 4,
     title: 'App Santé',
     client: 'MedTech Plus',
     category: 'healthcare',
