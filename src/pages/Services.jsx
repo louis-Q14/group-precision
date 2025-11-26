@@ -15,7 +15,7 @@ const services = [
     id: 'conception',
         icon: PenTool,
         title: 'Développement des Projets',
-    subtitle: 'Votre partenaire pour la concrétisation de projets complexes',
+    subtitle: '',
     description: 'À la confluence du conseil stratégique, de la communication, de l\'ingénierie et du management, PRECISIONS apporte une vision expert et une approche terrain unique. Nous intervenons sur l\'ensemble du cycle de vie de votre projet pour concevoir et livrer des solutions sur mesure.',
     features: [
       '🔍 Émergence & Stratégie : De la formulation de l\'idée à l\'étude de faisabilité et l\'élaboration de la stratégie',
