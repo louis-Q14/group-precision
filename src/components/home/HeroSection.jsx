@@ -136,8 +136,8 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Portfolio Slider */}
-      <div className="absolute bottom-24 left-0 right-0 z-20">
+      {/* Portfolio Slider - Hidden on mobile */}
+      <div className="hidden md:block absolute bottom-24 left-0 right-0 z-20">
         <PortfolioSlider embedded />
       </div>
 
