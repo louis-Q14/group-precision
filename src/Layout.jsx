@@ -2,9 +2,11 @@ import React from 'react';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import { Toaster } from 'sonner';
+import { LanguageProvider } from '@/components/LanguageContext';
 
 export default function Layout({ children }) {
   return (
+    <LanguageProvider>
     <div className="min-h-screen bg-white">
       <style>{`
         :root {
@@ -49,5 +51,6 @@ export default function Layout({ children }) {
       <Footer />
       <Toaster position="top-right" richColors />
     </div>
+    </LanguageProvider>
   );
 }
