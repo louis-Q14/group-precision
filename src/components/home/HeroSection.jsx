@@ -8,10 +8,12 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { base44 } from '@/api/base44Client';
 import PortfolioSlider from './PortfolioSlider';
+import { useLanguage } from '@/components/LanguageContext';
 
 
 
 export default function HeroSection() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { scrollY } = useScroll();
@@ -29,7 +31,7 @@ export default function HeroSection() {
       source: 'hero_form',
       status: 'new',
     });
-    toast.success('Merci ! Nous vous contacterons bientôt.');
+    toast.success(t('contact.form.successMessage'));
     setEmail('');
     setIsSubmitting(false);
   };
@@ -71,10 +73,10 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
           >
-            Créons ensemble votre{' '}
+            {t('hero.title').split(' ').slice(0, -1).join(' ')}{' '}
             <span className="relative">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86C] to-[#E8D5B5]">
-                succès
+                {t('hero.title').split(' ').slice(-1)[0]}
               </span>
               <motion.span
                 initial={{ width: '0%' }}
@@ -92,8 +94,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
           >
-            Stratégie, design et technologie. Nous accompagnons les entreprises ambitieuses 
-            dans leur transformation avec des solutions sur mesure et des résultats mesurables.
+            {t('hero.subtitle')}
           </motion.p>
 
           {/* CTA Form */}
@@ -106,7 +107,7 @@ export default function HeroSection() {
           >
             <Input
               type="email"
-              placeholder="Votre email professionnel"
+              placeholder={t('contact.form.email')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 h-14 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl px-6"
@@ -142,7 +143,7 @@ export default function HeroSection() {
           transition={{ duration: 2, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-gray-500"
         >
-          <span className="text-xs uppercase tracking-widest">Découvrir</span>
+          <span className="text-xs uppercase tracking-widest">{t('hero.scrollDown')}</span>
           <ChevronDown className="w-5 h-5" />
         </motion.div>
       </motion.div>

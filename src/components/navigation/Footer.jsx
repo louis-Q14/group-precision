@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { base44 } from '@/api/base44Client';
+import { useLanguage } from '@/components/LanguageContext';
 
 const footerLinks = {
   services: [
@@ -37,6 +38,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,7 +53,7 @@ export default function Footer() {
       source: 'newsletter',
       status: 'new',
     });
-    toast.success('Merci pour votre inscription !');
+    toast.success(t('footer.newsletter.subscribe') + ' ✓');
     setEmail('');
     setIsSubmitting(false);
   };
@@ -64,16 +66,16 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="text-center lg:text-left">
               <h3 className="text-2xl lg:text-3xl font-semibold mb-2">
-                Restez informé
+                {t('footer.newsletter.title')}
               </h3>
               <p className="text-gray-400">
-                Recevez nos dernières actualités et insights directement dans votre boîte mail.
+                {t('footer.newsletter.subtitle')}
               </p>
             </div>
             <form onSubmit={handleNewsletterSubmit} className="flex w-full max-w-md gap-3">
               <Input
                 type="email"
-                placeholder="Votre email"
+                placeholder={t('footer.newsletter.placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6"
@@ -178,7 +180,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} PRECISIONS. Tous droits réservés.
+              © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
