@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/components/LanguageContext';
 
 const testimonials = [
   {
@@ -34,6 +35,7 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
+  const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -80,11 +82,10 @@ export default function TestimonialsSection() {
                 <Quote className="w-8 h-8 text-[#C9A86C]" />
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-                Ce que disent nos clients
+                {t('testimonials.title')}
               </h2>
               <p className="text-lg text-gray-400">
-                La satisfaction de nos clients est notre plus grande fierté. 
-                Découvrez leurs témoignages.
+                {t('testimonials.tagline')}
               </p>
             </motion.div>
 
