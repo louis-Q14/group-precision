@@ -14,52 +14,53 @@ import {
   Coins
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/components/LanguageContext';
 
-const services = [
+const getServices = (t) => [
   {
     icon: PenTool,
-    title: 'Développement des Projets',
-    description: 'Création et développement de vos projets de A à Z, du design à la mise en production.',
+    title: t('services.projectDev'),
+    description: t('services.projectDevDesc'),
     features: ['Design sur mesure', 'Développement complet', 'Mise en production'],
     color: 'from-indigo-500 to-blue-500',
     bgColor: 'bg-indigo-500/10',
   },
   {
     icon: MessageCircle,
-    title: 'Consultation',
-    description: 'Accompagnement personnalisé et expertise pour guider vos décisions stratégiques.',
+    title: t('services.consultation'),
+    description: t('services.consultationDesc'),
     features: ['Diagnostic expert', 'Recommandations', 'Suivi personnalisé'],
     color: 'from-cyan-500 to-teal-500',
     bgColor: 'bg-cyan-500/10',
   },
   {
     icon: Coins,
-    title: 'Recherche des Financements',
-    description: 'Identification et accompagnement dans l\'obtention de financements pour vos projets.',
+    title: t('services.financing'),
+    description: t('services.financingDesc'),
     features: ['Subventions', 'Aides publiques', 'Montage de dossiers'],
     color: 'from-emerald-500 to-green-500',
     bgColor: 'bg-emerald-500/10',
   },
   {
     icon: Lightbulb,
-    title: 'Conseil & Stratégie',
-    description: 'Audit digital complet, définition de votre roadmap et accompagnement stratégique.',
+    title: t('services.strategy'),
+    description: t('services.strategyDesc'),
     features: ['Audit digital', 'Stratégie de croissance', 'Roadmap produit'],
     color: 'from-amber-500 to-orange-500',
     bgColor: 'bg-amber-500/10',
   },
   {
     icon: TrendingUp,
-    title: 'Marketing Digital',
-    description: 'Stratégies d\'acquisition et de conversion optimisées pour accélérer votre croissance.',
+    title: t('services.marketing'),
+    description: t('services.marketingDesc'),
     features: ['SEO & SEA', 'Social Media', 'Content Marketing'],
     color: 'from-rose-500 to-pink-500',
     bgColor: 'bg-rose-500/10',
   },
   {
     icon: GraduationCap,
-    title: 'Formation',
-    description: 'Programmes de formation sur mesure pour monter en compétences vos équipes.',
+    title: t('services.training'),
+    description: t('services.trainingDesc'),
     features: ['Workshops', 'E-learning', 'Coaching individuel'],
     color: 'from-purple-500 to-violet-500',
     bgColor: 'bg-purple-500/10',
@@ -67,6 +68,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const { t } = useLanguage();
+  const services = getServices(t);
   return (
     <section className="py-24 lg:py-32 bg-[#FAFAFA]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -79,7 +82,7 @@ export default function ServicesSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0A0B]/5 mb-6"
           >
             <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm font-medium text-[#0A0A0B]">Nos services</span>
+            <span className="text-sm font-medium text-[#0A0A0B]">{t('services.tagline')}</span>
           </motion.div>
           
           <motion.h2
@@ -88,9 +91,9 @@ export default function ServicesSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0B] mb-6"
-          >
-            Des solutions complètes pour votre transformation
-          </motion.h2>
+                        >
+                          {t('services.title')}
+                        </motion.h2>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -98,10 +101,9 @@ export default function ServicesSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-600"
-          >
-            Une approche holistique combinant stratégie, technologie et créativité 
-            pour des résultats mesurables et durables.
-          </motion.p>
+                        >
+                          {t('services.subtitle')}
+                        </motion.p>
         </div>
 
         {/* Services Grid */}
@@ -153,7 +155,7 @@ export default function ServicesSection() {
                   to={createPageUrl('Services')}
                   className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0A0B] group-hover:text-[#C9A86C] transition-colors"
                 >
-                  En savoir plus
+                  {t('services.learnMore')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -173,7 +175,7 @@ export default function ServicesSection() {
               size="lg" 
               className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white"
             >
-              Voir tous nos services
+              {t('services.viewAll')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
