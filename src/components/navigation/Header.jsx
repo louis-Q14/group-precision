@@ -10,67 +10,39 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useLanguage } from '@/components/LanguageContext';
 
-const navItems = [
+const getNavItems = (t) => [
   { 
-    name: 'Accueil', 
+    name: t('nav.home'), 
     href: 'Home',
-    subItems: [
-      { name: 'Notre mission', href: 'Home' },
-      { name: 'Nos valeurs', href: 'Home' },
-      { name: 'Témoignages', href: 'Home' },
-    ]
   },
   { 
-    name: 'Services', 
+    name: t('nav.services'), 
     href: 'Services',
-    subItems: [
-      { name: 'Développement des Projets', href: 'Services' },
-      { name: 'Consultation', href: 'Services' },
-      { name: 'Recherche des Financements', href: 'Services' },
-      { name: 'Conseil & Stratégie', href: 'Services' },
-      { name: 'Marketing Digital', href: 'Services' },
-      { name: 'Formation', href: 'Services' },
-    ]
   },
   { 
-    name: 'Réalisations', 
+    name: t('nav.portfolio'), 
     href: 'Portfolio',
-    subItems: [
-      { name: 'Projets Web', href: 'Portfolio' },
-      { name: 'Applications Mobile', href: 'Portfolio' },
-      { name: 'Branding', href: 'Portfolio' },
-      { name: 'Marketing', href: 'Portfolio' },
-    ]
   },
   { 
-    name: 'À propos', 
+    name: t('nav.about'), 
     href: 'About',
-    subItems: [
-      { name: 'Notre histoire', href: 'About' },
-      { name: 'Notre équipe', href: 'About' },
-      { name: 'Nos certifications', href: 'About' },
-      { name: 'Carrières', href: 'About' },
-    ]
   },
   { 
-    name: 'Blog', 
+    name: t('nav.blog'), 
     href: 'Blog',
-    subItems: [
-      { name: 'Insights', href: 'Blog' },
-      { name: 'Tutoriels', href: 'Blog' },
-      { name: 'Actualités', href: 'Blog' },
-      { name: 'Études de cas', href: 'Blog' },
-    ]
   },
-  { name: 'Contact', href: 'Contact' },
+  { name: t('nav.contact'), href: 'Contact' },
 ];
 
 export default function Header() {
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [language, setLanguage] = useState('FR');
+  
+  const navItems = getNavItems(t);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,48 +89,17 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
-                item.subItems ? (
-                  <DropdownMenu key={item.name}>
-                    <DropdownMenuTrigger asChild>
-                      <button
-                        className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                          isScrolled
-                            ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
-                            : 'text-white/80 hover:text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {item.name}
-                        <ChevronDown className="w-3 h-3" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="min-w-[180px] bg-white/20 backdrop-blur-md border-white/20 text-white [&_*]:text-white">
-                      <DropdownMenuItem asChild>
-                        <Link to={createPageUrl(item.href)} className="font-medium">
-                          Voir tout
-                        </Link>
-                      </DropdownMenuItem>
-                      {item.subItems.map((subItem) => (
-                        <DropdownMenuItem key={subItem.name} asChild>
-                          <Link to={createPageUrl(subItem.href)}>
-                            {subItem.name}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={createPageUrl(item.href)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                      isScrolled
-                        ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  to={createPageUrl(item.href)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    isScrolled
+                      ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
 
@@ -180,11 +121,11 @@ export default function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="min-w-[100px]">
-                  <DropdownMenuItem onClick={() => setLanguage('FR')}>
-                    Français
+                  <DropdownMenuItem onClick={() => setLanguage('FR')} className={language === 'FR' ? 'bg-gray-100' : ''}>
+                    🇫🇷 Français
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage('EN')}>
-                    English
+                  <DropdownMenuItem onClick={() => setLanguage('EN')} className={language === 'EN' ? 'bg-gray-100' : ''}>
+                    🇬🇧 English
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -198,7 +139,7 @@ export default function Header() {
                       : 'bg-white text-[#0A0A0B] hover:bg-white/90'
                   }`}
                 >
-                  Démarrer un projet
+                  {t('nav.startProject')}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
@@ -254,7 +195,7 @@ export default function Header() {
                 <div className="pt-6 mt-6 border-t">
                   <Link to={createPageUrl('Contact')} onClick={() => setIsMobileMenuOpen(false)}>
                     <Button className="w-full rounded-full bg-[#0A0A0B] text-white">
-                      Démarrer un projet
+                      {t('nav.startProject')}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
