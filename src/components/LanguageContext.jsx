@@ -57,8 +57,8 @@ const translations = {
     },
     // Testimonials
     testimonials: {
-      tagline: 'Témoignages',
-      title: 'Ce que nos clients disent',
+      tagline: 'La satisfaction de nos clients est notre plus grande fierté. Découvrez leurs témoignages.',
+      title: 'Ce que disent nos clients',
     },
     // CTA
     cta: {
@@ -177,7 +177,7 @@ const translations = {
     },
     // Testimonials
     testimonials: {
-      tagline: 'Testimonials',
+      tagline: 'Our clients\' satisfaction is our greatest pride. Discover their testimonials.',
       title: 'What our clients say',
     },
     // CTA
