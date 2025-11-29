@@ -27,6 +27,24 @@ const projects = [
     technologies: ['Web', 'Mobile', 'Cloud'],
     websiteUrl: 'https://www.harchive.net',
   },
+  {
+    id: 2,
+    title: 'Terreau Fertile',
+    client: 'Terreau Fertile',
+    category: 'web',
+    industry: 'other',
+    description: 'Plateforme de soutien aux maraîchers facilitant l\'accès à la terre et au financement de court terme pour dynamiser l\'agriculture locale et promouvoir une production durable.',
+    image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&fit=crop',
+    challenge: 'Permettre aux maraîchers d\'accéder facilement à des terres cultivables et à des financements adaptés à leurs besoins.',
+    solution: 'Création d\'une plateforme connectant les maraîchers aux propriétaires fonciers et aux institutions de microfinance pour des solutions de financement court terme.',
+    results: [
+      { label: 'Secteur', value: 'Agriculture' },
+      { label: 'Impact', value: 'Durable' },
+    ],
+    testimonial: 'Une initiative qui transforme le quotidien des agriculteurs locaux.',
+    testimonialAuthor: 'Équipe Terreau Fertile',
+    technologies: ['Web', 'Fintech', 'AgriTech'],
+  },
 ];
 
 const categories = [
