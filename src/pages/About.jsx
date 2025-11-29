@@ -316,14 +316,23 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="cursor-pointer"
               >
-                <div className="relative overflow-hidden rounded-2xl mb-4">
+                <motion.div 
+                  className="relative overflow-hidden rounded-2xl mb-4 shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-[350px] object-cover"
+                    className="w-full h-[350px] object-cover transition-all duration-500 hover:brightness-110"
                   />
-                </div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </motion.div>
                 <h3 className="text-xl font-semibold text-[#0A0A0B]">{member.name}</h3>
                 <p className="text-gray-600">{member.position}</p>
               </motion.div>
