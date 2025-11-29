@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,6 +6,51 @@ import { ArrowRight, ExternalLink, Sparkles, X, ChevronLeft, ChevronRight } from
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+// Composant pour le carrousel d'images animé
+function ImageCarousel({ images, title }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [images]);
+
+  if (!images || images.length === 0) return null;
+  if (images.length === 1) {
+    return <img src={images[0]} alt={title} className="w-full h-full object-cover" />;
+  }
+
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt={`${title} - ${currentIndex + 1}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full h-full object-cover absolute inset-0"
+        />
+      </AnimatePresence>
+      {/* Indicateurs */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+            className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-white w-4' : 'bg-white/50'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const projects = [
   {
@@ -34,7 +79,20 @@ const projects = [
     category: 'web',
     industry: 'other',
     description: 'Plateforme de soutien aux maraîchers facilitant l\'accès à la terre et au financement de court terme pour dynamiser l\'agriculture locale et promouvoir une production durable.',
-    image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&fit=crop',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/a9e794b0a_1.jpg',
+    images: [
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/a9e794b0a_1.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/69d2ef54e_2.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/9591f7424_3.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/a0341ecde_4.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/691026fba_5.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/5dc2bbcd3_6.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/cc67569f6_7.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/ac3c91785_8.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/2f9178cdf_9.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/486e5bc92_10.jpg',
+      'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/f40cb40cb_11.jpg',
+    ],
     challenge: 'Permettre aux maraîchers d\'accéder facilement à des terres cultivables et à des financements adaptés à leurs besoins.',
     solution: 'Création d\'une plateforme connectant les maraîchers aux propriétaires fonciers et aux institutions de microfinance pour des solutions de financement court terme.',
     results: [
@@ -165,11 +223,17 @@ export default function Portfolio() {
                   className="cursor-pointer group"
                 >
                   <div className="relative h-[350px] rounded-2xl overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                      {project.images ? (
+                        <div className="w-full h-full transition-transform duration-700 group-hover:scale-110">
+                          <ImageCarousel images={project.images} title={project.title} />
+                        </div>
+                      ) : (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                     
                     <div className="absolute inset-0 p-6 flex flex-col justify-end">
@@ -210,11 +274,15 @@ export default function Portfolio() {
           {selectedProject && (
             <div>
               <div className="relative h-[300px]">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                />
+                {selectedProject.images ? (
+                  <ImageCarousel images={selectedProject.images} title={selectedProject.title} />
+                ) : (
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <Badge className="mb-3 bg-white/20 text-white border-0">
