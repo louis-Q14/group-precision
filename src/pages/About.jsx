@@ -103,7 +103,7 @@ const getValues = (language) => [
 ];
 
 const getTimeline = (language) => [
-  { year: '2012', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISIONS par Alexandre Martin' : 'PRECISIONS founded by Alexandre Martin' },
+  { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISIONS par Louis-Quatorze Kzd' : 'PRECISIONS founded by Louis-Quatorze Kzd' },
   { year: '2015', title: language === 'FR' ? 'Première levée' : 'First Funding', description: language === 'FR' ? 'Série A de 5M€ pour accélérer notre croissance' : '5M€ Series A to accelerate our growth' },
   { year: '2018', title: 'Expansion', description: language === 'FR' ? 'Ouverture de bureaux à Londres et Berlin' : 'Opening offices in London and Berlin' },
   { year: '2020', title: language === 'FR' ? '100 collaborateurs' : '100 Employees', description: language === 'FR' ? 'Cap symbolique franchi malgré la crise' : 'Milestone reached despite the crisis' },
