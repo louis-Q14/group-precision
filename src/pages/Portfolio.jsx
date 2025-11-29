@@ -25,6 +25,7 @@ const projects = [
     testimonial: 'Une solution révolutionnaire pour l\'éducation en RDC.',
     testimonialAuthor: 'Équipe HARCHIVE',
     technologies: ['Web', 'Mobile', 'Cloud'],
+    websiteUrl: 'https://www.harchive.net',
   },
 ];
 
@@ -233,18 +234,30 @@ export default function Portfolio() {
                   <p className="text-gray-400 text-sm">— {selectedProject.testimonialAuthor}</p>
                 </div>
                 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProject.technologies.map((tech) => (
                     <Badge key={tech} variant="outline" className="bg-gray-50">
                       {tech}
                     </Badge>
                   ))}
                 </div>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+
+                {selectedProject.websiteUrl && (
+                  <a 
+                    href={selectedProject.websiteUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#0A0A0B] text-white rounded-full hover:bg-[#0A0A0B]/90 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Visiter le site
+                  </a>
+                )}
+                </div>
+                </div>
+                )}
+                </DialogContent>
+                </Dialog>
 
       {/* CTA */}
       <section className="py-24 bg-[#FAFAFA]">
