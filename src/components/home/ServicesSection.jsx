@@ -17,57 +17,81 @@ import {
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageContext';
 
-const getServices = (t) => [
+const getServices = (t, language) => [
   {
     icon: Globe,
-    title: 'Communication Digitale',
-    description: 'Stratégies digitales complètes : marketing, publicité média, social media et développement web.',
-    features: ['Marketing Digital', 'Publicité Média', 'Développement Web'],
+    title: language === 'FR' ? 'Communication Digitale' : 'Digital Communication',
+    description: language === 'FR' 
+      ? 'Stratégies digitales complètes : marketing, publicité média, social media et développement web.'
+      : 'Complete digital strategies: marketing, media advertising, social media and web development.',
+    features: language === 'FR' 
+      ? ['Marketing Digital', 'Publicité Média', 'Développement Web']
+      : ['Digital Marketing', 'Media Advertising', 'Web Development'],
     color: 'from-blue-500 to-cyan-500',
     bgColor: 'bg-blue-500/10',
     category: 'communication',
   },
   {
     icon: Megaphone,
-    title: 'Publicité & Médias',
-    description: 'Campagnes publicitaires percutantes sur tous les canaux pour maximiser votre visibilité.',
-    features: ['TV & Radio', 'Presse & Affichage', 'Digital Ads'],
+    title: language === 'FR' ? 'Publicité & Médias' : 'Advertising & Media',
+    description: language === 'FR'
+      ? 'Campagnes publicitaires percutantes sur tous les canaux pour maximiser votre visibilité.'
+      : 'Impactful advertising campaigns across all channels to maximize your visibility.',
+    features: language === 'FR'
+      ? ['TV & Radio', 'Presse & Affichage', 'Digital Ads']
+      : ['TV & Radio', 'Press & Display', 'Digital Ads'],
     color: 'from-rose-500 to-pink-500',
     bgColor: 'bg-rose-500/10',
     category: 'communication',
   },
   {
     icon: Lightbulb,
-    title: 'Conseil Stratégique',
-    description: 'Accompagnement stratégique pour définir et atteindre vos objectifs de développement.',
-    features: ['Vision & Objectifs', 'Plan stratégique', 'Organisation'],
+    title: language === 'FR' ? 'Conseil Stratégique' : 'Strategic Consulting',
+    description: language === 'FR'
+      ? 'Accompagnement stratégique pour définir et atteindre vos objectifs de développement.'
+      : 'Strategic support to define and achieve your development goals.',
+    features: language === 'FR'
+      ? ['Vision & Objectifs', 'Plan stratégique', 'Organisation']
+      : ['Vision & Goals', 'Strategic Plan', 'Organization'],
     color: 'from-amber-500 to-orange-500',
     bgColor: 'bg-amber-500/10',
     category: 'economique',
   },
   {
     icon: Coins,
-    title: 'Financement de Projets',
-    description: 'Recherche et préfinancement pour concrétiser vos projets de développement.',
-    features: ['Recherche fonds', 'Préfinancement', 'Montage dossiers'],
+    title: language === 'FR' ? 'Financement de Projets' : 'Project Financing',
+    description: language === 'FR'
+      ? 'Recherche et préfinancement pour concrétiser vos projets de développement.'
+      : 'Funding research and pre-financing to bring your development projects to life.',
+    features: language === 'FR'
+      ? ['Recherche fonds', 'Préfinancement', 'Montage dossiers']
+      : ['Fund Research', 'Pre-financing', 'File Assembly'],
     color: 'from-emerald-500 to-green-500',
     bgColor: 'bg-emerald-500/10',
     category: 'economique',
   },
   {
     icon: Handshake,
-    title: 'Relations Internationales',
-    description: 'Développez vos activités et partenariats à l\'échelle internationale.',
-    features: ['Partenariats', 'Expansion globale', 'Négociations'],
+    title: language === 'FR' ? 'Relations Internationales' : 'International Relations',
+    description: language === 'FR'
+      ? 'Développez vos activités et partenariats à l\'échelle internationale.'
+      : 'Develop your activities and partnerships on an international scale.',
+    features: language === 'FR'
+      ? ['Partenariats', 'Expansion globale', 'Négociations']
+      : ['Partnerships', 'Global Expansion', 'Negotiations'],
     color: 'from-indigo-500 to-purple-500',
     bgColor: 'bg-indigo-500/10',
     category: 'economique',
   },
   {
     icon: RefreshCw,
-    title: 'Accompagnement du Changement',
-    description: 'Réussissez vos transformations organisationnelles avec un accompagnement sur mesure.',
-    features: ['Conduite changement', 'Formation', 'Adoption'],
+    title: language === 'FR' ? 'Accompagnement du Changement' : 'Change Management',
+    description: language === 'FR'
+      ? 'Réussissez vos transformations organisationnelles avec un accompagnement sur mesure.'
+      : 'Successfully transform your organization with tailored support.',
+    features: language === 'FR'
+      ? ['Conduite changement', 'Formation', 'Adoption']
+      : ['Change Leadership', 'Training', 'Adoption'],
     color: 'from-purple-500 to-violet-500',
     bgColor: 'bg-purple-500/10',
     category: 'economique',
@@ -75,8 +99,8 @@ const getServices = (t) => [
 ];
 
 export default function ServicesSection() {
-  const { t } = useLanguage();
-  const services = getServices(t);
+  const { t, language } = useLanguage();
+  const services = getServices(t, language);
   return (
     <section className="py-24 lg:py-32 bg-[#FAFAFA]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

@@ -33,7 +33,7 @@ const getNavItems = (t) => [
     name: t('nav.blog'), 
     href: 'Blog',
   },
-  { name: 'Témoignages', href: 'Testimonials' },
+  { name: language === 'FR' ? 'Témoignages' : 'Testimonials', href: 'Testimonials' },
   { name: t('nav.contact'), href: 'Contact' },
 ];
 
