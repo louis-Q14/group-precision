@@ -101,7 +101,7 @@ const projects = [
     ],
     testimonial: 'Une initiative qui transforme le quotidien des agriculteurs locaux.',
     testimonialAuthor: 'Équipe Terreau Fertile',
-    technologies: ['Web', 'Fintech', 'AgriTech'],
+    technologies: [],
   },
 ];
 
