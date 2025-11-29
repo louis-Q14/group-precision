@@ -8,20 +8,25 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/components/LanguageContext';
 
-const team = [
+const getTeam = (language) => [
   {
     name: 'Alexandre Martin',
-    position: 'CEO & Fondateur',
-    bio: '15 ans d\'expérience en transformation digitale. Ancien directeur chez McKinsey Digital.',
+    position: language === 'FR' ? 'CEO & Fondateur' : 'CEO & Founder',
+    bio: language === 'FR' 
+      ? '15 ans d\'expérience en transformation digitale. Ancien directeur chez McKinsey Digital.'
+      : '15 years of digital transformation experience. Former director at McKinsey Digital.',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: true,
   },
   {
     name: 'Sophie Dubois',
-    position: 'Directrice Créative',
-    bio: 'Designer primée avec 12 ans d\'expérience en branding et UX pour des marques internationales.',
+    position: language === 'FR' ? 'Directrice Créative' : 'Creative Director',
+    bio: language === 'FR'
+      ? 'Designer primée avec 12 ans d\'expérience en branding et UX pour des marques internationales.'
+      : 'Award-winning designer with 12 years of branding and UX experience for international brands.',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: true,
@@ -29,15 +34,19 @@ const team = [
   {
     name: 'Thomas Chen',
     position: 'CTO',
-    bio: 'Expert en architecture cloud et IA. Ancien tech lead chez Google Cloud.',
+    bio: language === 'FR'
+      ? 'Expert en architecture cloud et IA. Ancien tech lead chez Google Cloud.'
+      : 'Cloud architecture and AI expert. Former tech lead at Google Cloud.',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: true,
   },
   {
     name: 'Marie Laurent',
-    position: 'Directrice Marketing',
-    bio: 'Spécialiste growth marketing avec un track record de +200% de croissance pour ses clients.',
+    position: language === 'FR' ? 'Directrice Marketing' : 'Marketing Director',
+    bio: language === 'FR'
+      ? 'Spécialiste growth marketing avec un track record de +200% de croissance pour ses clients.'
+      : 'Growth marketing specialist with a track record of +200% growth for clients.',
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: true,
@@ -45,51 +54,63 @@ const team = [
   {
     name: 'Pierre Bernard',
     position: 'Lead Developer',
-    bio: 'Full-stack expert avec une passion pour les architectures scalables et performantes.',
+    bio: language === 'FR'
+      ? 'Full-stack expert avec une passion pour les architectures scalables et performantes.'
+      : 'Full-stack expert with a passion for scalable and performant architectures.',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: false,
   },
   {
     name: 'Emma Richard',
-    position: 'UX Designer Senior',
-    bio: 'Spécialiste en recherche utilisateur et design d\'interfaces centrées sur l\'humain.',
+    position: language === 'FR' ? 'UX Designer Senior' : 'Senior UX Designer',
+    bio: language === 'FR'
+      ? 'Spécialiste en recherche utilisateur et design d\'interfaces centrées sur l\'humain.'
+      : 'User research and human-centered interface design specialist.',
     image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
     linkedin: '#',
     isLeadership: false,
   },
 ];
 
-const values = [
+const getValues = (language) => [
   {
     icon: Target,
     title: 'Excellence',
-    description: 'Nous visons la perfection dans chaque détail, chaque ligne de code, chaque pixel.',
+    description: language === 'FR'
+      ? 'Nous visons la perfection dans chaque détail, chaque ligne de code, chaque pixel.'
+      : 'We strive for perfection in every detail, every line of code, every pixel.',
   },
   {
     icon: Lightbulb,
     title: 'Innovation',
-    description: 'Nous repoussons constamment les limites pour créer des solutions avant-gardistes.',
+    description: language === 'FR'
+      ? 'Nous repoussons constamment les limites pour créer des solutions avant-gardistes.'
+      : 'We constantly push boundaries to create cutting-edge solutions.',
   },
   {
     icon: Handshake,
-    title: 'Partenariat',
-    description: 'Nous construisons des relations durables basées sur la confiance et la transparence.',
+    title: language === 'FR' ? 'Partenariat' : 'Partnership',
+    description: language === 'FR'
+      ? 'Nous construisons des relations durables basées sur la confiance et la transparence.'
+      : 'We build lasting relationships based on trust and transparency.',
   },
   {
     icon: Leaf,
-    title: 'Responsabilité',
-    description: 'Nous nous engageons pour un numérique éthique et respectueux de l\'environnement.',
+    title: language === 'FR' ? 'Responsabilité' : 'Responsibility',
+    description: language === 'FR'
+      ? 'Nous nous engageons pour un numérique éthique et respectueux de l\'environnement.'
+      : 'We are committed to ethical and environmentally responsible digital practices.',
   },
 ];
 
-const timeline = [
-  { year: '2012', title: 'Fondation', description: 'Création de PRECISIONS par Alexandre Martin' },
-  { year: '2015', title: 'Première levée', description: 'Série A de 5M€ pour accélérer notre croissance' },
-  { year: '2018', title: 'Expansion', description: 'Ouverture de bureaux à Londres et Berlin' },
-  { year: '2020', title: '100 collaborateurs', description: 'Cap symbolique franchi malgré la crise' },
-  { year: '2023', title: 'Certification B Corp', description: 'Reconnaissance de l\'engagement RSE de PRECISIONS' },
-  { year: '2024', title: 'Aujourd\'hui', description: '150+ projets, 45 experts, présence internationale' },
+const getTimeline = (language) => [
+  { year: '2012', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISIONS par Alexandre Martin' : 'PRECISIONS founded by Alexandre Martin' },
+  { year: '2015', title: language === 'FR' ? 'Première levée' : 'First Funding', description: language === 'FR' ? 'Série A de 5M€ pour accélérer notre croissance' : '5M€ Series A to accelerate our growth' },
+  { year: '2018', title: 'Expansion', description: language === 'FR' ? 'Ouverture de bureaux à Londres et Berlin' : 'Opening offices in London and Berlin' },
+  { year: '2020', title: language === 'FR' ? '100 collaborateurs' : '100 Employees', description: language === 'FR' ? 'Cap symbolique franchi malgré la crise' : 'Milestone reached despite the crisis' },
+  { year: '2023', title: language === 'FR' ? 'Certification B Corp' : 'B Corp Certification', description: language === 'FR' ? 'Reconnaissance de l\'engagement RSE de PRECISIONS' : 'Recognition of PRECISIONS CSR commitment' },
+  { year: '2024', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '150+ projets, 45 experts, présence internationale' : '150+ projects, 45 experts, international presence' },
 ];
 
 const certifications = [
@@ -101,6 +122,11 @@ const certifications = [
 ];
 
 export default function About() {
+  const { language } = useLanguage();
+  const team = getTeam(language);
+  const values = getValues(language);
+  const timeline = getTimeline(language);
+  
   return (
     <main>
       {/* Hero */}
@@ -118,7 +144,7 @@ export default function About() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
               >
                 <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-                <span className="text-sm text-white">À propos</span>
+                <span className="text-sm text-white">{language === 'FR' ? 'À propos' : 'About'}</span>
               </motion.div>
               
               <motion.h1
@@ -127,7 +153,7 @@ export default function About() {
                 transition={{ delay: 0.1 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
               >
-                Nous créons l'avenir digital
+                {language === 'FR' ? 'Nous créons l\'avenir digital' : 'We create the digital future'}
               </motion.h1>
               
               <motion.p
@@ -136,8 +162,9 @@ export default function About() {
                 transition={{ delay: 0.2 }}
                 className="text-xl text-gray-400 mb-8"
               >
-                Une équipe passionnée d'experts qui transforme les ambitions digitales 
-                en succès mesurables depuis plus de 12 ans.
+                {language === 'FR' 
+                  ? 'Une équipe passionnée d\'experts qui transforme les ambitions digitales en succès mesurables depuis plus de 12 ans.'
+                  : 'A passionate team of experts transforming digital ambitions into measurable success for over 12 years.'}
               </motion.p>
 
               <motion.div
@@ -148,15 +175,15 @@ export default function About() {
               >
                 <div className="flex items-center gap-3">
                   <Award className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">Top 10 Agences France</span>
+                  <span className="text-white">{language === 'FR' ? 'Top 10 Agences France' : 'Top 10 French Agencies'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Users className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">45+ Experts</span>
+                  <span className="text-white">45+ {language === 'FR' ? 'Experts' : 'Experts'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Globe2 className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">3 Bureaux</span>
+                  <span className="text-white">3 {language === 'FR' ? 'Bureaux' : 'Offices'}</span>
                 </div>
               </motion.div>
             </div>
@@ -174,7 +201,7 @@ export default function About() {
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl">
                 <div className="text-4xl font-bold text-[#0A0A0B]">12+</div>
-                <div className="text-gray-600">Années d'expertise</div>
+                <div className="text-gray-600">{language === 'FR' ? 'Années d\'expertise' : 'Years of Expertise'}</div>
               </div>
             </motion.div>
           </div>
@@ -191,10 +218,12 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
             >
-              Nos valeurs
+              {language === 'FR' ? 'Nos valeurs' : 'Our Values'}
             </motion.h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Les principes qui guident chacune de nos actions et décisions.
+              {language === 'FR' 
+                ? 'Les principes qui guident chacune de nos actions et décisions.'
+                : 'The principles that guide each of our actions and decisions.'}
             </p>
           </div>
 
@@ -229,7 +258,7 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
             >
-              Notre histoire
+              {language === 'FR' ? 'Notre histoire' : 'Our Story'}
             </motion.h2>
           </div>
 
@@ -272,10 +301,12 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
             >
-              Notre équipe
+              {language === 'FR' ? 'Notre équipe' : 'Our Team'}
             </motion.h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Des experts passionnés qui donnent vie à vos projets.
+              {language === 'FR' 
+                ? 'Des experts passionnés qui donnent vie à vos projets.'
+                : 'Passionate experts who bring your projects to life.'}
             </p>
           </div>
 
@@ -317,8 +348,12 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-2">Certifications & Partenariats</h3>
-              <p className="text-gray-400">Reconnus par les leaders de l'industrie</p>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {language === 'FR' ? 'Certifications & Partenariats' : 'Certifications & Partnerships'}
+              </h3>
+              <p className="text-gray-400">
+                {language === 'FR' ? 'Reconnus par les leaders de l\'industrie' : 'Recognized by industry leaders'}
+              </p>
             </div>
             <div className="flex flex-wrap justify-center gap-6">
               {certifications.map((cert) => (
@@ -341,7 +376,9 @@ export default function About() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A86C]/10 mb-6"
           >
             <Heart className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm font-medium text-[#0A0A0B]">Rejoignez l'aventure</span>
+            <span className="text-sm font-medium text-[#0A0A0B]">
+              {language === 'FR' ? 'Rejoignez l\'aventure' : 'Join the Adventure'}
+            </span>
           </motion.div>
           
           <motion.h2
@@ -351,7 +388,7 @@ export default function About() {
             transition={{ delay: 0.1 }}
             className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6"
           >
-            Envie de faire partie de l'équipe ?
+            {language === 'FR' ? 'Envie de faire partie de l\'équipe ?' : 'Want to be part of the team?'}
           </motion.h2>
           
           <motion.p
@@ -361,12 +398,14 @@ export default function About() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-600 mb-8"
           >
-            Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre équipe.
+            {language === 'FR' 
+              ? 'Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre équipe.'
+              : 'We are always looking for passionate talents to join our team.'}
           </motion.p>
           
           <Link to={createPageUrl('Contact')}>
             <Button className="rounded-full px-8 py-6 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white text-lg">
-              Voir nos offres
+              {language === 'FR' ? 'Voir nos offres' : 'See our offers'}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

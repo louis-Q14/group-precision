@@ -13,7 +13,7 @@ import { useLanguage } from '@/components/LanguageContext';
 
 
 export default function HeroSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { scrollY } = useScroll();
@@ -117,7 +117,7 @@ export default function HeroSection() {
               disabled={isSubmitting}
               className="h-14 px-8 bg-[#C9A86C] hover:bg-[#B8975B] text-[#0A0A0B] font-semibold rounded-xl"
             >
-              {isSubmitting ? 'Envoi...' : 'Démarrer'}
+              {isSubmitting ? (language === 'FR' ? 'Envoi...' : 'Sending...') : (language === 'FR' ? 'Démarrer' : 'Start')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </motion.form>
