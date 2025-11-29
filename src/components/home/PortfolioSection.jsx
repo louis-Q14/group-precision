@@ -6,52 +6,7 @@ import { ArrowRight, ExternalLink, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-const projects = [
-  {
-    id: 1,
-    title: 'Fintech Revolution',
-    client: 'NeoBank Corp',
-    category: 'finance',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-    metrics: [
-      { value: '+340%', label: 'Croissance' },
-      { value: '2.5M', label: 'Utilisateurs' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'E-Commerce Premium',
-    client: 'Luxe Fashion',
-    category: 'retail',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-    metrics: [
-      { value: '+180%', label: 'Conversions' },
-      { value: '45%', label: 'Panier moyen' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Plateforme SaaS',
-    client: 'TechStart',
-    category: 'tech',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop',
-    metrics: [
-      { value: '99.9%', label: 'Uptime' },
-      { value: '50K+', label: 'Entreprises' },
-    ],
-  },
-  {
-    id: 4,
-    title: 'App Santé',
-    client: 'MedTech Plus',
-    category: 'healthcare',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop',
-    metrics: [
-      { value: '4.9★', label: 'App Store' },
-      { value: '1M+', label: 'Downloads' },
-    ],
-  },
-];
+const projects = [];
 
 const categories = [
   { id: 'all', name: 'Tous' },

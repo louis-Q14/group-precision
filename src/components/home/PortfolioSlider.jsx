@@ -3,44 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-const portfolioImages = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    title: 'Fintech Revolution',
-    client: 'NeoBank Corp',
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-    title: 'E-Commerce Luxe',
-    client: 'Maison Élégance',
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop',
-    title: 'Plateforme SaaS',
-    client: 'TechStart',
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop',
-    title: 'App Santé Connect',
-    client: 'MedTech Plus',
-  },
-  {
-    id: 5,
-    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop',
-    title: 'Brand Identity 360',
-    client: 'Horizon Group',
-  },
-  {
-    id: 6,
-    image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=600&h=400&fit=crop',
-    title: 'Stratégie Growth',
-    client: 'StartupNow',
-  },
-];
+const portfolioImages = [];
 
 // Double the array for seamless infinite scroll
 const duplicatedImages = [...portfolioImages, ...portfolioImages];
