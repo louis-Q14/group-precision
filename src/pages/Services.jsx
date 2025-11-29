@@ -3,151 +3,179 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { 
-  Lightbulb, Code2, TrendingUp, GraduationCap, ArrowRight, 
+  Lightbulb, TrendingUp, GraduationCap, ArrowRight, 
   CheckCircle, Sparkles, Target, Zap, Shield, Clock,
-  Users, BarChart3, Globe, Palette, PenTool, MessageCircle, Coins
+  Users, BarChart3, Globe, Megaphone, Monitor, Network,
+  MessageSquare, Search, HeadphonesIcon
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 const services = [
   {
-    id: 'conception',
-        icon: PenTool,
-        title: 'Développement des Projets',
-    subtitle: '',
-    description: 'À la confluence du conseil stratégique, de la communication, de l\'ingénierie et du management, PRECISIONS apporte une vision expert et une approche terrain unique. Nous intervenons sur l\'ensemble du cycle de vie de votre projet pour concevoir et livrer des solutions sur mesure.',
-    features: [
-      '🔍 Émergence & Stratégie : De la formulation de l\'idée à l\'étude de faisabilité et l\'élaboration de la stratégie',
-      '💡 Financement & Mise en œuvre : Recherche de financements, lobbying, négociation d\'affaires et accompagnement à la réalisation',
-      '📈 Opérations & Suivi : Assistance administrative et suivi opérationnel pour garantir le succès et la pérennité',
-      'Notre promesse : transformer vos ambitions en réalisations tangibles'
-    ],
-    benefits: [],
-    color: 'from-indigo-500 to-blue-500',
-    bgColor: 'bg-indigo-50',
-  },
-  {
-    id: 'consultation',
-    icon: MessageCircle,
-    title: 'Consultation',
-    subtitle: 'Un accompagnement expert personnalisé',
-    description: 'Bénéficiez de notre expertise pour guider vos décisions stratégiques et optimiser vos processus avec un accompagnement sur mesure.',
-    features: [
-      'Diagnostic approfondi',
-      'Analyse des besoins',
-      'Recommandations personnalisées',
-      'Plans d\'action concrets',
-      'Suivi régulier',
-      'Support dédié'
-    ],
-    benefits: [
-      { icon: Users, text: 'Expertise dédiée' },
-      { icon: Target, text: 'Solutions adaptées' },
-      { icon: Clock, text: 'Réactivité' },
-    ],
-    color: 'from-cyan-500 to-teal-500',
-    bgColor: 'bg-cyan-50',
-  },
-  {
-    id: 'financement',
-    icon: Coins,
-    title: 'Recherche des Financements',
-    subtitle: 'Optimisez le financement de vos projets',
-    description: 'Nous vous accompagnons dans l\'identification et l\'obtention des financements adaptés à vos projets : subventions, aides publiques, crédits.',
-    features: [
-      'Identification des aides disponibles',
-      'Montage des dossiers de demande',
-      'Optimisation fiscale (CIR, CII)',
-      'Recherche de subventions',
-      'Accompagnement BPI France',
-      'Suivi des demandes'
-    ],
-    benefits: [
-      { icon: Coins, text: 'Financements optimisés' },
-      { icon: Shield, text: 'Dossiers solides' },
-      { icon: BarChart3, text: 'Taux de succès élevé' },
-    ],
-    color: 'from-emerald-500 to-green-500',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    id: 'consulting',
+    id: 'strategie',
     icon: Lightbulb,
-    title: 'Conseil & Stratégie',
-    subtitle: 'Transformez votre vision en roadmap actionnable',
-    description: 'Nous analysons votre écosystème, identifions les opportunités de croissance et définissons une stratégie sur mesure alignée avec vos objectifs business.',
+    title: 'Conseil en Stratégie Marketing & Communication',
+    subtitle: 'Élaborez une stratégie gagnante',
+    description: 'Nous élaborons et orchestrons des réponses tactiques et pertinentes à vos problématiques de communication grand public ou B2B. Notre expertise vous guide vers des décisions stratégiques éclairées.',
     features: [
-      'Audit digital complet (technique, UX, SEO)',
-      'Analyse concurrentielle et benchmark',
-      'Définition de la roadmap produit',
-      'Workshops d\'innovation et idéation',
-      'Business case et estimation ROI',
+      'Audit et diagnostic de votre communication actuelle',
+      'Définition de votre positionnement et messages clés',
+      'Élaboration de plans de communication intégrés',
+      'Stratégie de marque et identité visuelle',
+      'Conseil en relations publiques et média',
       'Accompagnement au changement'
     ],
     benefits: [
-      { icon: Target, text: 'Objectifs clairs et mesurables' },
-      { icon: Zap, text: 'Time-to-market optimisé' },
-      { icon: Shield, text: 'Risques maîtrisés' },
+      { icon: Target, text: 'Positionnement clair' },
+      { icon: Zap, text: 'Impact maximisé' },
+      { icon: Shield, text: 'Cohérence garantie' },
     ],
     color: 'from-amber-500 to-orange-500',
     bgColor: 'bg-amber-50',
   },
   {
-    id: 'marketing',
-    icon: TrendingUp,
-    title: 'Marketing Digital',
-    subtitle: 'Accélérez votre croissance en ligne',
-    description: 'Des stratégies d\'acquisition et de conversion data-driven pour maximiser votre visibilité, générer des leads qualifiés et optimiser votre ROI marketing.',
+    id: 'publicite',
+    icon: Megaphone,
+    title: 'Publicité Média',
+    subtitle: 'Maximisez votre visibilité',
+    description: 'Conception et déploiement de campagnes publicitaires percutantes sur tous les canaux média : TV, radio, presse, affichage et digital pour atteindre efficacement vos cibles.',
     features: [
-      'SEO technique et éditorial',
-      'Campagnes SEA (Google Ads, Meta Ads)',
-      'Social Media Management',
-      'Content Marketing & Copywriting',
-      'Email Marketing & Automation',
-      'Analytics et reporting avancé'
+      'Conception créative de campagnes publicitaires',
+      'Achat d\'espaces média optimisé',
+      'Campagnes TV, radio et presse',
+      'Affichage et communication extérieure',
+      'Publicité programmatique',
+      'Mesure et optimisation des performances'
     ],
     benefits: [
-      { icon: BarChart3, text: 'ROI mesurable' },
-      { icon: Users, text: 'Audience qualifiée' },
-      { icon: TrendingUp, text: 'Croissance durable' },
+      { icon: BarChart3, text: 'ROI optimisé' },
+      { icon: Users, text: 'Audience ciblée' },
+      { icon: TrendingUp, text: 'Notoriété accrue' },
     ],
     color: 'from-rose-500 to-pink-500',
     bgColor: 'bg-rose-50',
   },
   {
-    id: 'formation',
-    icon: GraduationCap,
-    title: 'Formation',
-    subtitle: 'Montez en compétences vos équipes',
-    description: 'Programmes de formation personnalisés pour autonomiser vos équipes sur les compétences digitales essentielles à votre transformation.',
+    id: 'digital',
+    icon: Globe,
+    title: 'Communication Digitale & Publishing',
+    subtitle: 'Rayonnez sur le digital',
+    description: 'Stratégies digitales complètes pour renforcer votre présence en ligne : réseaux sociaux, content marketing, SEO/SEA et création de contenus engageants.',
     features: [
-      'Formations sur mesure (présentiel/distanciel)',
-      'Workshops pratiques et hands-on',
-      'Parcours e-learning interactifs',
-      'Coaching individuel et mentorat',
-      'Certifications professionnelles',
-      'Accompagnement post-formation'
+      'Stratégie social media et community management',
+      'Content marketing et création de contenus',
+      'SEO et référencement naturel',
+      'Campagnes SEA (Google Ads, Meta Ads)',
+      'Email marketing et automation',
+      'Influence marketing et partenariats'
     ],
     benefits: [
-      { icon: Users, text: 'Équipes autonomes' },
-      { icon: Palette, text: 'Pédagogie innovante' },
-      { icon: Clock, text: 'Formats flexibles' },
+      { icon: Globe, text: 'Présence renforcée' },
+      { icon: MessageSquare, text: 'Engagement élevé' },
+      { icon: Search, text: 'Visibilité optimale' },
+    ],
+    color: 'from-blue-500 to-cyan-500',
+    bgColor: 'bg-blue-50',
+  },
+  {
+    id: 'reseau',
+    icon: Network,
+    title: 'Animation de Réseau',
+    subtitle: 'Fédérez vos partenaires',
+    description: 'Animation et dynamisation de vos réseaux de distribution, franchises ou partenaires pour maximiser leur engagement et leurs performances commerciales.',
+    features: [
+      'Conception de programmes d\'animation',
+      'Outils de communication réseau',
+      'Événements et conventions',
+      'Incentives et challenges commerciaux',
+      'Formations et accompagnement terrain',
+      'Reporting et suivi des performances'
+    ],
+    benefits: [
+      { icon: Users, text: 'Réseau engagé' },
+      { icon: Target, text: 'Objectifs atteints' },
+      { icon: Zap, text: 'Dynamique positive' },
     ],
     color: 'from-purple-500 to-violet-500',
     bgColor: 'bg-purple-50',
   },
+  {
+    id: 'audit',
+    icon: Search,
+    title: 'Conseil & Audit',
+    subtitle: 'Évaluez et optimisez',
+    description: 'Audits approfondis de votre communication et organisation pour identifier les axes d\'amélioration et définir des recommandations actionnables.',
+    features: [
+      'Audit de communication globale',
+      'Analyse de la concurrence',
+      'Étude d\'image et de notoriété',
+      'Audit digital et e-réputation',
+      'Diagnostic organisationnel',
+      'Recommandations stratégiques'
+    ],
+    benefits: [
+      { icon: Search, text: 'Vision claire' },
+      { icon: Shield, text: 'Risques identifiés' },
+      { icon: BarChart3, text: 'Données fiables' },
+    ],
+    color: 'from-emerald-500 to-green-500',
+    bgColor: 'bg-emerald-50',
+  },
+  {
+    id: 'web',
+    icon: Monitor,
+    title: 'Développement Web',
+    subtitle: 'Créez votre vitrine digitale',
+    description: 'Conception et développement de sites web performants, applications et plateformes digitales sur mesure pour répondre à vos objectifs business.',
+    features: [
+      'Sites vitrines et institutionnels',
+      'Sites e-commerce et marketplaces',
+      'Applications web sur mesure',
+      'Intranets et extranets',
+      'Maintenance et évolutions',
+      'Hébergement et sécurité'
+    ],
+    benefits: [
+      { icon: Monitor, text: 'Solutions sur mesure' },
+      { icon: Zap, text: 'Performance optimale' },
+      { icon: Shield, text: 'Sécurité renforcée' },
+    ],
+    color: 'from-indigo-500 to-blue-500',
+    bgColor: 'bg-indigo-50',
+  },
+  {
+    id: 'support',
+    icon: HeadphonesIcon,
+    title: 'Assistance aux Utilisateurs',
+    subtitle: 'Accompagnez vos clients',
+    description: 'Services d\'assistance et de support pour vos utilisateurs : hotline, helpdesk, formation utilisateurs et documentation pour garantir une expérience optimale.',
+    features: [
+      'Mise en place de hotlines dédiées',
+      'Helpdesk et support technique',
+      'Formation des utilisateurs',
+      'Création de documentation et guides',
+      'FAQ et bases de connaissances',
+      'Suivi de la satisfaction client'
+    ],
+    benefits: [
+      { icon: HeadphonesIcon, text: 'Support réactif' },
+      { icon: Users, text: 'Utilisateurs autonomes' },
+      { icon: Clock, text: 'Disponibilité étendue' },
+    ],
+    color: 'from-teal-500 to-cyan-500',
+    bgColor: 'bg-teal-50',
+  },
 ];
 
 const processSteps = [
-  { number: '01', title: 'Découverte', description: 'Analyse approfondie de vos besoins et objectifs' },
-  { number: '02', title: 'Stratégie', description: 'Définition de la solution et de la roadmap' },
-  { number: '03', title: 'Exécution', description: 'Développement agile avec livraisons itératives' },
-  { number: '04', title: 'Optimisation', description: 'Amélioration continue et support dédié' },
+  { number: '01', title: 'Écoute', description: 'Compréhension approfondie de vos enjeux et objectifs' },
+  { number: '02', title: 'Stratégie', description: 'Élaboration de solutions tactiques pertinentes' },
+  { number: '03', title: 'Création', description: 'Conception et production des dispositifs' },
+  { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
 ];
 
 export default function Services() {
-  const [activeService, setActiveService] = useState('conception');
+  const [activeService, setActiveService] = useState('strategie');
 
   return (
     <main>
@@ -173,7 +201,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
           >
-            Des solutions sur mesure pour chaque défi
+            Communication & Marketing
           </motion.h1>
           
           <motion.p
@@ -182,8 +210,8 @@ export default function Services() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto"
           >
-            De la stratégie à l'exécution, nous vous accompagnons à chaque étape 
-                              de votre transformation.
+            Nous élaborons et orchestrons des réponses tactiques et pertinentes 
+            à vos problématiques de communication grand public ou B2B.
           </motion.p>
         </div>
       </section>
@@ -192,19 +220,20 @@ export default function Services() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Service Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          <div className="flex flex-wrap justify-center gap-3 mb-16">
             {services.map((service) => (
               <button
                 key={service.id}
                 onClick={() => setActiveService(service.id)}
-                className={`flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300 ${
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm transition-all duration-300 ${
                   activeService === service.id
                     ? 'bg-[#0A0A0B] text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                <service.icon className="w-5 h-5" />
-                {service.title}
+                <service.icon className="w-4 h-4" />
+                <span className="hidden sm:inline">{service.title.split(' ').slice(0, 2).join(' ')}</span>
+                <span className="sm:hidden">{service.title.split(' ')[0]}</span>
               </button>
             ))}
           </div>
@@ -224,27 +253,27 @@ export default function Services() {
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Info */}
                 <div>
-
-                  <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4">
                     {service.title}
                   </h2>
+                  <p className="text-lg text-[#C9A86C] font-medium mb-4">
+                    {service.subtitle}
+                  </p>
                   <p className="text-lg text-gray-600 mb-8">
                     {service.description}
                   </p>
 
                   {/* Benefits */}
-                  {service.benefits.length > 0 && (
-                    <div className="grid sm:grid-cols-3 gap-4 mb-8">
-                      {service.benefits.map((benefit, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
-                          <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-                            <benefit.icon className="w-5 h-5 text-white" />
-                          </div>
-                          <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
+                  <div className="grid sm:grid-cols-3 gap-4 mb-8">
+                    {service.benefits.map((benefit, i) => (
+                      <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center`}>
+                          <benefit.icon className="w-5 h-5 text-white" />
                         </div>
-                      ))}
-                    </div>
-                  )}
+                        <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
+                      </div>
+                    ))}
+                  </div>
 
                   <Link to={createPageUrl('Contact')}>
                     <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
@@ -287,7 +316,7 @@ export default function Services() {
               Notre méthodologie
             </motion.h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Une approche éprouvée pour garantir le succès de vos projets digitaux.
+              Une approche éprouvée pour des réponses tactiques et pertinentes à vos enjeux.
             </p>
           </div>
 
@@ -311,7 +340,6 @@ export default function Services() {
                   <p className="text-gray-600">{step.description}</p>
                 </div>
                 
-                {/* Connector line */}
                 {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gray-200" />
                 )}
@@ -330,7 +358,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-3xl lg:text-4xl font-bold text-white mb-6"
           >
-            Prêt à démarrer votre projet ?
+            Prêt à booster votre communication ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
