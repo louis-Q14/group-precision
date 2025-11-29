@@ -12,12 +12,10 @@ import { useLanguage } from '@/components/LanguageContext';
 
 const getTeam = (language) => [
   {
-    name: 'Alexandre Martin',
+    name: 'Louis-Quatorze Kazadi',
     position: language === 'FR' ? 'CEO & Fondateur' : 'CEO & Founder',
-    bio: language === 'FR' 
-      ? '15 ans d\'expérience en transformation digitale. Ancien directeur chez McKinsey Digital.'
-      : '15 years of digital transformation experience. Former director at McKinsey Digital.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+    bio: '',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/700c4f75e_ceo.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -318,22 +316,13 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group"
               >
                 <div className="relative overflow-hidden rounded-2xl mb-4">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-[350px] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-sm">{member.bio}</p>
-                    <a href={member.linkedin} className="inline-flex items-center gap-2 text-[#C9A86C] text-sm mt-2 hover:underline">
-                      <Linkedin className="w-4 h-4" />
-                      LinkedIn
-                    </a>
-                  </div>
                 </div>
                 <h3 className="text-xl font-semibold text-[#0A0A0B]">{member.name}</h3>
                 <p className="text-gray-600">{member.position}</p>
