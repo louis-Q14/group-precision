@@ -107,17 +107,17 @@ export default function Footer() {
               PRECISIONS transforme vos ambitions digitales en réalité. Innovation, excellence et résultats mesurables.
             </p>
             <div className="space-y-3">
-              <a href="mailto:contact@enterprise.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:contact@precisions.group" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
-                contact@enterprise.com
+                contact@precisions.group
               </a>
-              <a href="tel:+33123456789" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+              <a href="tel:+447802353154" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                 <Phone className="w-5 h-5" />
-                +33 1 23 45 67 89
+                +44 7802 353154
               </a>
               <div className="flex items-center gap-3 text-gray-400">
                 <MapPin className="w-5 h-5" />
-                Paris, France
+                183 rue Lukula, Bandalungwa Kinshasa
               </div>
             </div>
           </div>
