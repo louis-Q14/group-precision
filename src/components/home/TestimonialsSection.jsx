@@ -4,35 +4,7 @@ import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageContext';
 
-const testimonials = [
-  {
-    id: 1,
-    content: "PRECISIONS a complètement transformé notre approche digitale. Leur expertise et leur engagement ont dépassé toutes nos attentes. Un partenaire de confiance pour notre croissance.",
-    author: 'Marie Dupont',
-    position: 'CEO',
-    company: 'TechVision',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-    rating: 5,
-  },
-  {
-    id: 2,
-    content: "Une équipe exceptionnelle qui comprend vraiment les enjeux business. Le ROI de notre projet a été atteint en seulement 4 mois. Je recommande sans hésitation.",
-    author: 'Thomas Martin',
-    position: 'Directeur Digital',
-    company: 'InnoGroup',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
-    rating: 5,
-  },
-  {
-    id: 3,
-    content: "Professionnalisme, créativité et résultats. PRECISIONS a su nous accompagner à chaque étape avec une méthodologie rigoureuse et une vraie écoute de nos besoins.",
-    author: 'Sophie Bernard',
-    position: 'CMO',
-    company: 'LuxeBrand',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
-    rating: 5,
-  },
-];
+const testimonials = [];
 
 export default function TestimonialsSection() {
   const { t } = useLanguage();
