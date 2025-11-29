@@ -11,10 +11,12 @@ import { useLanguage } from '@/components/LanguageContext';
 
 const footerLinks = {
   services: [
-    { name: 'Conseil Digital', href: 'Services' },
-    { name: 'Développement Web', href: 'Services' },
-    { name: 'Marketing Digital', href: 'Services' },
-    { name: 'Formation', href: 'Services' },
+    { name: 'Communication Digitale', href: 'Services' },
+    { name: 'Publicité & Médias', href: 'Services' },
+    { name: 'Conseil Stratégique', href: 'Services' },
+    { name: 'Financement de Projets', href: 'Services' },
+    { name: 'Relations Internationales', href: 'Services' },
+    { name: 'Accompagnement du Changement', href: 'Services' },
   ],
   company: [
     { name: 'À propos', href: 'About' },
