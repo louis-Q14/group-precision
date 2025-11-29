@@ -151,7 +151,7 @@ export default function About() {
                 transition={{ delay: 0.1 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
               >
-                {language === 'FR' ? 'Nous créons l\'avenir digital' : 'We create the digital future'}
+                {language === 'FR' ? 'Nous créons l\'avenir' : 'We create the future'}
               </motion.h1>
               
               <motion.p
@@ -161,8 +161,8 @@ export default function About() {
                 className="text-xl text-gray-400 mb-8"
               >
                 {language === 'FR' 
-                  ? 'Une équipe passionnée d\'experts qui transforme les ambitions digitales en succès mesurables depuis plus de 12 ans.'
-                  : 'A passionate team of experts transforming digital ambitions into measurable success for over 12 years.'}
+                  ? 'Une équipe passionnée d\'experts qui transforme les ambitions digitales en succès mesurables.'
+                  : 'A passionate team of experts transforming digital ambitions into measurable success.'}
               </motion.p>
 
               <motion.div
@@ -173,11 +173,11 @@ export default function About() {
               >
                 <div className="flex items-center gap-3">
                   <Award className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">{language === 'FR' ? 'Top 10 Agences France' : 'Top 10 French Agencies'}</span>
+                  <span className="text-white">{language === 'FR' ? 'Top 10 Agences RD Congo' : 'Top 10 DR Congo Agencies'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Users className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">45+ {language === 'FR' ? 'Experts' : 'Experts'}</span>
+                  <span className="text-white">20+ {language === 'FR' ? 'Experts' : 'Experts'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Globe2 className="w-6 h-6 text-[#C9A86C]" />
@@ -197,10 +197,6 @@ export default function About() {
                 alt="Team"
                 className="rounded-3xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl">
-                <div className="text-4xl font-bold text-[#0A0A0B]">12+</div>
-                <div className="text-gray-600">{language === 'FR' ? 'Années d\'expertise' : 'Years of Expertise'}</div>
-              </div>
             </motion.div>
           </div>
         </div>
