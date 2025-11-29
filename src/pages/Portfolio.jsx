@@ -7,7 +7,26 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
-const projects = [];
+const projects = [
+  {
+    id: 1,
+    title: 'HARCHIVE',
+    client: 'HARCHIVE',
+    category: 'web',
+    industry: 'tech',
+    description: 'Plateforme innovante visant à mettre en communication tous les acteurs de l\'éducation en République Démocratique du Congo et bien plus encore.',
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop',
+    challenge: 'Connecter les différents acteurs du système éducatif congolais sur une plateforme unifiée.',
+    solution: 'Développement d\'une plateforme collaborative permettant aux enseignants, élèves, parents et institutions de communiquer efficacement.',
+    results: [
+      { label: 'Utilisateurs', value: 'En cours' },
+      { label: 'Écoles', value: 'RDC' },
+    ],
+    testimonial: 'Une solution révolutionnaire pour l\'éducation en RDC.',
+    testimonialAuthor: 'Équipe HARCHIVE',
+    technologies: ['Web', 'Mobile', 'Cloud'],
+  },
+];
 
 const categories = [
   { id: 'all', name: 'Tous les projets' },
