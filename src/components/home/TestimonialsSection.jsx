@@ -34,9 +34,15 @@ export default function TestimonialsSection() {
   };
 
   useEffect(() => {
-    const timer = setInterval(() => paginate(1), 6000);
-    return () => clearInterval(timer);
+    if (testimonials.length > 0) {
+      const timer = setInterval(() => paginate(1), 6000);
+      return () => clearInterval(timer);
+    }
   }, []);
+
+  if (testimonials.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-24 lg:py-32 bg-[#0A0A0B] overflow-hidden">
