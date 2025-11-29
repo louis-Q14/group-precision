@@ -341,28 +341,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Certifications */}
-      <section className="py-16 bg-[#0A0A0B]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {language === 'FR' ? 'Certifications & Partenariats' : 'Certifications & Partnerships'}
-              </h3>
-              <p className="text-gray-400">
-                {language === 'FR' ? 'Reconnus par les leaders de l\'industrie' : 'Recognized by industry leaders'}
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-6">
-              {certifications.map((cert) => (
-                <div key={cert} className="px-4 py-2 bg-white/5 rounded-full text-sm text-white">
-                  {cert}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA */}
       <section className="py-24 bg-[#FAFAFA]">
