@@ -18,19 +18,19 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email',
-    value: 'contact@enterprise.com',
-    link: 'mailto:contact@enterprise.com',
+    value: 'contact@precisions.group',
+    link: 'mailto:contact@precisions.group',
   },
   {
     icon: Phone,
     title: 'Téléphone',
-    value: '+33 1 23 45 67 89',
-    link: 'tel:+33123456789',
+    value: '+44 7802 353154',
+    link: 'tel:+447802353154',
   },
   {
     icon: MapPin,
     title: 'Adresse',
-    value: '42 rue de la Tech, 75008 Paris',
+    value: '183 rue Lukula, Bandalungwa Kinshasa',
     link: '#',
   },
   {
@@ -397,7 +397,7 @@ export default function Contact() {
         <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A0B]/5">
           <div className="text-center">
             <MapPin className="w-12 h-12 text-[#C9A86C] mx-auto mb-4" />
-            <p className="text-gray-600">42 rue de la Tech, 75008 Paris</p>
+            <p className="text-gray-600">183 rue Lukula, Bandalungwa Kinshasa</p>
           </div>
         </div>
       </section>
