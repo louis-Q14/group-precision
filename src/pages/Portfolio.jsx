@@ -20,7 +20,7 @@ const projects = [
     solution: 'Développement d\'une plateforme collaborative permettant aux enseignants, élèves, parents et institutions de communiquer efficacement.',
     results: [
       { label: 'Utilisateurs', value: 'En cours' },
-      { label: 'Écoles', value: 'RDC' },
+      { label: 'Universités', value: 'RDC' },
     ],
     testimonial: 'Une solution révolutionnaire pour l\'éducation en RDC.',
     testimonialAuthor: 'Équipe HARCHIVE',
