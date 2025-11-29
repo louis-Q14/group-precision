@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 import { Sparkles, ArrowRight, Clock, User, Tag, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/components/LanguageContext';
 
 const articles = [
   {
@@ -102,17 +103,21 @@ const articles = [
   },
 ];
 
-const categories = [
-  { id: 'all', name: 'Tous' },
+const getCategories = (language) => [
+  { id: 'all', name: language === 'FR' ? 'Tous' : 'All' },
   { id: 'insights', name: 'Insights' },
-  { id: 'tutorials', name: 'Tutoriels' },
-  { id: 'news', name: 'Actualités' },
-  { id: 'case-study', name: 'Études de cas' },
+  { id: 'tutorials', name: language === 'FR' ? 'Tutoriels' : 'Tutorials' },
+  { id: 'news', name: language === 'FR' ? 'Actualités' : 'News' },
+  { id: 'case-study', name: language === 'FR' ? 'Études de cas' : 'Case Studies' },
 ];
 
 export default function Blog() {
+  const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  const categories = getCategories(language);
+  const dateLocale = language === 'FR' ? fr : enUS;
 
   const featuredArticles = articles.filter(a => a.isFeatured);
   
@@ -156,7 +161,9 @@ export default function Blog() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto"
           >
-            Articles, tutoriels et études de cas pour rester à la pointe du digital.
+            {language === 'FR' 
+              ? 'Articles, tutoriels et études de cas pour rester à la pointe du digital.'
+              : 'Articles, tutorials and case studies to stay at the cutting edge of digital.'}
           </motion.p>
         </div>
       </section>
@@ -164,7 +171,9 @@ export default function Blog() {
       {/* Featured Articles */}
       <section className="py-16 bg-white border-b">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-[#0A0A0B] mb-8">À la une</h2>
+          <h2 className="text-2xl font-bold text-[#0A0A0B] mb-8">
+            {language === 'FR' ? 'À la une' : 'Featured'}
+          </h2>
           
           <div className="grid lg:grid-cols-2 gap-8">
             {featuredArticles.map((article, index) => (
@@ -196,7 +205,7 @@ export default function Blog() {
                   <div>
                     <div className="font-medium text-[#0A0A0B]">{article.author}</div>
                     <div className="text-sm text-gray-500">
-                      {format(article.publishedAt, 'd MMMM yyyy', { locale: fr })}
+                      {format(article.publishedAt, 'd MMMM yyyy', { locale: dateLocale })}
                     </div>
                   </div>
                   <div className="ml-auto flex items-center gap-1 text-sm text-gray-500">
@@ -248,7 +257,7 @@ export default function Blog() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input
                 type="search"
-                placeholder="Rechercher un article..."
+                placeholder={language === 'FR' ? 'Rechercher un article...' : 'Search an article...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 pr-4 h-12 w-full lg:w-[300px] rounded-full border-gray-200"
@@ -279,7 +288,7 @@ export default function Blog() {
                 
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4 text-sm text-gray-500">
-                    <span>{format(article.publishedAt, 'd MMM yyyy', { locale: fr })}</span>
+                    <span>{format(article.publishedAt, 'd MMM yyyy', { locale: dateLocale })}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
@@ -307,7 +316,9 @@ export default function Blog() {
 
           {filteredArticles.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-500 text-lg">Aucun article trouvé pour cette recherche.</p>
+              <p className="text-gray-500 text-lg">
+                {language === 'FR' ? 'Aucun article trouvé pour cette recherche.' : 'No articles found for this search.'}
+              </p>
             </div>
           )}
         </div>
@@ -322,7 +333,7 @@ export default function Blog() {
             viewport={{ once: true }}
             className="text-3xl lg:text-4xl font-bold text-white mb-6"
           >
-            Restez informé
+            {language === 'FR' ? 'Restez informé' : 'Stay Informed'}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -331,7 +342,9 @@ export default function Blog() {
             transition={{ delay: 0.1 }}
             className="text-lg text-gray-400 mb-8"
           >
-            Recevez nos derniers articles et ressources directement dans votre boîte mail.
+            {language === 'FR' 
+              ? 'Recevez nos derniers articles et ressources directement dans votre boîte mail.'
+              : 'Receive our latest articles and resources directly in your inbox.'}
           </motion.p>
           
           <motion.form
@@ -343,11 +356,11 @@ export default function Blog() {
           >
             <Input
               type="email"
-              placeholder="Votre email"
+              placeholder={language === 'FR' ? 'Votre email' : 'Your email'}
               className="flex-1 h-14 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl px-6"
             />
             <Button className="h-14 px-8 bg-[#C9A86C] hover:bg-[#B8975B] text-[#0A0A0B] rounded-xl">
-              S'abonner
+              {language === 'FR' ? 'S\'abonner' : 'Subscribe'}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </motion.form>

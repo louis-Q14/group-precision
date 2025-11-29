@@ -8,8 +8,10 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
+import { useLanguage } from '@/components/LanguageContext';
 
 export default function Testimonials() {
+  const { language } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ export default function Testimonials() {
       is_approved: false,
     });
 
-    toast.success('Merci pour votre témoignage !');
+    toast.success(language === 'FR' ? 'Merci pour votre témoignage !' : 'Thank you for your testimonial!');
     setSubmitted(true);
     setIsSubmitting(false);
   };
@@ -58,7 +60,7 @@ export default function Testimonials() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
           >
             <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">Témoignages</span>
+            <span className="text-sm text-white">{language === 'FR' ? 'Témoignages' : 'Testimonials'}</span>
           </motion.div>
           
           <motion.h1
@@ -67,7 +69,7 @@ export default function Testimonials() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
           >
-            Ce que disent nos clients
+            {language === 'FR' ? 'Ce que disent nos clients' : 'What our clients say'}
           </motion.h1>
           
           <motion.p
@@ -76,7 +78,9 @@ export default function Testimonials() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto"
           >
-            Découvrez les retours de nos clients et partagez votre expérience avec nous.
+            {language === 'FR' 
+              ? 'Découvrez les retours de nos clients et partagez votre expérience avec nous.'
+              : 'Discover our clients\' feedback and share your experience with us.'}
           </motion.p>
         </div>
       </section>
@@ -86,7 +90,7 @@ export default function Testimonials() {
         <section className="py-20 bg-[#FAFAFA]">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-[#0A0A0B] mb-12 text-center">
-              Témoignages de nos clients
+              {language === 'FR' ? 'Témoignages de nos clients' : 'Client Testimonials'}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
@@ -137,10 +141,12 @@ export default function Testimonials() {
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
               <h3 className="text-2xl font-bold text-[#0A0A0B] mb-4">
-                Merci pour votre témoignage !
+                {language === 'FR' ? 'Merci pour votre témoignage !' : 'Thank you for your testimonial!'}
               </h3>
               <p className="text-gray-600 mb-8">
-                Votre avis sera publié après validation par notre équipe.
+                {language === 'FR' 
+                  ? 'Votre avis sera publié après validation par notre équipe.'
+                  : 'Your review will be published after validation by our team.'}
               </p>
               <Button
                 onClick={() => {
@@ -152,7 +158,7 @@ export default function Testimonials() {
                 variant="outline"
                 className="rounded-full"
               >
-                Soumettre un autre témoignage
+                {language === 'FR' ? 'Soumettre un autre témoignage' : 'Submit another testimonial'}
               </Button>
             </motion.div>
           ) : (
@@ -162,10 +168,12 @@ export default function Testimonials() {
             >
               <div className="text-center mb-10">
                 <h2 className="text-2xl font-bold text-[#0A0A0B] mb-4">
-                  Partagez votre expérience
+                  {language === 'FR' ? 'Partagez votre expérience' : 'Share your experience'}
                 </h2>
                 <p className="text-gray-600">
-                  Votre avis compte pour nous et aide d'autres clients à nous découvrir.
+                  {language === 'FR' 
+                    ? 'Votre avis compte pour nous et aide d\'autres clients à nous découvrir.'
+                    : 'Your feedback matters to us and helps other clients discover us.'}
                 </p>
               </div>
 
@@ -173,41 +181,41 @@ export default function Testimonials() {
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="author_name">Votre nom *</Label>
+                      <Label htmlFor="author_name">{language === 'FR' ? 'Votre nom' : 'Your name'} *</Label>
                       <Input
                         id="author_name"
                         value={formData.author_name}
                         onChange={(e) => handleChange('author_name', e.target.value)}
                         required
                         className="h-12 rounded-xl"
-                        placeholder="Jean Dupont"
+                        placeholder={language === 'FR' ? 'Jean Dupont' : 'John Doe'}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="company">Entreprise</Label>
+                      <Label htmlFor="company">{language === 'FR' ? 'Entreprise' : 'Company'}</Label>
                       <Input
                         id="company"
                         value={formData.company}
                         onChange={(e) => handleChange('company', e.target.value)}
                         className="h-12 rounded-xl"
-                        placeholder="Nom de votre entreprise"
+                        placeholder={language === 'FR' ? 'Nom de votre entreprise' : 'Your company name'}
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="position">Poste</Label>
+                    <Label htmlFor="position">{language === 'FR' ? 'Poste' : 'Position'}</Label>
                     <Input
                       id="position"
                       value={formData.position}
                       onChange={(e) => handleChange('position', e.target.value)}
                       className="h-12 rounded-xl"
-                      placeholder="Directeur, Manager, etc."
+                      placeholder={language === 'FR' ? 'Directeur, Manager, etc.' : 'Director, Manager, etc.'}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Note</Label>
+                    <Label>{language === 'FR' ? 'Note' : 'Rating'}</Label>
                     <div className="flex gap-2">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <button
@@ -229,14 +237,14 @@ export default function Testimonials() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="content">Votre témoignage *</Label>
+                    <Label htmlFor="content">{language === 'FR' ? 'Votre témoignage' : 'Your testimonial'} *</Label>
                     <Textarea
                       id="content"
                       value={formData.content}
                       onChange={(e) => handleChange('content', e.target.value)}
                       required
                       className="min-h-[150px] rounded-xl"
-                      placeholder="Partagez votre expérience avec nous..."
+                      placeholder={language === 'FR' ? 'Partagez votre expérience avec nous...' : 'Share your experience with us...'}
                     />
                   </div>
 
@@ -245,7 +253,9 @@ export default function Testimonials() {
                     disabled={isSubmitting}
                     className="w-full h-14 rounded-xl bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white text-lg"
                   >
-                    {isSubmitting ? 'Envoi en cours...' : 'Soumettre mon témoignage'}
+                    {isSubmitting 
+                      ? (language === 'FR' ? 'Envoi en cours...' : 'Sending...') 
+                      : (language === 'FR' ? 'Soumettre mon témoignage' : 'Submit my testimonial')}
                     <Send className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
