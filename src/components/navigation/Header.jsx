@@ -12,27 +12,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/components/LanguageContext';
 
-const getNavItems = (t) => [
-  { 
-    name: t('nav.home'), 
-    href: 'Home',
-  },
-  { 
-    name: t('nav.services'), 
-    href: 'Services',
-  },
-  { 
-    name: t('nav.portfolio'), 
-    href: 'Portfolio',
-  },
-  { 
-    name: t('nav.about'), 
-    href: 'About',
-  },
-  { 
-    name: t('nav.blog'), 
-    href: 'Blog',
-  },
+const getNavItems = (t, language) => [
+  { name: t('nav.home'), href: 'Home' },
+  { name: t('nav.services'), href: 'Services' },
+  { name: t('nav.portfolio'), href: 'Portfolio' },
+  { name: t('nav.about'), href: 'About' },
+  { name: t('nav.blog'), href: 'Blog' },
   { name: language === 'FR' ? 'Témoignages' : 'Testimonials', href: 'Testimonials' },
   { name: t('nav.contact'), href: 'Contact' },
 ];
@@ -43,7 +28,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   
-  const navItems = getNavItems(t);
+  const navItems = getNavItems(t, language);
 
   useEffect(() => {
     const handleScroll = () => {
