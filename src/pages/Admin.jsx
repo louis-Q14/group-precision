@@ -25,14 +25,12 @@ export default function Admin() {
     try {
       const currentUser = await base44.auth.me();
       if (!currentUser || currentUser.role !== 'admin') {
-        toast.error('Accès refusé - Admins uniquement');
-        window.location.href = '/';
+        window.location.href = '/Login';
         return;
       }
       setUser(currentUser);
     } catch (error) {
-      toast.error('Non authentifié');
-      window.location.href = '/';
+      window.location.href = '/Login';
     } finally {
       setLoading(false);
     }
