@@ -86,20 +86,27 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
+      console.log('Création du lead...');
       await base44.entities.Lead.create({
         ...formData,
         source: 'contact_page',
         status: 'new',
       });
+      console.log('Lead créé avec succès');
 
-      // Envoi de la notification par e-mail
-      await base44.functions.invoke('sendContactEmail', formData);
+      console.log('Envoi de l\'email...');
+      const emailResponse = await base44.functions.invoke('sendContactEmail', formData);
+      console.log('Réponse email:', emailResponse);
+
+      if (emailResponse.data?.success === false) {
+        throw new Error(emailResponse.data?.error || 'Erreur lors de l\'envoi de l\'email');
+      }
 
       toast.success('Message envoyé avec succès !');
       setSubmitted(true);
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
-      toast.error('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+      toast.error(`Erreur: ${error.message || 'Veuillez réessayer.'}`);
     } finally {
       setIsSubmitting(false);
     }
