@@ -198,7 +198,7 @@ export default function Footer() {
               © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
             </p>
             <Link 
-              to={createPageUrl('Login')} 
+              to={createPageUrl('Admin')} 
               className="w-8 h-8 rounded-lg bg-white hover:bg-[#C9A86C] flex items-center justify-center transition-all"
               title="Admin"
             >

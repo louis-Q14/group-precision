@@ -25,14 +25,13 @@ export default function Admin() {
     try {
       const currentUser = await base44.auth.me();
       if (!currentUser || currentUser.role !== 'admin') {
-        window.location.href = '/Login';
+        base44.auth.redirectToLogin('/Admin');
         return;
       }
       setUser(currentUser);
-    } catch (error) {
-      window.location.href = '/Login';
-    } finally {
       setLoading(false);
+    } catch (error) {
+      base44.auth.redirectToLogin('/Admin');
     }
   };
 
