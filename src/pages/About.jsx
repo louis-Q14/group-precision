@@ -192,12 +192,16 @@ export default function About() {
               transition={{ delay: 0.3 }}
               className="relative"
             >
-              <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/411ca2a35_travail.jpg"
-                alt="Team"
-                className="rounded-3xl"
-                style={{ boxShadow: '0 0 60px 20px rgba(0, 0, 0, 0.1)' }}
-              />
+              <div className="relative rounded-3xl overflow-hidden">
+                <img
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/411ca2a35_travail.jpg"
+                  alt="Team"
+                  className="w-full"
+                />
+                <div className="absolute inset-0 rounded-3xl" style={{
+                  boxShadow: 'inset 0 0 60px 30px rgba(10, 10, 11, 0.4)'
+                }} />
+              </div>
             </motion.div>
           </div>
         </div>
