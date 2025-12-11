@@ -5,6 +5,7 @@ import About from './pages/About';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
+import Admin from './pages/Admin';
 import __Layout from './Layout.jsx';
 
 
@@ -16,6 +17,7 @@ export const PAGES = {
     "Blog": Blog,
     "Contact": Contact,
     "Testimonials": Testimonials,
+    "Admin": Admin,
 }
 
 export const pagesConfig = {

@@ -1,0 +1,87 @@
+import React from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { base44 } from '@/api/base44Client';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle, XCircle, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
+
+export default function TestimonialsManager() {
+  const queryClient = useQueryClient();
+
+  const { data: testimonials = [], isLoading } = useQuery({
+    queryKey: ['testimonials'],
+    queryFn: () => base44.entities.Testimonial.list('-created_date'),
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.Testimonial.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['testimonials']);
+      toast.success('Témoignage mis à jour');
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => base44.entities.Testimonial.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['testimonials']);
+      toast.success('Témoignage supprimé');
+    },
+  });
+
+  if (isLoading) return <div>Chargement...</div>;
+
+  return (
+    <Card className="p-6">
+      <h2 className="text-xl font-bold mb-6">Témoignages ({testimonials.length})</h2>
+      <div className="space-y-4">
+        {testimonials.map((testimonial) => (
+          <div key={testimonial.id} className="border rounded-lg p-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="font-semibold">{testimonial.author_name}</h3>
+                <p className="text-sm text-gray-600">
+                  {testimonial.position} {testimonial.company && `- ${testimonial.company}`}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => 
+                    updateMutation.mutate({ 
+                      id: testimonial.id, 
+                      data: { is_approved: !testimonial.is_approved } 
+                    })
+                  }
+                >
+                  {testimonial.is_approved ? (
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                  ) : (
+                    <XCircle className="w-5 h-5 text-gray-400" />
+                  )}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => deleteMutation.mutate(testimonial.id)}
+                >
+                  <Trash2 className="w-4 h-4 text-red-500" />
+                </Button>
+              </div>
+            </div>
+            <p className="text-gray-700 mb-2">{testimonial.content}</p>
+            <div className="flex gap-2">
+              <Badge variant={testimonial.is_approved ? 'default' : 'secondary'}>
+                {testimonial.is_approved ? 'Approuvé' : 'En attente'}
+              </Badge>
+              <Badge variant="outline">⭐ {testimonial.rating}/5</Badge>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
