@@ -91,6 +91,25 @@ export default function Contact() {
       status: 'new',
     });
 
+    // Envoi automatique de l'email
+    await base44.integrations.Core.SendEmail({
+      to: 'contact@precisions.group',
+      subject: `Nouveau message de ${formData.full_name} - ${formData.interest}`,
+      body: `
+Nouveau message reçu via le formulaire de contact :
+
+Nom: ${formData.full_name}
+Email: ${formData.email}
+Téléphone: ${formData.phone || 'Non renseigné'}
+Entreprise: ${formData.company || 'Non renseignée'}
+Type de projet: ${formData.interest}
+Budget estimé: ${formData.budget_range || 'Non renseigné'}
+
+Message:
+${formData.message}
+      `,
+    });
+
     toast.success('Message envoyé avec succès !');
     setSubmitted(true);
     setIsSubmitting(false);
