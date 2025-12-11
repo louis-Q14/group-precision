@@ -100,8 +100,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C9A86C] to-[#B8975B] flex items-center justify-center shadow-lg">
-                <span className="text-2xl font-bold text-white">P</span>
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
+                <span className="text-xl font-bold text-[#0A0A0B]">P</span>
               </div>
               <span className="text-xl font-semibold">PRECISIONS</span>
             </div>
@@ -181,9 +181,17 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="text-gray-500 text-sm">
+                © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
+              </p>
+              <Link 
+                to={createPageUrl('Admin')} 
+                className="text-gray-600 hover:text-[#C9A86C] transition-colors text-xs"
+              >
+                Admin
+              </Link>
+            </div>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <motion.a
@@ -197,14 +205,6 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
-          </div>
-          <div className="text-center mt-4">
-            <Link 
-              to={createPageUrl('Admin')} 
-              className="text-gray-600 hover:text-[#C9A86C] transition-colors text-xs"
-            >
-              Admin
-            </Link>
           </div>
         </div>
       </div>
