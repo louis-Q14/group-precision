@@ -85,18 +85,24 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await base44.entities.Lead.create({
-      ...formData,
-      source: 'contact_page',
-      status: 'new',
-    });
+    try {
+      await base44.entities.Lead.create({
+        ...formData,
+        source: 'contact_page',
+        status: 'new',
+      });
 
-    // Envoi de la notification par e-mail
-    await base44.functions.invoke('sendContactEmail', formData);
+      // Envoi de la notification par e-mail
+      await base44.functions.invoke('sendContactEmail', formData);
 
-    toast.success('Message envoyé avec succès !');
-    setSubmitted(true);
-    setIsSubmitting(false);
+      toast.success('Message envoyé avec succès !');
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      toast.error('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
