@@ -91,6 +91,9 @@ export default function Contact() {
       status: 'new',
     });
 
+    // Envoi de la notification par e-mail
+    await base44.functions.invoke('sendContactEmail', formData);
+
     toast.success('Message envoyé avec succès !');
     setSubmitted(true);
     setIsSubmitting(false);
