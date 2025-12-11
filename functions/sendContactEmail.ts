@@ -1,14 +1,19 @@
-import { Resend } from 'npm:resend@4.0.0';
-
-const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
+import nodemailer from 'npm:nodemailer@6.9.7';
 
 Deno.serve(async (req) => {
   try {
     const { full_name, email, phone, company, interest, budget_range, message } = await req.json();
 
-    // Envoi de l'e-mail de notification à l'équipe
-    await resend.emails.send({
-      from: 'PRECISIONS Group <onboarding@resend.dev>',
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: Deno.env.get('SMTP_EMAIL'),
+        pass: Deno.env.get('SMTP_PASSWORD'),
+      },
+    });
+
+    await transporter.sendMail({
+      from: Deno.env.get('SMTP_EMAIL'),
       to: 'contact@precisions.group',
       subject: `Nouveau message de ${full_name} - ${interest}`,
       html: `
