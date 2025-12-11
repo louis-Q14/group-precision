@@ -190,17 +190,26 @@ export default function About() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
-              className="relative"
+              whileHover={{ scale: 1.02 }}
+              className="relative cursor-pointer"
             >
               <div className="relative rounded-3xl overflow-hidden">
-                <img
+                <motion.img
                   src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/411ca2a35_travail.jpg"
                   alt="Team"
-                  className="w-full"
+                  className="w-full transition-transform duration-700"
+                  whileHover={{ scale: 1.05 }}
                 />
-                <div className="absolute inset-0 rounded-3xl" style={{
-                  boxShadow: 'inset 0 0 60px 30px rgba(10, 10, 11, 0.4)'
-                }} />
+                <motion.div 
+                  className="absolute inset-0 rounded-3xl" 
+                  style={{
+                    boxShadow: 'inset 0 0 60px 30px rgba(10, 10, 11, 0.4)'
+                  }}
+                  whileHover={{
+                    boxShadow: 'inset 0 0 80px 40px rgba(201, 168, 108, 0.2)'
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
               </div>
             </motion.div>
           </div>
