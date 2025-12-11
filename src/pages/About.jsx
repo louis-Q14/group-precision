@@ -196,6 +196,7 @@ export default function About() {
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/411ca2a35_travail.jpg"
                 alt="Team"
                 className="rounded-3xl"
+                style={{ boxShadow: '0 0 60px 20px rgba(0, 0, 0, 0.1)' }}
               />
             </motion.div>
           </div>
