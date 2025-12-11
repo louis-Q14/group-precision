@@ -91,22 +91,28 @@ export default function Contact() {
       status: 'new',
     });
 
-    // Envoi automatique de l'email
+    // Envoi d'un email de confirmation au client
     await base44.integrations.Core.SendEmail({
-      to: 'contact@precisions.group',
-      subject: `Nouveau message de ${formData.full_name} - ${formData.interest}`,
+      from_name: 'PRECISIONS Group',
+      to: formData.email,
+      subject: 'Merci pour votre message - PRECISIONS Group',
       body: `
-Nouveau message reçu via le formulaire de contact :
+Bonjour ${formData.full_name},
 
-Nom: ${formData.full_name}
-Email: ${formData.email}
-Téléphone: ${formData.phone || 'Non renseigné'}
-Entreprise: ${formData.company || 'Non renseignée'}
-Type de projet: ${formData.interest}
-Budget estimé: ${formData.budget_range || 'Non renseigné'}
+Merci pour votre message. Nous avons bien reçu votre demande concernant : ${formData.interest}.
 
-Message:
-${formData.message}
+Notre équipe va analyser votre projet et vous contactera dans les plus brefs délais (généralement sous 24h).
+
+Détails de votre demande :
+- Type de projet : ${formData.interest}
+- Budget estimé : ${formData.budget_range || 'Non renseigné'}
+
+À très bientôt,
+L'équipe PRECISIONS Group
+
+---
+contact@precisions.group
++44 7802 353154
       `,
     });
 
