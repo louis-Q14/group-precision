@@ -22,10 +22,10 @@ Deno.serve(async (req) => {
     console.log('Resend initialisé, envoi en cours...');
 
     const emailData = {
-      from: 'PRECISIONS Contact <onboarding@resend.dev>',
-      to: ['contact@precisions.group'],
+      from: 'onboarding@resend.dev',
+      to: 'contact@precisions.group',
       replyTo: email,
-      subject: `Nouveau message de ${full_name} - ${interest || 'Non spécifié'}`,
+      subject: `[PRECISIONS] Nouveau message de ${full_name} - ${interest || 'Non spécifié'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0A0A0B; border-bottom: 3px solid #C9A86C; padding-bottom: 10px;">
