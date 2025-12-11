@@ -180,18 +180,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <p className="text-gray-500 text-sm">
-                © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
-              </p>
-              <Link 
-                to={createPageUrl('Admin')} 
-                className="text-gray-600 hover:text-[#C9A86C] transition-colors text-xs"
-              >
-                Admin
-              </Link>
-            </div>
+          <div className="flex flex-col items-center justify-center gap-6">
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <motion.a
@@ -205,6 +194,16 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
+            <p className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
+            </p>
+            <Link 
+              to={createPageUrl('Admin')} 
+              className="w-8 h-8 rounded-lg bg-white hover:bg-[#C9A86C] flex items-center justify-center transition-all"
+              title="Admin"
+            >
+              <span className="text-sm font-bold text-[#0A0A0B]">P</span>
+            </Link>
           </div>
         </div>
       </div>
