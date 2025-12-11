@@ -181,9 +181,17 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="text-gray-500 text-sm">
+                © {new Date().getFullYear()} PRECISIONS. {t('footer.copyright')}
+              </p>
+              <Link 
+                to={createPageUrl('Admin')} 
+                className="text-gray-600 hover:text-[#C9A86C] transition-colors text-xs"
+              >
+                Admin
+              </Link>
+            </div>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <motion.a
