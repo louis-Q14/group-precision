@@ -33,11 +33,11 @@ export default function Admin() {
         setError('not_admin');
         setLoading(false);
       } else {
-        base44.auth.redirectToLogin('/Admin');
+        window.location.href = `https://precisions.group/login?from_url=${encodeURIComponent(window.location.href)}`;
       }
     } catch (error) {
       console.error('Auth error:', error);
-      base44.auth.redirectToLogin('/Admin');
+      window.location.href = `https://precisions.group/login?from_url=${encodeURIComponent(window.location.href)}`;
     }
   };
 
