@@ -47,22 +47,36 @@ export default function TestimonialsManager() {
                 </p>
               </div>
               <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => 
-                    updateMutation.mutate({ 
-                      id: testimonial.id, 
-                      data: { is_approved: !testimonial.is_approved } 
-                    })
-                  }
-                >
-                  {testimonial.is_approved ? (
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-gray-400" />
-                  )}
-                </Button>
+                {!testimonial.is_approved && (
+                  <Button
+                    size="sm"
+                    onClick={() => 
+                      updateMutation.mutate({ 
+                        id: testimonial.id, 
+                        data: { is_approved: true } 
+                      })
+                    }
+                    className="bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    <CheckCircle className="w-4 h-4 mr-2" />
+                    Approuver et publier
+                  </Button>
+                )}
+                {testimonial.is_approved && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => 
+                      updateMutation.mutate({ 
+                        id: testimonial.id, 
+                        data: { is_approved: false } 
+                      })
+                    }
+                  >
+                    <XCircle className="w-4 h-4 mr-2" />
+                    Retirer
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   size="icon"
