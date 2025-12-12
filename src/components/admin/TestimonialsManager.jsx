@@ -4,7 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, Trash2 } from 'lucide-react';
+import { CheckCircle, XCircle, Trash2, Star } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function TestimonialsManager() {
@@ -87,11 +87,22 @@ export default function TestimonialsManager() {
               </div>
             </div>
             <p className="text-gray-700 mb-2">{testimonial.content}</p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
               <Badge variant={testimonial.is_approved ? 'default' : 'secondary'}>
                 {testimonial.is_approved ? 'Approuvé' : 'En attente'}
               </Badge>
-              <Badge variant="outline">⭐ {testimonial.rating}/5</Badge>
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className={`w-4 h-4 ${
+                      star <= testimonial.rating
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         ))}
