@@ -24,34 +24,20 @@ export default function Admin() {
 
   const checkAuth = async () => {
     try {
-      const isAuth = await base44.auth.isAuthenticated();
-      
-      if (!isAuth) {
-        setError('not_authenticated');
-        setLoading(false);
-        return;
-      }
-
       const currentUser = await base44.auth.me();
       
-      if (!currentUser) {
-        setError('no_user');
+      if (currentUser && currentUser.role === 'admin') {
+        setUser(currentUser);
         setLoading(false);
-        return;
-      }
-
-      if (currentUser.role !== 'admin') {
+      } else if (currentUser) {
         setError('not_admin');
         setLoading(false);
-        return;
+      } else {
+        base44.auth.redirectToLogin('/Admin');
       }
-
-      setUser(currentUser);
-      setLoading(false);
     } catch (error) {
       console.error('Auth error:', error);
-      setError('auth_error');
-      setLoading(false);
+      base44.auth.redirectToLogin('/Admin');
     }
   };
 
@@ -68,7 +54,7 @@ export default function Admin() {
     );
   }
 
-  if (error) {
+  if (error === 'not_admin') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-6">
         <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg text-center">
@@ -79,58 +65,17 @@ export default function Admin() {
           <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4">
             Accès restreint
           </h1>
-
-          {error === 'not_authenticated' && (
-            <>
-              <p className="text-gray-600 mb-6">
-                Vous devez être connecté pour accéder à cette page.
-              </p>
-              <Button 
-                onClick={() => base44.auth.redirectToLogin('/Admin')}
-                className="w-full bg-[#0A0A0B] hover:bg-[#0A0A0B]/90"
-              >
-                Se connecter
-              </Button>
-            </>
-          )}
-
-          {error === 'not_admin' && (
-            <>
-              <p className="text-gray-600 mb-6">
-                Vous n'avez pas les droits d'administrateur. Seuls les administrateurs peuvent accéder à cette section.
-              </p>
-              <Button 
-                onClick={() => window.location.href = '/'}
-                variant="outline"
-                className="w-full"
-              >
-                Retour au site
-              </Button>
-            </>
-          )}
-
-          {(error === 'no_user' || error === 'auth_error') && (
-            <>
-              <p className="text-gray-600 mb-6">
-                Une erreur s'est produite lors de la vérification de vos droits.
-              </p>
-              <div className="space-y-3">
-                <Button 
-                  onClick={() => base44.auth.redirectToLogin('/Admin')}
-                  className="w-full bg-[#0A0A0B] hover:bg-[#0A0A0B]/90"
-                >
-                  Réessayer
-                </Button>
-                <Button 
-                  onClick={() => window.location.href = '/'}
-                  variant="outline"
-                  className="w-full"
-                >
-                  Retour au site
-                </Button>
-              </div>
-            </>
-          )}
+          
+          <p className="text-gray-600 mb-6">
+            Vous n'avez pas les droits d'administrateur. Seuls les administrateurs peuvent accéder à cette section.
+          </p>
+          <Button 
+            onClick={() => window.location.href = '/'}
+            variant="outline"
+            className="w-full"
+          >
+            Retour au site
+          </Button>
         </div>
       </div>
     );
