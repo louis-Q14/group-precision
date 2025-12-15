@@ -286,17 +286,17 @@ export default function About() {
                 className="cursor-pointer max-w-[250px] mx-auto"
               >
                 <motion.div 
-                  className="relative overflow-hidden rounded-2xl mb-4 shadow-lg"
+                  className="relative overflow-hidden rounded-2xl mb-4 shadow-lg group"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-[175px] object-cover transition-all duration-500 hover:brightness-110"
+                    className="w-full h-[175px] object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                   />
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </motion.div>
                 <h3 className="text-xl font-semibold text-[#0A0A0B]">{member.name}</h3>
