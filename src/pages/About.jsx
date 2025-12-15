@@ -104,11 +104,9 @@ const getValues = (language) => [
 
 const getTimeline = (language) => [
   { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISIONS par Louis-Quatorze Kzd' : 'PRECISIONS founded by Louis-Quatorze Kzd' },
-  { year: '2015', title: language === 'FR' ? 'Première levée' : 'First Funding', description: language === 'FR' ? 'Série A de 5M€ pour accélérer notre croissance' : '5M€ Series A to accelerate our growth' },
-  { year: '2018', title: 'Expansion', description: language === 'FR' ? 'Ouverture de bureaux à Londres et Berlin' : 'Opening offices in London and Berlin' },
-  { year: '2020', title: language === 'FR' ? '100 collaborateurs' : '100 Employees', description: language === 'FR' ? 'Cap symbolique franchi malgré la crise' : 'Milestone reached despite the crisis' },
-  { year: '2023', title: language === 'FR' ? 'Certification B Corp' : 'B Corp Certification', description: language === 'FR' ? 'Reconnaissance de l\'engagement RSE de PRECISIONS' : 'Recognition of PRECISIONS CSR commitment' },
-  { year: '2024', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '150+ projets, 45 experts, présence internationale' : '150+ projects, 45 experts, international presence' },
+  { year: '2024', title: language === 'FR' ? 'Premiers clients' : 'First Clients', description: language === 'FR' ? 'Signature de nos premiers contrats en RD Congo' : 'Signing our first contracts in DR Congo' },
+  { year: '2025', title: language === 'FR' ? 'Croissance' : 'Growth', description: language === 'FR' ? 'Expansion de l\'équipe et diversification des services' : 'Team expansion and service diversification' },
+  { year: '2025', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '20+ experts, présence en RD Congo, projets internationaux' : '20+ experts, DR Congo presence, international projects' },
 ];
 
 const certifications = [
