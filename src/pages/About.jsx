@@ -15,7 +15,7 @@ const getTeam = (language) => [
     name: 'Louis-Quatorze Kazadi',
     position: language === 'FR' ? 'CEO & Fondateur' : 'CEO & Founder',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/700c4f75e_ceo.png',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/357cba44d_image_01.png',
     linkedin: '#',
     isLeadership: true,
   },
