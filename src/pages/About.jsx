@@ -293,7 +293,7 @@ export default function About() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-[350px] object-cover transition-all duration-500 hover:brightness-110"
+                    className="w-full h-[175px] object-cover transition-all duration-500 hover:brightness-110"
                   />
                   <motion.div 
                     className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
