@@ -274,7 +274,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-3xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -283,7 +283,7 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="cursor-pointer"
+                className="cursor-pointer max-w-[250px] mx-auto"
               >
                 <motion.div 
                   className="relative overflow-hidden rounded-2xl mb-4 shadow-lg"
