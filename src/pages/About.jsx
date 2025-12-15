@@ -19,56 +19,6 @@ const getTeam = (language) => [
     linkedin: '#',
     isLeadership: true,
   },
-  {
-    name: 'Sophie Dubois',
-    position: language === 'FR' ? 'Directrice Créative' : 'Creative Director',
-    bio: language === 'FR'
-      ? 'Designer primée avec 12 ans d\'expérience en branding et UX pour des marques internationales.'
-      : 'Award-winning designer with 12 years of branding and UX experience for international brands.',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Thomas Chen',
-    position: 'CTO',
-    bio: language === 'FR'
-      ? 'Expert en architecture cloud et IA. Ancien tech lead chez Google Cloud.'
-      : 'Cloud architecture and AI expert. Former tech lead at Google Cloud.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Marie Laurent',
-    position: language === 'FR' ? 'Directrice Marketing' : 'Marketing Director',
-    bio: language === 'FR'
-      ? 'Spécialiste growth marketing avec un track record de +200% de croissance pour ses clients.'
-      : 'Growth marketing specialist with a track record of +200% growth for clients.',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Pierre Bernard',
-    position: 'Lead Developer',
-    bio: language === 'FR'
-      ? 'Full-stack expert avec une passion pour les architectures scalables et performantes.'
-      : 'Full-stack expert with a passion for scalable and performant architectures.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
-    linkedin: '#',
-    isLeadership: false,
-  },
-  {
-    name: 'Emma Richard',
-    position: language === 'FR' ? 'UX Designer Senior' : 'Senior UX Designer',
-    bio: language === 'FR'
-      ? 'Spécialiste en recherche utilisateur et design d\'interfaces centrées sur l\'humain.'
-      : 'User research and human-centered interface design specialist.',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
-    linkedin: '#',
-    isLeadership: false,
-  },
 ];
 
 const getValues = (language) => [
