@@ -27,7 +27,15 @@ const getTeam = (language) => [
     linkedin: '#',
     isLeadership: true,
   },
-];
+  {
+    name: 'Serge Biona Mwenga',
+    position: language === 'FR' ? 'Directeur de Projet' : 'Project Director',
+    bio: '',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/d1c5dcc4f_photo_04.png',
+    linkedin: '#',
+    isLeadership: true,
+  },
+  ];
 
 const getValues = (language) => [
   {
