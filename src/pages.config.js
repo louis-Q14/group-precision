@@ -1,23 +1,23 @@
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
 import About from './pages/About';
+import Admin from './pages/Admin';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import Home from './pages/Home';
+import Portfolio from './pages/Portfolio';
+import Services from './pages/Services';
 import Testimonials from './pages/Testimonials';
-import Admin from './pages/Admin';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "Home": Home,
-    "Services": Services,
-    "Portfolio": Portfolio,
     "About": About,
+    "Admin": Admin,
     "Blog": Blog,
     "Contact": Contact,
+    "Home": Home,
+    "Portfolio": Portfolio,
+    "Services": Services,
     "Testimonials": Testimonials,
-    "Admin": Admin,
 }
 
 export const pagesConfig = {

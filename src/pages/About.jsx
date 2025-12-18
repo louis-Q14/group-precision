@@ -35,6 +35,14 @@ const getTeam = (language) => [
     linkedin: '#',
     isLeadership: true,
   },
+  {
+    name: 'Maitre Joel Mukuna Kalala',
+    position: language === 'FR' ? 'Conseil Juridique' : 'Legal Advisor',
+    bio: '',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/79b2c13f8_Image_200.png',
+    linkedin: '#',
+    isLeadership: true,
+  },
   ];
 
 const getValues = (language) => [
