@@ -59,7 +59,7 @@ export default function Header() {
                 <img
                   src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/dadef6114_precisions_group_logo.svg"
                   alt="Precisions Group"
-                  className={`h-44 w-auto transition-all duration-300 ${
+                  className={`h-96 w-auto transition-all duration-300 ${
                     isScrolled
                       ? theme === 'dark' ? 'brightness-0 invert' : ''
                       : 'brightness-0 invert'
