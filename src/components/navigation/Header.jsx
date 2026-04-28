@@ -62,7 +62,7 @@ export default function Header() {
                   className={`h-14 w-auto max-w-[240px] object-contain transition-all duration-300 ${
                     isScrolled
                       ? theme === 'dark' ? 'brightness-0 invert' : ''
-                      : 'brightness-0 invert'
+                      : 'invert'
                   }`}
                 />
               </motion.div>
