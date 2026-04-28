@@ -101,9 +101,9 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img
-                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/f868afe3e_image.png"
+                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/97a9c9cc7_PRECISIONS_logo.png"
                 alt="PRECISIONS"
-                className="h-10 w-auto object-contain invert"
+                className="h-12 w-auto max-w-[240px] object-contain invert"
               />
             </div>
             <p className="text-gray-400 mb-8 max-w-sm">
@@ -203,9 +203,9 @@ export default function Footer() {
               title="Admin"
             >
               <img
-                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/f868afe3e_image.png"
+                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/97a9c9cc7_PRECISIONS_logo.png"
                 alt="Admin"
-                className="h-8 w-auto object-contain invert hover:opacity-70 transition-opacity"
+                className="h-8 w-auto max-w-[160px] object-contain invert hover:opacity-70 transition-opacity"
               />
             </Link>
           </div>
