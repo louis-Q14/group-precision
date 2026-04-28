@@ -55,22 +55,12 @@ export default function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="relative z-10">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="flex items-center gap-3"
-              >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
-                  isScrolled ? 'bg-[#0A0A0B]' : 'bg-white'
-                }`}>
-                  <span className={`text-xl font-bold ${isScrolled ? 'text-white' : 'text-[#0A0A0B]'}`}>
-                    P
-                  </span>
-                </div>
-                <span className={`text-xl font-semibold tracking-tight transition-colors duration-300 ${
-                  isScrolled ? 'text-[#0A0A0B]' : 'text-white'
-                }`}>
-                  PRECISIONS
-                </span>
+              <motion.div whileHover={{ scale: 1.02 }}>
+                <img
+                  src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/dadef6114_precisions_group_logo.svg"
+                  alt="Precisions Group"
+                  className={`h-10 w-auto transition-all duration-300 ${!isScrolled ? 'brightness-0 invert' : ''}`}
+                />
               </motion.div>
             </Link>
 
