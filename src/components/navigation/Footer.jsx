@@ -100,10 +100,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-                <span className="text-xl font-bold text-[#0A0A0B]">P</span>
-              </div>
-              <span className="text-xl font-semibold">PRECISIONS</span>
+              <img
+                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/f868afe3e_image.png"
+                alt="PRECISIONS"
+                className="h-10 w-auto object-contain invert"
+              />
             </div>
             <p className="text-gray-400 mb-8 max-w-sm">
               PRECISIONS transforme vos ambitions digitales en réalité. Innovation, excellence et résultats mesurables.
@@ -199,10 +200,13 @@ export default function Footer() {
             </p>
             <Link 
               to={createPageUrl('Admin')} 
-              className="w-8 h-8 rounded-lg bg-white hover:bg-[#C9A86C] flex items-center justify-center transition-all"
               title="Admin"
             >
-              <span className="text-sm font-bold text-[#0A0A0B]">P</span>
+              <img
+                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/f868afe3e_image.png"
+                alt="Admin"
+                className="h-8 w-auto object-contain invert hover:opacity-70 transition-opacity"
+              />
             </Link>
           </div>
         </div>
