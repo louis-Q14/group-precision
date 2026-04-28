@@ -52,14 +52,14 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-28">
+          <div className="flex items-center justify-between h-32">
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="relative z-10">
               <motion.div whileHover={{ scale: 1.02 }}>
                 <img
                   src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/dadef6114_precisions_group_logo.svg"
                   alt="Precisions Group"
-                  className={`h-20 w-auto max-w-[200px] transition-all duration-300 ${
+                  className={`h-24 w-auto max-w-[280px] transition-all duration-300 ${
                     isScrolled
                       ? theme === 'dark' ? 'brightness-0 invert' : ''
                       : 'brightness-0 invert'
