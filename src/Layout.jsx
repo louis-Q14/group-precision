@@ -3,13 +3,11 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import { Toaster } from 'sonner';
 import { LanguageProvider } from '@/components/LanguageContext';
-import { ThemeProvider } from '@/components/ThemeContext';
 
 export default function Layout({ children }) {
   return (
-    <ThemeProvider>
     <LanguageProvider>
-    <div className="min-h-screen bg-white dark:bg-[#0A0A0B]">
+    <div className="min-h-screen bg-white">
       <style>{`
         :root {
           --color-primary: #0A0A0B;
@@ -88,6 +86,5 @@ export default function Layout({ children }) {
       <Toaster position="top-right" richColors />
     </div>
     </LanguageProvider>
-    </ThemeProvider>
   );
 }
