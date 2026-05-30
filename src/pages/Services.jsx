@@ -7,7 +7,7 @@ import {
   CheckCircle, Sparkles, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network,
   MessageSquare, Search, HeadphonesIcon, Coins, Briefcase,
-  Building2, Handshake, Settings, RefreshCw
+  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -323,6 +323,61 @@ const serviceCategories = [
         bgColor: 'bg-indigo-50',
       },
     ]
+  },
+  {
+    id: 'plateformes',
+    title: 'Plateformes Digitales',
+    description: 'Nos plateformes propriétaires au service du numérique en RD Congo',
+    icon: Database,
+    color: 'from-orange-500 to-teal-500',
+    services: [
+      {
+        id: 'sombateka',
+        icon: ShoppingCart,
+        title: 'SombaTeka — Plateforme de Vente en Ligne',
+        subtitle: 'Le marché digital pour tous en RDC',
+        description: 'SombaTeka est une plateforme e-commerce dédiée à la vente en ligne accessible à tous — particuliers, commerçants, PME et grandes entreprises. Elle facilite les échanges commerciaux en RD Congo et à l\'international avec des outils simples et sécurisés.',
+        features: [
+          'Création de boutiques en ligne personnalisées',
+          'Système de paiement mobile et bancaire sécurisé',
+          'Gestion des commandes et des stocks',
+          'Livraison intégrée avec suivi en temps réel',
+          'Marketplace multi-vendeurs et multi-catégories',
+          'Tableau de bord analytics pour les vendeurs',
+          'Support client dédié pour les marchands',
+        ],
+        benefits: [
+          { icon: ShoppingCart, text: 'Vente simplifiée' },
+          { icon: CreditCard, text: 'Paiements sécurisés' },
+          { icon: Package, text: 'Livraison intégrée' },
+        ],
+        color: 'from-orange-500 to-amber-500',
+        bgColor: 'bg-orange-50',
+      },
+      {
+        id: 'harchive',
+        icon: Archive,
+        title: 'HARCHIVE — Archivage Académique Numérique',
+        subtitle: 'Connecter tous les corps académiques de la RDC',
+        description: 'HARCHIVE est une plateforme d\'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays.',
+        features: [
+          'Archivage sécurisé des dossiers académiques des étudiants',
+          'Gestion des diplômes et attestations numériques',
+          'Réseau connectant universités, instituts et écoles de la RDC',
+          'Vérification en ligne de l\'authenticité des diplômes',
+          'Suivi du parcours académique de la licence au doctorat',
+          'Annuaire des enseignants et chercheurs nationaux',
+          'Partage de ressources pédagogiques entre institutions',
+        ],
+        benefits: [
+          { icon: BookOpen, text: 'Archives fiables' },
+          { icon: GraduationCap, text: 'Diplômes certifiés' },
+          { icon: Link2, text: 'Réseau académique RDC' },
+        ],
+        color: 'from-teal-500 to-green-500',
+        bgColor: 'bg-teal-50',
+      },
+    ]
   }
 ];
 
@@ -336,6 +391,7 @@ const processSteps = [
 export default function Services() {
   const [activeCategory, setActiveCategory] = useState('communication');
   const [activeService, setActiveService] = useState('strategie');
+  
 
   const currentCategory = serviceCategories.find(c => c.id === activeCategory);
   const currentService = currentCategory?.services.find(s => s.id === activeService);

@@ -12,7 +12,9 @@ import {
   Coins,
   Briefcase,
   Handshake,
-  RefreshCw
+  RefreshCw,
+  ShoppingCart,
+  Archive
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageContext';
@@ -96,6 +98,34 @@ const getServices = (t, language) => [
     bgColor: 'bg-purple-500/10',
     category: 'economique',
   },
+  {
+    icon: ShoppingCart,
+    title: 'SombaTeka',
+    description: language === 'FR'
+      ? 'Plateforme de vente en ligne dédiée à tous — particuliers, commerçants et entreprises — pour vendre et acheter facilement en RD Congo et au-delà.'
+      : 'Online marketplace for everyone — individuals, traders and companies — to buy and sell easily in DRC and beyond.',
+    features: language === 'FR'
+      ? ['Boutiques en ligne', 'Paiements sécurisés', 'Livraison intégrée']
+      : ['Online stores', 'Secure payments', 'Integrated delivery'],
+    color: 'from-orange-500 to-amber-500',
+    bgColor: 'bg-orange-500/10',
+    category: 'plateforme',
+    badge: 'Plateforme',
+  },
+  {
+    icon: Archive,
+    title: 'HARCHIVE',
+    description: language === 'FR'
+      ? 'Plateforme d\'archivage numérique académique connectant tous les corps académiques de la RD Congo — étudiants, enseignants et institutions.'
+      : 'Academic digital archiving platform connecting all academic bodies in DRC — students, teachers and institutions.',
+    features: language === 'FR'
+      ? ['Archives académiques', 'Réseau académique RDC', 'Diplômes numériques']
+      : ['Academic archives', 'DRC academic network', 'Digital diplomas'],
+    color: 'from-teal-500 to-green-500',
+    bgColor: 'bg-teal-500/10',
+    category: 'plateforme',
+    badge: 'Plateforme',
+  },
 ];
 
 export default function ServicesSection() {
@@ -147,7 +177,13 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <div className="group h-full bg-white rounded-3xl p-8 lg:p-10 border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-500">
+              <div className={`group h-full bg-white rounded-3xl p-8 lg:p-10 border hover:shadow-xl transition-all duration-500 ${service.badge ? 'border-[#C9A86C]/40 hover:border-[#C9A86C]' : 'border-gray-100 hover:border-gray-200'}`}>
+                {/* Badge plateforme */}
+                {service.badge && (
+                  <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#C9A86C]/10 text-[#C9A86C] text-xs font-semibold mb-4">
+                    <span>✦</span> Plateforme Propriétaire
+                  </div>
+                )}
                 {/* Icon */}
                 <div className={`w-14 h-14 rounded-2xl ${service.bgColor} flex items-center justify-center mb-6`}>
                   <service.icon className={`w-7 h-7 bg-gradient-to-br ${service.color} bg-clip-text text-transparent`} 
