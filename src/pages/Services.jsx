@@ -532,7 +532,7 @@ export default function Services() {
                       </Button>
                     </a>
                   ) : currentService.id === 'harchive' ? (
-                    <a href="https://www.harchive.net" target="_blank" rel="noopener noreferrer">
+                    <a href="https://harchive.net" target="_blank" rel="noopener noreferrer">
                       <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
                         Visiter HARCHIVE
                         <ArrowRight className="w-5 h-5 ml-2" />
