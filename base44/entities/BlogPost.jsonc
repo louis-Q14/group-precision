@@ -1,0 +1,63 @@
+{
+  "name": "BlogPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Titre de l'article"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL slug"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "Extrait/r\u00e9sum\u00e9"
+    },
+    "content": {
+      "type": "string",
+      "description": "Contenu complet (markdown)"
+    },
+    "cover_image": {
+      "type": "string",
+      "description": "Image de couverture"
+    },
+    "author": {
+      "type": "string",
+      "description": "Auteur"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "insights",
+        "tutorials",
+        "news",
+        "case-study"
+      ],
+      "description": "Cat\u00e9gorie"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags"
+    },
+    "reading_time": {
+      "type": "number",
+      "description": "Temps de lecture (minutes)"
+    },
+    "is_published": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "title",
+    "content"
+  ]
+}

@@ -524,12 +524,28 @@ export default function Services() {
                     ))}
                   </div>
 
-                  <Link to={createPageUrl('Contact')}>
-                    <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                      Discuter de votre projet
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </Link>
+                  {currentService.id === 'sombateka' ? (
+                    <a href="https://www.sombateka.com" target="_blank" rel="noopener noreferrer">
+                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                        Visiter SombaTeka
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </a>
+                  ) : currentService.id === 'harchive' ? (
+                    <a href="https://www.harchive.net" target="_blank" rel="noopener noreferrer">
+                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                        Visiter HARCHIVE
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </a>
+                  ) : (
+                    <Link to={createPageUrl('Contact')}>
+                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                        Discuter de votre projet
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </Link>
+                  )}
                 </div>
 
                 {/* Right - Features */}

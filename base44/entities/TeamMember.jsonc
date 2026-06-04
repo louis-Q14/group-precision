@@ -1,0 +1,53 @@
+{
+  "name": "TeamMember",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nom complet"
+    },
+    "position": {
+      "type": "string",
+      "description": "Poste"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Biographie courte"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Photo de profil"
+    },
+    "linkedin": {
+      "type": "string",
+      "description": "Profil LinkedIn"
+    },
+    "twitter": {
+      "type": "string",
+      "description": "Profil Twitter"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "expertise": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Domaines d'expertise"
+    },
+    "order": {
+      "type": "number",
+      "description": "Ordre d'affichage"
+    },
+    "is_leadership": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name",
+    "position"
+  ]
+}
