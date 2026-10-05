@@ -421,6 +421,28 @@ const serviceCategories = [
         color: 'from-pink-500 to-rose-500',
         bgColor: 'bg-pink-50',
       },
+      {
+        id: 'orbitalinvest',
+        icon: Coins,
+        title: 'OrbitalInvest — Plateforme d\'Investissement',
+        subtitle: 'Investissez simplement et intelligemment',
+        description: 'OrbitalInvest est une plateforme d\'investissement conçue pour rendre la gestion financière accessible à tous. Elle offre des outils d\'analyse, un suivi de portefeuille et des opportunités d\'investissement adaptées aux objectifs de chaque investisseur, particuliers comme entreprises.',
+        features: [
+          'Gestion et suivi de portefeuille en temps réel',
+          'Outils d\'analyse et d\'aide à la décision',
+          'Opportunités d\'investissement diversifiées',
+          'Tableau de bord financier personnalisé',
+          'Sécurité et conformité des transactions',
+          'Accompagnement et conseils en investissement',
+        ],
+        benefits: [
+          { icon: Coins, text: 'Investissements simplifiés' },
+          { icon: TrendingUp, text: 'Portefeuille suivi' },
+          { icon: Shield, text: 'Sécurité garantie' },
+        ],
+        color: 'from-emerald-500 to-green-600',
+        bgColor: 'bg-emerald-50',
+      },
     ]
   }
 ];
@@ -596,6 +618,10 @@ export default function Services() {
                         <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </a>
+                  ) : currentService.id === 'orbitalinvest' ? (
+                    <Button disabled className="rounded-full px-8 bg-gray-400 text-white cursor-not-allowed opacity-70">
+                      Site en construction
+                    </Button>
                   ) : (
                     <Link to={createPageUrl('Contact')}>
                       <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
