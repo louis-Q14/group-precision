@@ -7,7 +7,7 @@ import {
   CheckCircle, Sparkles, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network,
   MessageSquare, Search, HeadphonesIcon, Coins, Briefcase,
-  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2
+  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -377,6 +377,50 @@ const serviceCategories = [
         color: 'from-teal-500 to-green-500',
         bgColor: 'bg-teal-50',
       },
+      {
+        id: 'app243',
+        icon: Briefcase,
+        title: 'App243 — Plateforme RH Tout-en-Un',
+        subtitle: 'Gérez vos ressources humaines simplement',
+        description: 'App243 est une plateforme de gestion des ressources humaines pensée pour l\'Afrique. Elle centralise la gestion des employés, fiches de paie, congés, pointage et recrutement dans une interface moderne et intuitive, afin de simplifier l\'administration RH des entreprises.',
+        features: [
+          'Annuaire des employés et organigramme interactif',
+          'Suivi des heures, pointage et calcul automatique des salaires',
+          'Bulletins de paie, contrats et attestations centralisés',
+          'Gestion des congés, notes de frais et recrutement',
+          'Tableau de bord RH en temps réel',
+          'Documents RH sécurisés et accessibles',
+        ],
+        benefits: [
+          { icon: Briefcase, text: 'RH simplifiées' },
+          { icon: Users, text: 'Employés gérés' },
+          { icon: Shield, text: 'Données sécurisées' },
+        ],
+        color: 'from-blue-500 to-indigo-500',
+        bgColor: 'bg-blue-50',
+      },
+      {
+        id: 'parckbox',
+        icon: Printer,
+        title: 'PARCK BOX — Imprimerie & Coworking',
+        subtitle: 'Imprimez. Réservez. Travaillez.',
+        description: 'PARCK BOX est une plateforme tout-en-un qui réunit une imprimerie en ligne et la location d\'espaces de travail. Commandez vos impressions avec devis instantané, ou réservez un bureau équipé en quelques clics, avec paiement sécurisé et suivi dans votre espace.',
+        features: [
+          'Commande d\'impression en ligne avec devis instantané',
+          'Impression Noir & Blanc ou couleur, A4/A3/A5, reliures incluses',
+          'Service express 2h disponible',
+          'Location de 10 bureaux équipés (individuels, réunions, événementiels)',
+          'Réservation à l\'heure avec remises dégressives',
+          'Paiement sécurisé et facture PDF',
+        ],
+        benefits: [
+          { icon: Printer, text: 'Impression en ligne' },
+          { icon: Building2, text: 'Bureaux à louer' },
+          { icon: CreditCard, text: 'Paiement sécurisé' },
+        ],
+        color: 'from-pink-500 to-rose-500',
+        bgColor: 'bg-pink-50',
+      },
     ]
   }
 ];
@@ -535,6 +579,20 @@ export default function Services() {
                     <a href="https://harchive.net" target="_blank" rel="noopener noreferrer">
                       <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
                         Visiter HARCHIVE
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </a>
+                  ) : currentService.id === 'app243' ? (
+                    <a href="https://app243.com" target="_blank" rel="noopener noreferrer">
+                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                        Visiter App243
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </a>
+                  ) : currentService.id === 'parckbox' ? (
+                    <a href="https://parckbox.com" target="_blank" rel="noopener noreferrer">
+                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                        Visiter PARCK BOX
                         <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </a>
