@@ -17,7 +17,7 @@ const legalSections = [
         </p>
         <div className="bg-[#FAFAFA] rounded-xl p-6 space-y-2 text-sm">
           <p><strong>Dénomination sociale :</strong> PRECISION GROUP</p>
-          <p><strong>Statut juridique :</strong> Société à responsabilité limitée (SARL)</p>
+          <p><strong>Statut juridique :</strong> S.A.R.L.U</p>
           <p><strong>Siège social :</strong> 100, Avenues Colonel Ebeya et TSF, C/ Gombe, V/ Kinshasa, P/ Kinshasa – R.D. Congo</p>
           <p><strong>RCCM :</strong> CD/KNG/RCCM/26-B-03806</p>
           <p><strong>ID NAT :</strong> 01-H5300-N14651Z</p>
