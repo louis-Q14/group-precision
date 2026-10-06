@@ -18,6 +18,11 @@ export default function NavigationTracker() {
         }, '*');
     }, [location]);
 
+    // Scroll to top on every navigation
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
     // Log user activity when navigating to a page
     useEffect(() => {
         // Extract page name from pathname
