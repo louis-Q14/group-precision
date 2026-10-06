@@ -24,8 +24,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Téléphone',
-    value: '+44 7802 353154',
-    link: 'tel:+447802353154',
+    value: '+243 800 000 000',
+    link: 'tel:+243800000000',
   },
   {
     icon: MapPin,
