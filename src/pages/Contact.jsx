@@ -269,7 +269,7 @@ export default function Contact() {
                         onChange={(e) => handleChange('full_name', e.target.value)}
                         required
                         className="h-12 rounded-xl"
-                        placeholder="John Doe"
+                        placeholder="Jean Mukendi"
                       />
                     </div>
                     <div className="space-y-2">
@@ -281,7 +281,7 @@ export default function Contact() {
                         onChange={(e) => handleChange('email', e.target.value)}
                         required
                         className="h-12 rounded-xl"
-                        placeholder="john@company.com"
+                        placeholder="jean@entreprise.cd"
                       />
                     </div>
                     <div className="space-y-2">
@@ -292,7 +292,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={(e) => handleChange('phone', e.target.value)}
                         className="h-12 rounded-xl"
-                        placeholder="+33 6 12 34 56 78"
+                        placeholder="+243 800 000 000"
                       />
                     </div>
                     <div className="space-y-2">
