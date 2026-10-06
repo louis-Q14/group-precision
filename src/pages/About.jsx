@@ -4,11 +4,12 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { 
   Sparkles, ArrowRight, Award, Users, Globe2, Heart,
-  Linkedin, Twitter, Target, Lightbulb, Handshake, Leaf
+  Target, Lightbulb, Handshake, Leaf
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageContext';
+import Presentation from './Presentation';
 
 const getTeam = (language) => [
   {
@@ -91,14 +92,6 @@ const getTimeline = (language) => [
   { year: '2025', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '20+ experts, présence en RD Congo, projets internationaux' : '20+ experts, DR Congo presence, international projects' },
 ];
 
-const certifications = [
-  'Google Partner Premier',
-  'Meta Business Partner',
-  'HubSpot Solutions Partner',
-  'AWS Advanced Partner',
-  'Shopify Plus Partner',
-];
-
 export default function About() {
   const { language } = useLanguage();
   const team = getTeam(language);
@@ -107,6 +100,10 @@ export default function About() {
   
   return (
     <main>
+      {/* ===== PRESENTATION CONTENT (services + plateformes) ===== */}
+      <Presentation />
+
+      {/* ===== ABOUT CONTENT ===== */}
       {/* Hero */}
       <section className="pt-32 pb-20 bg-[#0A0A0B] relative overflow-hidden">
         <div className="absolute inset-0">
@@ -330,8 +327,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-
 
       {/* CTA */}
       <section className="py-24 bg-[#FAFAFA]">
