@@ -56,9 +56,9 @@ function CodeEditor() {
       <div className="absolute -inset-1 rounded-[14px] bg-gradient-to-tr from-[#C9A86C]/40 to-purple-500/30 blur-md" />
 
       {/* Fenêtre éditeur */}
-      <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-[#0d1117]">
+      <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0d1117]/60 backdrop-blur-xl">
         {/* Barre de titre */}
-        <div className="flex items-center gap-2 px-4 h-9 bg-[#161b22] border-b border-white/5">
+        <div className="flex items-center gap-2 px-4 h-9 bg-white/5 border-b border-white/5">
           <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
           <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
           <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
@@ -94,7 +94,7 @@ function CodeEditor() {
         </div>
 
         {/* Panneau Copilot */}
-        <div className="border-t border-white/5 bg-[#161b22] p-4">
+        <div className="border-t border-white/5 bg-white/5 p-4">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-5 h-5 rounded bg-gradient-to-tr from-[#C9A86C] to-purple-500 flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-white" />
@@ -229,7 +229,7 @@ export default function HeroSection() {
         transition={{ duration: 0.6, delay: 0.6 }}
         className="relative z-10 mt-14 mb-6 flex flex-col items-center"
       >
-        <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-[#0d1117] border border-white/10 shadow-xl">
+        <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-white/5 border border-white/10 shadow-xl backdrop-blur-xl">
           {TABS.map((tab) => (
             <button
               key={tab.id}
