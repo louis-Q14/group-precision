@@ -33,16 +33,16 @@ export default function LogoMarquee() {
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#010409] to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#010409] to-transparent z-10" />
       <motion.div
-        className="flex items-center gap-16 w-max"
+        className="flex items-center w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 30, ease: 'linear', repeat: Infinity }}
       >
-        {doubled.map((logo, i) => (
+        {[...LOGOS, ...LOGOS].map((logo, i) => (
           <img
             key={i}
             src={logo.src}
             alt={logo.name}
-            className="h-8 w-auto object-contain opacity-60 invert hover:opacity-100 transition-all duration-300"
+            className="h-8 w-auto object-contain opacity-60 invert hover:opacity-100 transition-all duration-300 mx-8 shrink-0"
           />
         ))}
       </motion.div>
