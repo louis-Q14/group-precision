@@ -30,7 +30,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Adresse',
-    value: '183 rue Lukula, Bandalungwa Kinshasa',
+    value: '100, Av. Colonel Ebeya et TSF, C/ Gombe, Kinshasa, R.D. Congo',
     link: '#',
   },
   {
