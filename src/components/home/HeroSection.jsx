@@ -138,7 +138,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-start overflow-hidden bg-[#010409] pt-28 pb-0">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#010409] pt-40 pb-0">
       {/* Fond radial sombre */}
       <div
         className="absolute inset-0"
