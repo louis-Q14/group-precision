@@ -20,6 +20,7 @@ const footerLinks = {
   ],
   company: [
     { name: 'À propos', href: 'About' },
+    { name: 'Mentions Légales', href: 'MentionsLegales' },
     { name: 'Équipe', href: 'About' },
     { name: 'Carrières', href: 'About' },
     { name: 'Blog', href: 'Blog' },
@@ -29,7 +30,6 @@ const footerLinks = {
     { name: 'Études de cas', href: 'Portfolio' },
     { name: 'FAQ', href: 'Contact' },
     { name: 'Contact', href: 'Contact' },
-    { name: 'Mentions Légales', href: 'MentionsLegales' },
   ],
 };
 
