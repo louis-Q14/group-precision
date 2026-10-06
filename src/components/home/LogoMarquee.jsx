@@ -4,7 +4,13 @@ import { motion } from 'framer-motion';
 // Remplacez les chaînes ci-dessous par les logos fournis (URLs d'images).
 // Format attendu : { name: string, src: string }
 const LOGOS = [
-  // { name: 'Logo 1', src: 'https://...' },
+  { name: 'ParckBox', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/9c99ecb71_ParcKBoxlogof.png' },
+  { name: 'PRECISIONS Group', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/043e3e31f_PRECISIONS.png' },
+  { name: 'SombaTeka', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/805a2e5f6_SOMBATEKA.png' },
+  { name: 'App243', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/7c4de919e_App243.png' },
+  { name: 'Architectura Studio', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/a160b3eb1_ARCHITECTURASTUDIO1.png' },
+  { name: 'IMPALA', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/5d0342421_IMPALA_logo.png' },
+  { name: 'OrbitalInvest', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/304b0f5c2_Orbitallnvest.png' },
 ];
 
 export default function LogoMarquee() {
@@ -36,7 +42,7 @@ export default function LogoMarquee() {
             key={i}
             src={logo.src}
             alt={logo.name}
-            className="h-8 w-auto object-contain opacity-50 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-300"
+            className="h-8 w-auto object-contain opacity-60 invert hover:opacity-100 transition-all duration-300"
           />
         ))}
       </motion.div>
