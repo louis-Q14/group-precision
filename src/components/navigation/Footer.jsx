@@ -115,13 +115,13 @@ export default function Footer() {
                 <Mail className="w-5 h-5" />
                 contact@precisions.group
               </a>
-              <a href="tel:+447802353154" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+              <a href="tel:+243000000000" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                 <Phone className="w-5 h-5" />
-                +44 7802 353154
+                +243 000 000 000
               </a>
               <div className="flex items-center gap-3 text-gray-400">
                 <MapPin className="w-5 h-5" />
-                183 rue Lukula, Bandalungwa Kinshasa
+                100, Av. Colonel Ebeya et TSF, C/ Gombe, Kinshasa, R.D. Congo
               </div>
             </div>
           </div>
