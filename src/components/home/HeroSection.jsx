@@ -99,7 +99,7 @@ function CodeEditor() {
             <div className="w-5 h-5 rounded bg-gradient-to-tr from-[#C9A86C] to-purple-500 flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-white" />
             </div>
-            <span className="text-xs text-gray-300 font-medium">PRECISIONS Copilot</span>
+            <span className="text-xs text-gray-300 font-medium">PRECISIONS</span>
             <span className="text-[10px] text-gray-600">· Chat</span>
           </div>
           <p className="text-xs text-gray-400 mb-3 leading-relaxed">
