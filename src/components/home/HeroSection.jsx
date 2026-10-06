@@ -227,7 +227,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="relative z-10 mt-14 mb-6"
+        className="relative z-10 mt-14 mb-6 flex flex-col items-center"
       >
         <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-[#0d1117] border border-white/10 shadow-xl">
           {TABS.map((tab) => (
