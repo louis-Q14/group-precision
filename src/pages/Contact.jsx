@@ -408,15 +408,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map placeholder */}
-      <section className="h-[400px] bg-gray-200 relative">
-        <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A0B]/5">
-          <div className="text-center">
-            <MapPin className="w-12 h-12 text-[#C9A86C] mx-auto mb-4" />
-            <p className="text-gray-600">183 rue Lukula, Bandalungwa Kinshasa</p>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
