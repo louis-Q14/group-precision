@@ -6,7 +6,7 @@ import {
   Lightbulb, TrendingUp, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network,
   MessageSquare, Search, HeadphonesIcon, Coins, Briefcase,
-  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer
+  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer, Wallet
 } from 'lucide-react';
 
 const serviceCategories = [
@@ -420,6 +420,24 @@ const serviceCategories = [
         bgColor: 'bg-digital-50',
       },
       {
+        id: 'pay243',
+        icon: Wallet,
+        title: 'Pay243 — Portefeuille Électronique',
+        subtitle: 'Payez vos achats en ligne simplement',
+        description: 'Pay243 est un portefeuille électronique conçu pour faciliter les achats en ligne : vous approvisionnez votre portefeuille, puis vous réglez vos achats sur internet en quelques gestes.',
+        features: [
+          'Portefeuille électronique personnel',
+          'Paiement des achats en ligne',
+          'Suivi de vos paiements',
+        ],
+        benefits: [
+          { icon: Wallet, text: 'Portefeuille électronique' },
+          { icon: ShoppingCart, text: 'Achats en ligne facilités' },
+        ],
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
+      },
+      {
         id: 'orbitalinvest',
         icon: Coins,
         title: 'OrbitalInvest — Plateforme d\'Investissement',
@@ -467,6 +485,7 @@ const PLATFORM_LINKS = {
   harchive: 'https://harchive.net',
   app243: 'https://app243.com',
   parckbox: 'https://parckbox.com',
+  pay243: 'https://pay243.com',
 };
 
 export default function Services() {

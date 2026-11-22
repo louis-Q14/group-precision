@@ -95,7 +95,7 @@ export default function About() {
               </div>
               <div>
                 <dt className="text-sm text-white/60">{language === 'FR' ? 'Plateformes' : 'Platforms'}</dt>
-                <dd className="mt-1 text-subtitle text-white tabular">5</dd>
+                <dd className="mt-1 text-subtitle text-white tabular">6</dd>
               </div>
             </dl>
           </div>

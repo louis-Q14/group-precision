@@ -85,7 +85,7 @@ const legalSections = [
           sans l'autorisation écrite préalable de PRECISIONS GROUP.
         </p>
         <p>
-          Les plateformes propriétaires (SombaTeka, HARCHIVE, App243, PARCK BOX, OrbitalInvest) ainsi
+          Les plateformes propriétaires (SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243, OrbitalInvest) ainsi
           que leurs dénominations sont des marques protégées au sein du groupe PRECISIONS.
         </p>
       </div>

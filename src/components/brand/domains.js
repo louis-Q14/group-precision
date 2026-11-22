@@ -51,14 +51,14 @@ export const DOMAINS = [
     FR: {
       name: 'Digital et numérique',
       pitch: 'Outiller votre quotidien',
-      text: 'Sites et applications sur mesure, assistance aux utilisateurs et nos cinq plateformes.',
-      services: ['Développement web', 'Assistance aux utilisateurs', 'Plateformes SombaTeka, HARCHIVE, App243, PARCK BOX, OrbitalInvest'],
+      text: 'Sites et applications sur mesure, assistance aux utilisateurs et nos six plateformes.',
+      services: ['Développement web', 'Assistance aux utilisateurs', 'Plateformes SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243, OrbitalInvest'],
     },
     EN: {
       name: 'Digital',
       pitch: 'Equip your daily work',
-      text: 'Custom websites and apps, user support and our five platforms.',
-      services: ['Web development', 'User support', 'SombaTeka, HARCHIVE, App243, PARCK BOX and OrbitalInvest platforms'],
+      text: 'Custom websites and apps, user support and our six platforms.',
+      services: ['Web development', 'User support', 'SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243 and OrbitalInvest platforms'],
     },
   },
   {

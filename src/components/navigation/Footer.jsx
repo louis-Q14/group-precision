@@ -11,6 +11,7 @@ const PLATFORMS = [
   { name: 'HARCHIVE', url: 'https://harchive.net' },
   { name: 'App243', url: 'https://app243.com' },
   { name: 'PARCK BOX', url: 'https://parckbox.com' },
+  { name: 'Pay243', url: 'https://pay243.com' },
   { name: 'OrbitalInvest', url: null },
 ];
 

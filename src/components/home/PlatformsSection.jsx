@@ -36,6 +36,13 @@ const PLATFORMS = [
     EN: { field: 'Printing and coworking', text: 'Prints ordered online with an instant quote, and equipped offices to book.' },
   },
   {
+    name: 'Pay243',
+    url: 'https://pay243.com',
+    domain: 'pay243.com',
+    FR: { field: 'Portefeuille électronique', text: 'Un portefeuille électronique pour régler facilement vos achats en ligne.' },
+    EN: { field: 'Digital wallet', text: 'A digital wallet that makes paying for online purchases easy.' },
+  },
+  {
     name: 'OrbitalInvest',
     logo: '/images/304b0f5c2_Orbitallnvest.png',
     url: null,
@@ -80,7 +87,7 @@ export default function PlatformsSection() {
               ? { as: 'a', href: platform.url, target: '_blank', rel: 'noopener noreferrer' }
               : {};
             return (
-              <Reveal as="li" key={platform.name} delay={i * 0.06} className={i === 0 ? 'lg:col-span-2' : ''}>
+              <Reveal as="li" key={platform.name} delay={i * 0.06}>
                 <SpotlightCard {...linkProps} className="block h-full min-h-[240px] p-7">
                   <div className="flex h-full flex-col">
                     <div className="flex items-start justify-between gap-4">

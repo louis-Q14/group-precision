@@ -7,12 +7,12 @@ import {
   Users, BarChart3, Globe, Megaphone, Monitor, Network, MessageSquare, Search,
   HeadphonesIcon, Coins, Briefcase, Building2, Handshake, Settings, RefreshCw,
   ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database,
-  Link2, Printer, Code2, Layers, Server, Smartphone, Cpu
+  Link2, Printer, Code2, Layers, Server, Smartphone, Cpu, Wallet
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const companyStats = [
-  { value: '5', label: 'Plateformes propriétaires' },
+  { value: '6', label: 'Plateformes propriétaires' },
   { value: '3', label: 'Domaines d\'expertise' },
   { value: '20+', label: 'Services spécialisés' },
   { value: '100%', label: 'Sur mesure' },
@@ -483,6 +483,27 @@ const platforms = [
     status: 'live',
   },
   {
+    id: 'pay243',
+    icon: Wallet,
+    title: 'Pay243',
+    tagline: 'Portefeuille Électronique',
+    subtitle: 'Payez vos achats en ligne simplement',
+    description: 'Pay243 est un portefeuille électronique conçu pour faciliter les achats en ligne : vous approvisionnez votre portefeuille, puis vous réglez vos achats sur internet en quelques gestes.',
+    features: [
+      'Portefeuille électronique personnel',
+      'Paiement des achats en ligne',
+      'Suivi de vos paiements',
+    ],
+    benefits: [
+      { icon: Wallet, text: 'Portefeuille électronique' },
+      { icon: ShoppingCart, text: 'Achats en ligne facilités' },
+    ],
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
+    url: 'https://pay243.com',
+    status: 'live',
+  },
+  {
     id: 'orbitalinvest',
     icon: Coins,
     title: 'OrbitalInvest',
@@ -543,7 +564,7 @@ export default function Presentation() {
             <motion.div
             >
               <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6">
-                Un cabinet, deux métiers, cinq plateformes
+                Un cabinet, deux métiers, six plateformes
               </h2>
               <p className="text-lg text-white/60 mb-6">
                 PRECISIONS Group accompagne les entreprises, institutions et entrepreneurs dans leur
@@ -552,7 +573,7 @@ export default function Presentation() {
               </p>
               <p className="text-lg text-white/60 mb-8">
                 Au-delà du conseil, nous concevons et opérons nos propres plateformes —
-                SombaTeka, HARCHIVE, App243, PARCK BOX et OrbitalInvest — qui adressent des besoins
+                SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243 et OrbitalInvest — qui adressent des besoins
                 concrets du marché africain : commerce, éducation, RH, services et finance.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -708,12 +729,12 @@ export default function Presentation() {
               Nos produits numériques
             </h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Cinq plateformes éditées par PRECISIONS Group, conçues pour répondre aux besoins concrets du marché africain.
+              Six plateformes éditées par PRECISIONS Group, conçues pour répondre aux besoins concrets du marché africain.
             </p>
           </div>
 
           {/* Platform selector cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {platforms.map((p) => (
               <button
                 key={p.id}
@@ -754,6 +775,7 @@ export default function Presentation() {
 
                   <p className="text-base text-white/60 mb-5">{currentPlatform.description}</p>
 
+                  {currentPlatform.howItWorks && (
                   <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 mb-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Zap className="w-5 h-5 text-gold" />
@@ -761,6 +783,7 @@ export default function Presentation() {
                     </div>
                     <p className="text-sm text-white/60 leading-relaxed">{currentPlatform.howItWorks}</p>
                   </div>
+                  )}
 
                   <div className="grid sm:grid-cols-3 gap-4 mb-8">
                     {currentPlatform.benefits.map((benefit, i) => (
@@ -803,6 +826,7 @@ export default function Presentation() {
                     </ul>
                   </div>
 
+                  {currentPlatform.techStack?.length > 0 && (
                   <div className="p-8 rounded-3xl bg-white/[0.04] border border-white/10">
                     <div className="flex items-center gap-2 mb-6">
                       <Code2 className="w-5 h-5 text-gold" />
@@ -820,6 +844,7 @@ export default function Presentation() {
                       ))}
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -13,7 +13,7 @@ const COPY = {
     secondary: 'Découvrir nos métiers',
     figures: [
       { value: '5', label: 'métiers complémentaires' },
-      { value: '5', label: 'plateformes numériques' },
+      { value: '6', label: 'plateformes numériques' },
       { value: '20+', label: 'experts mobilisés' },
       { value: '3', label: 'bureaux' },
     ],
@@ -26,7 +26,7 @@ const COPY = {
     secondary: 'See what we do',
     figures: [
       { value: '5', label: 'complementary lines of work' },
-      { value: '5', label: 'digital platforms' },
+      { value: '6', label: 'digital platforms' },
       { value: '20+', label: 'experts on hand' },
       { value: '3', label: 'offices' },
     ],
