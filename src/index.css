@@ -2,152 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
-
-
 @layer base {
-  /* ===== THEME CLAIR ===== */
   :root {
-    --background: 40 30% 97%;        /* Blanc crème chaud */
-    --foreground: 220 15% 12%;       /* Anthracite profond */
+    /* Identité noir et blanc, en HSL pour les composants shadcn */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 12%;
+    --card-foreground: 0 0% 4%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 12%;
-    --primary: 220 15% 10%;          /* Noir élégant */
-    --primary-foreground: 40 30% 97%;
-    --secondary: 38 25% 93%;         /* Sable clair */
-    --secondary-foreground: 220 15% 12%;
-    --muted: 38 20% 93%;
-    --muted-foreground: 220 10% 46%;
-    --accent: 38 60% 58%;            /* Or doré — accent PRECISIONS */
-    --accent-foreground: 220 15% 10%;
-    --destructive: 0 72% 51%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 4%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 38%;
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 38 20% 88%;
-    --input: 38 20% 90%;
-    --ring: 38 60% 58%;
-    --radius: 0.5rem;
+    --border: 0 0% 88%;
+    --input: 0 0% 80%;
+    --ring: 0 0% 4%;
+    --radius: 0.25rem;
 
-    /* Couleurs custom PRECISIONS */
-    --brand-gold: #C9A86C;
-    --brand-dark: #0A0A0B;
-    --brand-bg: #FAFAFA;
-    --brand-surface: #FFFFFF;
-    --brand-text: #1A1A2E;
-    --brand-text-muted: #6B7280;
-    --brand-border: #E8E0D4;
+    /* Gris « texte » : foncé sur fond clair, clair sur fond noir */
+    --gold-text: 82 82 82;
   }
 
-  /* ===== THEME SOMBRE ===== */
-  .dark {
-    --background: 222 20% 9%;        /* Bleu nuit profond */
-    --foreground: 40 25% 92%;        /* Crème doux */
-    --card: 222 18% 12%;             /* Carte légèrement plus claire */
-    --card-foreground: 40 25% 92%;
-    --popover: 222 18% 12%;
-    --popover-foreground: 40 25% 92%;
-    --primary: 38 60% 58%;           /* Or doré en primaire */
-    --primary-foreground: 222 20% 9%;
-    --secondary: 222 15% 18%;        /* Gris bleuté */
-    --secondary-foreground: 40 25% 88%;
-    --muted: 222 15% 16%;
-    --muted-foreground: 220 10% 58%;
-    --accent: 38 60% 58%;            /* Or */
-    --accent-foreground: 222 20% 9%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 222 15% 20%;
-    --input: 222 15% 18%;
-    --ring: 38 60% 58%;
+  /* Thème sombre du site public (classe posée sur <html> par Layout) */
+  .theme-dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.16;
+    --ring: 0 0% 100%;
+    --gold-text: 200 200 200;
+    color-scheme: dark;
+  }
 
-    /* Couleurs custom PRECISIONS dark */
-    --brand-gold: #C9A86C;
-    --brand-dark: #E8DDD0;
-    --brand-bg: #0F1117;
-    --brand-surface: #161B27;
-    --brand-text: #E8DDD0;
-    --brand-text-muted: #8B95A8;
-    --brand-border: #2A3142;
+  .theme-dark ::selection {
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  .bg-navy-950,
+  .bg-navy-900,
+  .bg-navy-800,
+  .bg-black,
+  .on-dark {
+    --gold-text: 200 200 200;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Toutes les photos du site en noir et blanc, pour une identité monochrome cohérente */
+  main img {
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  ::selection {
+    background: #0A0A0A;
+    color: #FFFFFF;
+  }
+
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
+@layer utilities {
+  /* Chiffres alignés pour dates et mesures */
+  .tabular { font-variant-numeric: tabular-nums; }
 
+  .wide { }
+  .normal-width { }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+  /* Panneau en verre dépoli sur fond noir */
+  .glass {
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
-  body {
-    @apply bg-background text-foreground;
+
+  /* Titre dégradé blanc vers gris */
+  .text-gradient {
+    background: linear-gradient(180deg, #FFFFFF 30%, #8C8C8C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Trame de lignes fines, estompée sur les bords */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+
+  /* Lueur blanche diffuse */
+  .glow {
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.16), transparent);
+    filter: blur(20px);
   }
 }

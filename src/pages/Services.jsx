@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import PageHero from '@/components/brand/PageHero';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { motion } from 'framer-motion';
 import { 
-  Lightbulb, TrendingUp, ArrowRight, 
-  CheckCircle, Sparkles, Target, Zap, Shield, Clock,
+  Lightbulb, TrendingUp, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network,
   MessageSquare, Search, HeadphonesIcon, Coins, Briefcase,
   Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const serviceCategories = [
   {
@@ -17,7 +15,7 @@ const serviceCategories = [
     title: 'Communication Digitale',
     description: 'Élaborer et orchestrer des réponses tactiques à vos problématiques de communication',
     icon: Globe,
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-comm to-comm-700',
     services: [
       {
         id: 'strategie',
@@ -37,8 +35,8 @@ const serviceCategories = [
           { icon: Zap, text: 'Impact maximisé' },
           { icon: Shield, text: 'Cohérence garantie' },
         ],
-        color: 'from-amber-500 to-orange-500',
-        bgColor: 'bg-amber-50',
+        color: 'from-comm to-comm-700',
+        bgColor: 'bg-comm-50',
       },
       {
         id: 'publicite',
@@ -58,8 +56,8 @@ const serviceCategories = [
           { icon: Users, text: 'Audience ciblée' },
           { icon: TrendingUp, text: 'Notoriété accrue' },
         ],
-        color: 'from-rose-500 to-pink-500',
-        bgColor: 'bg-rose-50',
+        color: 'from-comm to-comm-700',
+        bgColor: 'bg-comm-50',
       },
       {
         id: 'digital',
@@ -79,8 +77,8 @@ const serviceCategories = [
           { icon: MessageSquare, text: 'Engagement élevé' },
           { icon: Search, text: 'Visibilité optimale' },
         ],
-        color: 'from-blue-500 to-cyan-500',
-        bgColor: 'bg-blue-50',
+        color: 'from-comm to-comm-700',
+        bgColor: 'bg-comm-50',
       },
       {
         id: 'reseau',
@@ -100,8 +98,8 @@ const serviceCategories = [
           { icon: Target, text: 'Objectifs atteints' },
           { icon: Zap, text: 'Dynamique positive' },
         ],
-        color: 'from-purple-500 to-violet-500',
-        bgColor: 'bg-purple-50',
+        color: 'from-comm to-comm-700',
+        bgColor: 'bg-comm-50',
       },
       {
         id: 'web',
@@ -121,8 +119,8 @@ const serviceCategories = [
           { icon: Zap, text: 'Performance optimale' },
           { icon: Shield, text: 'Sécurité renforcée' },
         ],
-        color: 'from-indigo-500 to-blue-500',
-        bgColor: 'bg-indigo-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
       {
         id: 'support',
@@ -142,8 +140,8 @@ const serviceCategories = [
           { icon: Users, text: 'Utilisateurs autonomes' },
           { icon: Clock, text: 'Disponibilité étendue' },
         ],
-        color: 'from-teal-500 to-cyan-500',
-        bgColor: 'bg-teal-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
     ]
   },
@@ -152,7 +150,7 @@ const serviceCategories = [
     title: 'Développement Économique',
     description: 'Accompagner vos projets de développement et croissance économique',
     icon: Briefcase,
-    color: 'from-emerald-500 to-green-500',
+    color: 'from-fin to-fin-700',
     services: [
       {
         id: 'financement',
@@ -172,8 +170,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Dossiers solides' },
           { icon: BarChart3, text: 'Taux de succès élevé' },
         ],
-        color: 'from-emerald-500 to-green-500',
-        bgColor: 'bg-emerald-50',
+        color: 'from-fin to-fin-700',
+        bgColor: 'bg-fin-50',
       },
       {
         id: 'prefinancement',
@@ -193,8 +191,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Risques maîtrisés' },
           { icon: TrendingUp, text: 'Croissance accélérée' },
         ],
-        color: 'from-blue-500 to-indigo-500',
-        bgColor: 'bg-blue-50',
+        color: 'from-fin to-fin-700',
+        bgColor: 'bg-fin-50',
       },
       {
         id: 'projets',
@@ -214,8 +212,8 @@ const serviceCategories = [
           { icon: Users, text: 'Synergies créées' },
           { icon: Target, text: 'Impact maximisé' },
         ],
-        color: 'from-amber-500 to-orange-500',
-        bgColor: 'bg-amber-50',
+        color: 'from-fin to-fin-700',
+        bgColor: 'bg-fin-50',
       },
       {
         id: 'strategique',
@@ -235,8 +233,8 @@ const serviceCategories = [
           { icon: Target, text: 'Objectifs définis' },
           { icon: BarChart3, text: 'Résultats mesurables' },
         ],
-        color: 'from-purple-500 to-violet-500',
-        bgColor: 'bg-purple-50',
+        color: 'from-advice to-advice-700',
+        bgColor: 'bg-advice-50',
       },
       {
         id: 'organisation',
@@ -256,8 +254,8 @@ const serviceCategories = [
           { icon: Users, text: 'Équipes performantes' },
           { icon: Zap, text: 'Efficacité accrue' },
         ],
-        color: 'from-slate-500 to-gray-600',
-        bgColor: 'bg-slate-50',
+        color: 'from-advice to-advice-700',
+        bgColor: 'bg-advice-50',
       },
       {
         id: 'expertise',
@@ -277,8 +275,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Fiabilité garantie' },
           { icon: Lightbulb, text: 'Solutions innovantes' },
         ],
-        color: 'from-cyan-500 to-teal-500',
-        bgColor: 'bg-cyan-50',
+        color: 'from-advice to-advice-700',
+        bgColor: 'bg-advice-50',
       },
       {
         id: 'changement',
@@ -298,8 +296,8 @@ const serviceCategories = [
           { icon: Users, text: 'Adhésion obtenue' },
           { icon: Target, text: 'Objectifs atteints' },
         ],
-        color: 'from-rose-500 to-pink-500',
-        bgColor: 'bg-rose-50',
+        color: 'from-training-700 to-training-700',
+        bgColor: 'bg-training-50',
       },
       {
         id: 'international',
@@ -319,8 +317,8 @@ const serviceCategories = [
           { icon: Globe, text: 'Expansion globale' },
           { icon: Shield, text: 'Risques maîtrisés' },
         ],
-        color: 'from-indigo-500 to-purple-500',
-        bgColor: 'bg-indigo-50',
+        color: 'from-advice to-advice-700',
+        bgColor: 'bg-advice-50',
       },
     ]
   },
@@ -329,7 +327,7 @@ const serviceCategories = [
     title: 'Plateformes Digitales',
     description: 'Nos plateformes propriétaires au service du numérique en RD Congo',
     icon: Database,
-    color: 'from-orange-500 to-teal-500',
+    color: 'from-digital to-digital-700',
     services: [
       {
         id: 'sombateka',
@@ -351,8 +349,8 @@ const serviceCategories = [
           { icon: CreditCard, text: 'Paiements sécurisés' },
           { icon: Package, text: 'Livraison intégrée' },
         ],
-        color: 'from-orange-500 to-amber-500',
-        bgColor: 'bg-orange-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
       {
         id: 'harchive',
@@ -374,8 +372,8 @@ const serviceCategories = [
           { icon: GraduationCap, text: 'Diplômes certifiés' },
           { icon: Link2, text: 'Réseau académique RDC' },
         ],
-        color: 'from-teal-500 to-green-500',
-        bgColor: 'bg-teal-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
       {
         id: 'app243',
@@ -396,8 +394,8 @@ const serviceCategories = [
           { icon: Users, text: 'Employés gérés' },
           { icon: Shield, text: 'Données sécurisées' },
         ],
-        color: 'from-blue-500 to-indigo-500',
-        bgColor: 'bg-blue-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
       {
         id: 'parckbox',
@@ -418,8 +416,8 @@ const serviceCategories = [
           { icon: Building2, text: 'Bureaux à louer' },
           { icon: CreditCard, text: 'Paiement sécurisé' },
         ],
-        color: 'from-pink-500 to-rose-500',
-        bgColor: 'bg-pink-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
       {
         id: 'orbitalinvest',
@@ -440,8 +438,8 @@ const serviceCategories = [
           { icon: TrendingUp, text: 'Portefeuille suivi' },
           { icon: Shield, text: 'Sécurité garantie' },
         ],
-        color: 'from-emerald-500 to-green-600',
-        bgColor: 'bg-emerald-50',
+        color: 'from-digital to-digital-700',
+        bgColor: 'bg-digital-50',
       },
     ]
   }
@@ -454,277 +452,142 @@ const processSteps = [
   { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
 ];
 
+// Les liens « #métier » de l'accueil et du pied de page ouvrent la bonne catégorie et le bon service
+const HASH_TARGETS = {
+  communication: ['communication', 'strategie'],
+  financement: ['economique', 'financement'],
+  digital: ['communication', 'web'],
+  formation: ['economique', 'changement'],
+  conseil: ['economique', 'strategique'],
+  plateformes: ['plateformes', 'sombateka'],
+};
+
+const PLATFORM_LINKS = {
+  sombateka: 'https://www.sombateka.com',
+  harchive: 'https://harchive.net',
+  app243: 'https://app243.com',
+  parckbox: 'https://parckbox.com',
+};
+
 export default function Services() {
+  const { hash } = useLocation();
   const [activeCategory, setActiveCategory] = useState('communication');
   const [activeService, setActiveService] = useState('strategie');
-  
+
+  useEffect(() => {
+    const target = HASH_TARGETS[hash.replace('#', '')];
+    if (target) {
+      setActiveCategory(target[0]);
+      setActiveService(target[1]);
+    }
+  }, [hash]);
 
   const currentCategory = serviceCategories.find(c => c.id === activeCategory);
   const currentService = currentCategory?.services.find(s => s.id === activeService);
+  const platformUrl = currentService && PLATFORM_LINKS[currentService.id];
 
   return (
-    <main>
-      {/* Hero */}
-      <section className="pt-32 pb-20 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">Nos services</span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
-            Nos Expertises
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto"
-          >
-            Communication Digitale & Développement Économique : 
-            des solutions complètes pour accompagner votre croissance.
-          </motion.p>
-        </div>
-      </section>
+    <main className="bg-black text-white">
+      <PageHero
+        title="Nos métiers"
+        lede="Communication, financement, digital, formation et conseil : le détail de ce que nous prenons en charge, service par service."
+      />
 
-      {/* Category Tabs */}
-      <section className="py-8 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+      <section>
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          {/* Catégories */}
+          <div className="flex flex-wrap gap-2 py-8" role="tablist" aria-label="Catégories de services">
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
+                type="button"
+                role="tab"
+                aria-selected={activeCategory === category.id}
                 onClick={() => {
                   setActiveCategory(category.id);
                   setActiveService(category.services[0].id);
                 }}
-                className={`flex items-center justify-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? 'bg-[#0A0A0B] text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                className={`inline-flex items-center h-11 px-5 rounded-full border transition-colors ${
+                  activeCategory === category.id ? 'bg-white text-black border-white' : 'border-white/15 bg-white/5 text-white/70 hover:text-white hover:border-white/30'
                 }`}
               >
-                <category.icon className="w-6 h-6" />
-                <div className="text-left">
-                  <div className="font-semibold">{category.title}</div>
-                  <div className="text-xs opacity-70">{category.services.length} services</div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Detail */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Category Description */}
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-[#0A0A0B] mb-2">{currentCategory?.title}</h2>
-            <p className="text-gray-600">{currentCategory?.description}</p>
-          </div>
-
-          {/* Service Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {currentCategory?.services.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => setActiveService(service.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-300 ${
-                  activeService === service.id
-                    ? 'bg-[#C9A86C] text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                <service.icon className="w-4 h-4" />
-                <span className="hidden md:inline">{service.title.split(' ').slice(0, 2).join(' ')}</span>
-                <span className="md:hidden">{service.title.split(' ')[0]}</span>
+                {category.title}
+                <span className="ml-2 text-sm opacity-55">{category.services.length}</span>
               </button>
             ))}
           </div>
 
-          {/* Active Service Content */}
-          {currentService && (
-            <motion.div
-              key={currentService.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
-                {/* Left - Info */}
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4">
-                    {currentService.title}
-                  </h2>
-                  <p className="text-lg text-[#C9A86C] font-medium mb-4">
-                    {currentService.subtitle}
-                  </p>
-                  <p className="text-lg text-gray-600 mb-8">
-                    {currentService.description}
-                  </p>
+          <div className="grid lg:grid-cols-12 gap-x-10 gap-y-10 pb-24">
+            {/* Services de la catégorie */}
+            <nav className="lg:col-span-4" aria-label={currentCategory?.title}>
+              <p className="text-white/55">{currentCategory?.description}</p>
+              <ul className="mt-6 rounded-2xl glass p-2">
+                {currentCategory?.services.map((service) => (
+                  <li key={service.id}>
+                    <button
+                      type="button"
+                      onClick={() => setActiveService(service.id)}
+                      aria-current={activeService === service.id ? 'true' : undefined}
+                      className={`w-full text-left px-4 py-3 rounded-xl flex items-center justify-between gap-4 transition-colors ${
+                        activeService === service.id ? 'bg-white/10 font-medium text-white' : 'text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      {service.title.split(' — ')[0]}
+                      {activeService === service.id && <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_white] shrink-0" aria-hidden="true" />}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-                  {/* Benefits */}
-                  <div className="grid sm:grid-cols-3 gap-4 mb-8">
-                    {currentService.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${currentService.color} flex items-center justify-center`}>
-                          <benefit.icon className="w-5 h-5 text-white" />
-                        </div>
-                        <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Service choisi */}
+            {currentService && (
+              <article key={currentService.id} className="lg:col-span-7 lg:col-start-6 rounded-3xl glass p-7 lg:p-10">
+                <h2 className="text-title font-semibold text-gradient">{currentService.title}</h2>
+                <p className="mt-4 text-lg font-medium">{currentService.subtitle}</p>
+                <p className="mt-4 text-lede text-white/60 max-w-2xl">{currentService.description}</p>
 
-                  {currentService.id === 'sombateka' ? (
-                    <a href="https://www.sombateka.com" target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                        Visiter SombaTeka
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </a>
-                  ) : currentService.id === 'harchive' ? (
-                    <a href="https://harchive.net" target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                        Visiter HARCHIVE
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </a>
-                  ) : currentService.id === 'app243' ? (
-                    <a href="https://app243.com" target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                        Visiter App243
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </a>
-                  ) : currentService.id === 'parckbox' ? (
-                    <a href="https://parckbox.com" target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                        Visiter PARCK BOX
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
+                <h3 className="mt-10 text-sm text-white/45">Ce que nous proposons</h3>
+                <ul className="mt-3 grid sm:grid-cols-2 gap-2">
+                  {currentService.features.map((feature) => (
+                    <li key={feature} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white/85">{feature}</li>
+                  ))}
+                </ul>
+
+
+                <div className="mt-10">
+                  {platformUrl ? (
+                    <a href={platformUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center h-12 px-6 rounded-full bg-white text-black font-medium hover:bg-white/85">
+                      Visiter {currentService.title.split(' — ')[0]}
+                      <span className="sr-only"> (nouvel onglet)</span>
                     </a>
                   ) : currentService.id === 'orbitalinvest' ? (
-                    <Button disabled className="rounded-full px-8 bg-gray-400 text-white cursor-not-allowed opacity-70">
-                      Site en construction
-                    </Button>
+                    <p className="text-white/45">Site en construction</p>
                   ) : (
-                    <Link to={createPageUrl('Contact')}>
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
-                        Discuter de votre projet
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
+                    <Link to={createPageUrl('Contact')} className="inline-flex items-center h-12 px-6 rounded-full bg-white text-black font-medium hover:bg-white/85">
+                      Discuter de votre projet
                     </Link>
                   )}
                 </div>
-
-                {/* Right - Features */}
-                <div className={`${currentService.bgColor} rounded-3xl p-8 lg:p-10`}>
-                  <h3 className="text-xl font-semibold text-[#0A0A0B] mb-6">
-                    Ce que nous proposons
-                  </h3>
-                  <ul className="space-y-4">
-                    {currentService.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle className={`w-5 h-5 mt-0.5 bg-gradient-to-br ${currentService.color} text-white rounded-full`} />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          )}
+              </article>
+            )}
+          </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-24 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
-            >
-              Notre méthodologie
-            </motion.h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Une approche éprouvée pour des réponses tactiques et pertinentes à vos enjeux.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative"
-              >
-                <div className="bg-white rounded-2xl p-8 h-full border border-gray-100">
-                  <div className="text-5xl font-bold text-[#C9A86C]/30 mb-4">
-                    {step.number}
-                  </div>
-                  <h3 className="text-xl font-semibold text-[#0A0A0B] mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
-                
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gray-200" />
-                )}
-              </motion.div>
+      {/* Méthode : une vraie séquence, d'où la numérotation */}
+      <section className="border-t border-white/10 py-24">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          <h2 className="text-display font-semibold text-gradient">Notre méthode</h2>
+          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {processSteps.map((step) => (
+              <li key={step.number} className="rounded-2xl glass p-6">
+                <span className="text-sm text-white/45 tabular">Étape {Number(step.number)}</span>
+                <h3 className="mt-6 text-xl font-semibold tracking-tight">{step.title}</h3>
+                <p className="mt-2 text-white/60">{step.description}</p>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 bg-[#0A0A0B]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl lg:text-4xl font-bold text-white mb-6"
-          >
-            Prêt à développer votre activité ?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-gray-400 mb-8"
-          >
-            Contactez-nous pour une consultation gratuite et découvrez comment 
-            nous pouvons vous accompagner.
-          </motion.p>
-          <Link to={createPageUrl('Contact')}>
-            <Button className="rounded-full px-8 py-6 bg-[#C9A86C] hover:bg-[#B8975B] text-[#0A0A0B] font-semibold text-lg">
-              Planifier un appel découverte
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
+          </ol>
         </div>
       </section>
     </main>

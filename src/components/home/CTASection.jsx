@@ -1,81 +1,65 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
+import { Reveal } from '@/components/brand/Reveal';
+
+const COPY = {
+  FR: {
+    title: 'Un projet à lancer ? Écrivez-nous.',
+    text: 'Décrivez votre besoin en quelques lignes : nous revenons vers vous pour en parler.',
+    cta: 'Écrire un message',
+    address: 'Adresse',
+    hours: 'Horaires',
+    hoursValue: 'Du lundi au vendredi, 9 h – 18 h',
+  },
+  EN: {
+    title: 'A project to launch? Write to us.',
+    text: 'Describe what you need in a few lines and we will get back to you to discuss it.',
+    cta: 'Write a message',
+    address: 'Address',
+    hours: 'Opening hours',
+    hoursValue: 'Monday to Friday, 9 am – 6 pm',
+  },
+};
 
 export default function CTASection() {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const copy = COPY[language] ?? COPY.FR;
+
   return (
-    <section className="py-24 lg:py-32 bg-[#FAFAFA] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#C9A86C]/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#0A0A0B]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
-      </div>
+    <section className="bg-black text-white py-24 lg:py-32 border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-5 lg:px-8">
+        <Reveal className="relative isolate overflow-hidden rounded-3xl glass px-6 py-16 lg:px-16 lg:py-20 text-center">
+          <div className="absolute inset-0 -z-10 bg-grid opacity-70" aria-hidden="true" />
+          <div className="absolute -z-10 left-1/2 -translate-x-1/2 -top-24 h-[360px] w-[700px] max-w-[160%] glow" aria-hidden="true" />
+          <h2 className="text-display font-semibold text-gradient">{copy.title}</h2>
+          <p className="mt-5 mx-auto max-w-xl text-lede text-white/60">{copy.text}</p>
+          <Link
+            to={createPageUrl('Contact')}
+            className="group mt-9 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-white text-black font-medium shadow-[0_0_40px_rgba(255,255,255,0.25)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] transition-shadow"
+          >
+            {copy.cta}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </Link>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="bg-[#0A0A0B] rounded-[40px] p-10 lg:p-16 overflow-hidden relative">
-          {/* Inner gradient */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#C9A86C]/20 rounded-full blur-[100px]" />
-            <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[#C9A86C]/10 rounded-full blur-[80px]" />
-          </div>
-
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
-            {/* Content */}
-            <div className="text-center lg:text-left max-w-xl">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
-              >
-                {t('cta.title')}
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-lg text-gray-400"
-              >
-                {t('cta.subtitle')}
-              </motion.p>
+          <dl className="mt-14 pt-10 border-t border-white/10 grid sm:grid-cols-3 gap-8 text-sm">
+            <div>
+              <dt className="text-white/45">{copy.address}</dt>
+              <dd className="mt-1 text-white/85">100, av. Colonel Ebeya et TSF<br />Gombe, Kinshasa, RD Congo</dd>
             </div>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Link to={createPageUrl('Contact')}>
-                <Button
-                  size="lg"
-                  className="rounded-full px-8 bg-[#C9A86C] hover:bg-[#B8975B] text-[#0A0A0B] font-semibold"
-                >
-                  <Calendar className="w-5 h-5 mr-2" />
-                  {t('cta.bookCall')}
-                </Button>
-              </Link>
-              <Link to={createPageUrl('Contact')}>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full px-8 border-white/20 text-white hover:bg-white/10"
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  {t('cta.contactUs')}
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
+            <div>
+              <dt className="text-white/45">Email</dt>
+              <dd className="mt-1">
+                <a href="mailto:contact@precisions.group" className="text-white/85 underline underline-offset-4 hover:text-white">contact@precisions.group</a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-white/45">{copy.hours}</dt>
+              <dd className="mt-1 text-white/85">{copy.hoursValue}</dd>
+            </div>
+          </dl>
+        </Reveal>
       </div>
     </section>
   );

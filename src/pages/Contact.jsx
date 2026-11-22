@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
+import PageHero from '@/components/brand/PageHero';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Sparkles, ArrowRight, Mail, Phone, MapPin, Clock,
-  Linkedin, Twitter, Instagram, Send, Calendar, MessageCircle,
-  ChevronDown, CheckCircle
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -134,48 +132,18 @@ export default function Contact() {
   return (
     <main>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">Contact</span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
-            Parlons de votre projet
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto"
-          >
-            Nous sommes là pour vous accompagner. Contactez-nous pour une consultation gratuite.
-          </motion.p>
-        </div>
-      </section>
+      <PageHero
+        title="Parlons de votre projet"
+        lede="Décrivez votre besoin : nous revenons vers vous avec une première lecture et les bons interlocuteurs. Le premier échange est gratuit."
+      />
 
       {/* Contact Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-16">
             {/* Contact Info */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-[#0A0A0B] mb-8">
+              <h2 className="text-2xl font-semibold tracking-tight text-white mb-8">
                 Nos coordonnées
               </h2>
               
@@ -183,57 +151,23 @@ export default function Contact() {
                 {contactInfo.map((info) => (
                   <motion.div
                     key={info.title}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
                     className="flex items-start gap-4"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#C9A86C]/10 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-5 h-5 text-[#C9A86C]" />
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <info.icon className="w-5 h-5 text-gold" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-500 mb-1">{info.title}</div>
+                      <div className="text-sm text-white/50 mb-1">{info.title}</div>
                       {info.link ? (
-                        <a href={info.link} className="font-medium text-[#0A0A0B] hover:text-[#C9A86C] transition-colors">
+                        <a href={info.link} className="font-medium text-white hover:text-white transition-colors">
                           {info.value}
                         </a>
                       ) : (
-                        <div className="font-medium text-[#0A0A0B]">{info.value}</div>
+                        <div className="font-medium text-white">{info.value}</div>
                       )}
                     </div>
                   </motion.div>
                 ))}
-              </div>
-
-              {/* Social Links */}
-              <div>
-                <h3 className="font-semibold text-[#0A0A0B] mb-4">Suivez-nous</h3>
-                <div className="flex gap-3">
-                  {[Linkedin, Twitter, Instagram].map((Icon, i) => (
-                    <a
-                      key={i}
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#0A0A0B] hover:text-white transition-all"
-                    >
-                      <Icon className="w-5 h-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Actions */}
-              <div className="mt-12 p-6 bg-[#FAFAFA] rounded-2xl">
-                <h3 className="font-semibold text-[#0A0A0B] mb-4">Actions rapides</h3>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start gap-3 rounded-xl">
-                    <Calendar className="w-5 h-5 text-[#C9A86C]" />
-                    Réserver un appel découverte
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start gap-3 rounded-xl">
-                    <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
-                    Démarrer un chat
-                  </Button>
-                </div>
               </div>
             </div>
 
@@ -241,17 +175,15 @@ export default function Contact() {
             <div className="lg:col-span-3">
               {submitted ? (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-[#FAFAFA] rounded-3xl p-12 text-center"
+                  className="bg-white/[0.03] rounded-3xl p-12 text-center"
                 >
-                  <div className="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-6">
-                    <CheckCircle className="w-10 h-10 text-green-600" />
+                  <div className="w-20 h-20 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-6">
+                    <CheckCircle className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0A0A0B] mb-4">
+                  <h3 className="text-2xl font-semibold tracking-tight text-white mb-4">
                     Message envoyé !
                   </h3>
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-white/60 mb-8">
                     Merci pour votre message. Notre équipe vous contactera dans les 24h.
                   </p>
                   <Button
@@ -270,12 +202,10 @@ export default function Contact() {
                 </motion.div>
               ) : (
                 <motion.form
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
                   onSubmit={handleSubmit}
-                  className="bg-[#FAFAFA] rounded-3xl p-8 lg:p-12"
+                  className="bg-white/[0.03] rounded-3xl p-8 lg:p-12"
                 >
-                  <h2 className="text-2xl font-bold text-[#0A0A0B] mb-8">
+                  <h2 className="text-2xl font-semibold tracking-tight text-white mb-8">
                     Envoyez-nous un message
                   </h2>
 
@@ -371,13 +301,13 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-14 rounded-xl bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white text-lg"
+                    className="w-full h-14 rounded-xl bg-white text-black hover:bg-white/85 text-lg"
                   >
                     {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
                     <Send className="w-5 h-5 ml-2" />
                   </Button>
 
-                  <p className="text-sm text-gray-500 mt-4 text-center">
+                  <p className="text-sm text-white/50 mt-4 text-center">
                     En soumettant ce formulaire, vous acceptez notre politique de confidentialité.
                   </p>
                 </motion.form>
@@ -388,18 +318,15 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
+              className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
               Questions fréquentes
             </motion.h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-white/60">
               Retrouvez les réponses aux questions les plus courantes.
             </p>
           </div>
@@ -408,16 +335,12 @@ export default function Contact() {
             {faqs.map((faq, index) => (
               <motion.div
                 key={faq.id ?? index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
               >
-                <AccordionItem value={`item-${index}`} className="bg-white rounded-xl border-0 px-6">
+                <AccordionItem value={`item-${index}`} className="bg-white/[0.04] border border-white/10 rounded-xl border-0 px-6">
                   <AccordionTrigger className="hover:no-underline py-6 text-left">
-                    <span className="font-semibold text-[#0A0A0B]">{faq.question}</span>
+                    <span className="font-semibold text-white">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-gray-600 whitespace-pre-line">
+                  <AccordionContent className="pb-6 text-white/60 whitespace-pre-line">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

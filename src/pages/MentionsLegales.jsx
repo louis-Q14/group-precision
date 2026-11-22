@@ -1,7 +1,6 @@
-import React from 'react';
+import PageHero from '@/components/brand/PageHero';
 import { motion } from 'framer-motion';
-import { 
-  FileText, Building2, UserCog, Server, Shield, 
+import { Building2, UserCog, Server, Shield, 
   Cookie, AlertCircle, Scale, Mail, Phone, MapPin, Globe
 } from 'lucide-react';
 
@@ -15,7 +14,7 @@ const legalSections = [
         <p>
           Le présent site <strong>www.precisions.group</strong> est édité par :
         </p>
-        <div className="bg-[#FAFAFA] rounded-xl p-6 space-y-2 text-sm">
+        <div className="bg-white/[0.03] rounded-xl p-6 space-y-2 text-sm">
           <p><strong>Dénomination sociale :</strong> PRECISION GROUP</p>
           <p><strong>Statut juridique :</strong> Société à Responsabilité Limitée Unipersonnelle (S.A.R.L.U)</p>
           <p><strong>Siège social :</strong> 100, Avenues Colonel Ebeya et TSF, C/ Gombe, V/ Kinshasa, P/ Kinshasa – R.D. Congo</p>
@@ -26,9 +25,9 @@ const legalSections = [
         </div>
         <div className="space-y-2">
           <p><strong>Coordonnées de contact :</strong></p>
-          <p className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#C9A86C]" /> +243 801 000 000</p>
-          <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#C9A86C]" /> contact@precisions.group</p>
-          <p className="flex items-center gap-2"><Globe className="w-4 h-4 text-[#C9A86C]" /> www.precisions.group</p>
+          <p className="flex items-center gap-2"><Phone className="w-4 h-4 text-gold" /> +243 801 000 000</p>
+          <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-gold" /> contact@precisions.group</p>
+          <p className="flex items-center gap-2"><Globe className="w-4 h-4 text-gold" /> www.precisions.group</p>
         </div>
       </div>
     ),
@@ -180,59 +179,28 @@ export default function MentionsLegales() {
   return (
     <main>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-          >
-            <FileText className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">Informations légales</span>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
-            Mentions Légales
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400"
-          >
-            Conformément à la législation en vigueur en République Démocratique du Congo.
-          </motion.p>
-        </div>
-      </section>
+      <PageHero
+        title="Mentions légales"
+        lede="Informations légales relatives au site, conformément à la législation en vigueur en République démocratique du Congo."
+      />
 
       {/* Legal Sections */}
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="space-y-12">
             {legalSections.map((section, index) => (
               <motion.div
                 key={section.id}
                 id={section.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="border-l-2 border-[#C9A86C]/30 pl-6 lg:pl-8"
+                className="border-l-2 border-white/30 pl-6 lg:pl-8"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#C9A86C]/10 flex items-center justify-center">
-                    <section.icon className="w-6 h-6 text-[#C9A86C]" />
+                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                    <section.icon className="w-6 h-6 text-gold" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#0A0A0B]">{section.title}</h2>
+                  <h2 className="text-2xl font-semibold tracking-tight text-white">{section.title}</h2>
                 </div>
-                <div className="text-gray-600 leading-relaxed text-[15px]">
+                <div className="text-white/60 leading-relaxed text-[15px]">
                   {section.content}
                 </div>
               </motion.div>
@@ -242,17 +210,17 @@ export default function MentionsLegales() {
       </section>
 
       {/* Contact Band */}
-      <section className="py-20 bg-[#FAFAFA]">
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="bg-[#0A0A0B] rounded-3xl p-10 lg:p-14 text-white">
+          <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-10 lg:p-14 text-white">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#C9A86C]/20 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-[#C9A86C]" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-gold" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Adresse</h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white/40 text-sm">
                     100, Avenues Colonel Ebeya et TSF<br />
                     C/ Gombe, V/ Kinshasa<br />
                     P/ Kinshasa – R.D. Congo
@@ -260,24 +228,24 @@ export default function MentionsLegales() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#C9A86C]/20 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-[#C9A86C]" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 text-gold" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Téléphone</h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white/40 text-sm">
                     +243 801 000 000<br />
                     +243 801 000 000
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#C9A86C]/20 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5 text-[#C9A86C]" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-gold" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Contact</h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white/40 text-sm">
                     contact@precisions.group<br />
                     www.precisions.group
                   </p>

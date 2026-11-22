@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import {
-  Lightbulb, TrendingUp, ArrowRight, CheckCircle, Sparkles, Target, Zap, Shield, Clock,
+  Lightbulb, TrendingUp, ArrowRight, CheckCircle, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network, MessageSquare, Search,
   HeadphonesIcon, Coins, Briefcase, Building2, Handshake, Settings, RefreshCw,
   ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database,
@@ -24,7 +24,7 @@ const serviceCategories = [
     title: 'Communication Digitale',
     description: 'Élaborer et orchestrer des réponses tactiques à vos problématiques de communication grand public ou B2B, en alignant identité de marque, médias et digital pour un impact mesurable.',
     icon: Globe,
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-white/10 to-white/5',
     services: [
       {
         id: 'strategie',
@@ -45,8 +45,8 @@ const serviceCategories = [
           { icon: Zap, text: 'Impact maximisé' },
           { icon: Shield, text: 'Cohérence garantie' },
         ],
-        color: 'from-amber-500 to-orange-500',
-        bgColor: 'bg-amber-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'publicite',
@@ -67,8 +67,8 @@ const serviceCategories = [
           { icon: Users, text: 'Audience ciblée' },
           { icon: TrendingUp, text: 'Notoriété accrue' },
         ],
-        color: 'from-rose-500 to-pink-500',
-        bgColor: 'bg-rose-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'digital',
@@ -89,8 +89,8 @@ const serviceCategories = [
           { icon: MessageSquare, text: 'Engagement élevé' },
           { icon: Search, text: 'Visibilité optimale' },
         ],
-        color: 'from-blue-500 to-cyan-500',
-        bgColor: 'bg-blue-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'reseau',
@@ -111,8 +111,8 @@ const serviceCategories = [
           { icon: Target, text: 'Objectifs atteints' },
           { icon: Zap, text: 'Dynamique positive' },
         ],
-        color: 'from-purple-500 to-violet-500',
-        bgColor: 'bg-purple-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'web',
@@ -133,8 +133,8 @@ const serviceCategories = [
           { icon: Zap, text: 'Performance optimale' },
           { icon: Shield, text: 'Sécurité renforcée' },
         ],
-        color: 'from-indigo-500 to-blue-500',
-        bgColor: 'bg-indigo-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'support',
@@ -155,8 +155,8 @@ const serviceCategories = [
           { icon: Users, text: 'Utilisateurs autonomes' },
           { icon: Clock, text: 'Disponibilité étendue' },
         ],
-        color: 'from-teal-500 to-cyan-500',
-        bgColor: 'bg-teal-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
     ]
   },
@@ -165,7 +165,7 @@ const serviceCategories = [
     title: 'Développement Économique',
     description: 'Accompagner vos projets de développement et de croissance économique, du financement à la structuration, en passant par le pilotage stratégique et l\'expansion internationale.',
     icon: Briefcase,
-    color: 'from-emerald-500 to-green-500',
+    color: 'from-white/10 to-white/5',
     services: [
       {
         id: 'financement',
@@ -186,8 +186,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Dossiers solides' },
           { icon: BarChart3, text: 'Taux de succès élevé' },
         ],
-        color: 'from-emerald-500 to-green-500',
-        bgColor: 'bg-emerald-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'prefinancement',
@@ -208,8 +208,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Risques maîtrisés' },
           { icon: TrendingUp, text: 'Croissance accélérée' },
         ],
-        color: 'from-blue-500 to-indigo-500',
-        bgColor: 'bg-blue-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'projets',
@@ -230,8 +230,8 @@ const serviceCategories = [
           { icon: Users, text: 'Synergies créées' },
           { icon: Target, text: 'Impact maximisé' },
         ],
-        color: 'from-amber-500 to-orange-500',
-        bgColor: 'bg-amber-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'strategique',
@@ -252,8 +252,8 @@ const serviceCategories = [
           { icon: Target, text: 'Objectifs définis' },
           { icon: BarChart3, text: 'Résultats mesurables' },
         ],
-        color: 'from-purple-500 to-violet-500',
-        bgColor: 'bg-purple-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'organisation',
@@ -274,8 +274,8 @@ const serviceCategories = [
           { icon: Users, text: 'Équipes performantes' },
           { icon: Zap, text: 'Efficacité accrue' },
         ],
-        color: 'from-slate-500 to-gray-600',
-        bgColor: 'bg-slate-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'expertise',
@@ -296,8 +296,8 @@ const serviceCategories = [
           { icon: Shield, text: 'Fiabilité garantie' },
           { icon: Lightbulb, text: 'Solutions innovantes' },
         ],
-        color: 'from-cyan-500 to-teal-500',
-        bgColor: 'bg-cyan-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'changement',
@@ -318,8 +318,8 @@ const serviceCategories = [
           { icon: Users, text: 'Adhésion obtenue' },
           { icon: Target, text: 'Objectifs atteints' },
         ],
-        color: 'from-rose-500 to-pink-500',
-        bgColor: 'bg-rose-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
       {
         id: 'international',
@@ -340,8 +340,8 @@ const serviceCategories = [
           { icon: Globe, text: 'Expansion globale' },
           { icon: Shield, text: 'Risques maîtrisés' },
         ],
-        color: 'from-indigo-500 to-purple-500',
-        bgColor: 'bg-indigo-50',
+        color: 'from-white/10 to-white/5',
+        bgColor: 'bg-white/[0.04] border border-white/10',
       },
     ]
   }
@@ -377,8 +377,8 @@ const platforms = [
       { icon: CreditCard, text: 'Paiements sécurisés' },
       { icon: Package, text: 'Livraison intégrée' },
     ],
-    color: 'from-orange-500 to-amber-500',
-    bgColor: 'bg-orange-50',
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
     url: 'https://www.sombateka.com',
     status: 'live',
   },
@@ -411,8 +411,8 @@ const platforms = [
       { icon: GraduationCap, text: 'Diplômes certifiés' },
       { icon: Link2, text: 'Réseau académique RDC' },
     ],
-    color: 'from-teal-500 to-green-500',
-    bgColor: 'bg-teal-50',
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
     url: 'https://harchive.net',
     status: 'live',
   },
@@ -444,8 +444,8 @@ const platforms = [
       { icon: Users, text: 'Employés gérés' },
       { icon: Shield, text: 'Données sécurisées' },
     ],
-    color: 'from-blue-500 to-indigo-500',
-    bgColor: 'bg-blue-50',
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
     url: 'https://app243.com',
     status: 'live',
   },
@@ -477,8 +477,8 @@ const platforms = [
       { icon: Building2, text: 'Bureaux à louer' },
       { icon: CreditCard, text: 'Paiement sécurisé' },
     ],
-    color: 'from-pink-500 to-rose-500',
-    bgColor: 'bg-pink-50',
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
     url: 'https://parckbox.com',
     status: 'live',
   },
@@ -510,8 +510,8 @@ const platforms = [
       { icon: TrendingUp, text: 'Portefeuille suivi' },
       { icon: Shield, text: 'Sécurité garantie' },
     ],
-    color: 'from-emerald-500 to-green-600',
-    bgColor: 'bg-emerald-50',
+    color: 'from-white/10 to-white/5',
+    bgColor: 'bg-white/[0.04] border border-white/10',
     url: null,
     status: 'construction',
   },
@@ -534,88 +534,30 @@ export default function Presentation() {
   const currentPlatform = platforms.find(p => p.id === activePlatform);
 
   return (
-    <main>
-      {/* Hero */}
-      <section className="pt-32 pb-20 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">Présentation de l'entreprise</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
-            PRECISION Group
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto mb-10"
-          >
-            Cabinet de conseil en communication digitale et développement économique,
-            éditeur de plateformes numériques propriétaires au service de la RD Congo et de l'Afrique.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            {companyStats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-[#C9A86C]">{stat.value}</div>
-                <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+    <div>
 
       {/* Company Overview */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A86C]/10 mb-6">
-                <Building2 className="w-4 h-4 text-[#C9A86C]" />
-                <span className="text-sm font-medium text-[#C9A86C]">À propos</span>
-              </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6">
+              <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6">
                 Un cabinet, deux métiers, cinq plateformes
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-lg text-white/60 mb-6">
                 PRECISIONS Group accompagne les entreprises, institutions et entrepreneurs dans leur
                 communication digitale et leur développement économique. Notre approche conjugue
                 conseil stratégique, exécution opérationnelle et produits numériques propriétaires.
               </p>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-white/60 mb-8">
                 Au-delà du conseil, nous concevons et opérons nos propres plateformes —
                 SombaTeka, HARCHIVE, App243, PARCK BOX et OrbitalInvest — qui adressent des besoins
                 concrets du marché africain : commerce, éducation, RH, services et finance.
               </p>
               <div className="flex flex-wrap gap-3">
                 {['Conseil', 'Exécution', 'Produits numériques', 'Sur mesure'].map((tag) => (
-                  <span key={tag} className="px-4 py-2 rounded-full bg-gray-100 text-sm font-medium text-gray-700">
+                  <span key={tag} className="px-4 py-2 rounded-full bg-white/[0.07] text-sm font-medium text-white/75">
                     {tag}
                   </span>
                 ))}
@@ -623,21 +565,18 @@ export default function Presentation() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               className="grid grid-cols-2 gap-4"
             >
               {serviceCategories.map((cat) => (
-                <div key={cat.id} className={`p-6 rounded-2xl bg-gradient-to-br ${cat.color} text-white`}>
+                <div key={cat.id} className={`p-6 rounded-2xl bg-white/10 border border-white/15 text-white`}>
                   <cat.icon className="w-8 h-8 mb-3" />
-                  <div className="text-2xl font-bold">{cat.services.length}</div>
+                  <div className="text-2xl font-semibold tracking-tight">{cat.services.length}</div>
                   <div className="text-sm opacity-90">{cat.title}</div>
                 </div>
               ))}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500 to-teal-500 text-white">
+              <div className="p-6 rounded-2xl bg-white/10 border border-white/15 text-white">
                 <Database className="w-8 h-8 mb-3" />
-                <div className="text-2xl font-bold">{platforms.length}</div>
+                <div className="text-2xl font-semibold tracking-tight">{platforms.length}</div>
                 <div className="text-sm opacity-90">Plateformes</div>
               </div>
             </motion.div>
@@ -646,17 +585,13 @@ export default function Presentation() {
       </section>
 
       {/* Services */}
-      <section className="py-20 bg-[#FAFAFA]">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A86C]/10 mb-4">
-              <Briefcase className="w-4 h-4 text-[#C9A86C]" />
-              <span className="text-sm font-medium text-[#C9A86C]">Nos services</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4">
+            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4">
               Expertises & prestations
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
               Deux domaines d'expertise, vingt services spécialisés pour accompagner votre croissance de bout en bout.
             </p>
           </div>
@@ -672,8 +607,8 @@ export default function Presentation() {
                 }}
                 className={`flex items-center justify-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 ${
                   activeCategory === category.id
-                    ? 'bg-[#0A0A0B] text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                    ? 'bg-white/[0.04] border border-white/10 text-white '
+                    : 'bg-white/[0.04] border border-white/10 text-white/60 hover:bg-white/10 border border-white/10'
                 }`}
               >
                 <category.icon className="w-6 h-6" />
@@ -687,7 +622,7 @@ export default function Presentation() {
 
           {/* Category Description */}
           <div className="text-center mb-10 max-w-3xl mx-auto">
-            <p className="text-gray-600">{currentCategory?.description}</p>
+            <p className="text-white/60">{currentCategory?.description}</p>
           </div>
 
           {/* Service Tabs */}
@@ -698,13 +633,12 @@ export default function Presentation() {
                 onClick={() => setActiveService(service.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-300 ${
                   activeService === service.id
-                    ? 'bg-[#C9A86C] text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                    ? `bg-white/10 border border-white/15 text-white`
+                    : 'bg-white/[0.04] border border-white/10 text-white/60 hover:bg-white/10 border border-white/10'
                 }`}
               >
                 <service.icon className="w-4 h-4" />
-                <span className="hidden md:inline">{service.title.split(' ').slice(0, 3).join(' ')}</span>
-                <span className="md:hidden">{service.title.split(' ')[0]}</span>
+                <span className="text-left">{service.title.split(' — ')[0]}</span>
               </button>
             ))}
           </div>
@@ -713,51 +647,49 @@ export default function Presentation() {
           {currentService && (
             <motion.div
               key={currentService.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 <div>
-                  <h3 className="text-2xl lg:text-3xl font-bold text-[#0A0A0B] mb-3">
+                  <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight text-white mb-3">
                     {currentService.title}
                   </h3>
-                  <p className="text-lg text-[#C9A86C] font-medium mb-4">
+                  <p className="text-lg text-gold font-medium mb-4">
                     {currentService.subtitle}
                   </p>
-                  <p className="text-base text-gray-600 mb-6">
+                  <p className="text-base text-white/60 mb-6">
                     {currentService.description}
                   </p>
 
-                  <div className="p-5 rounded-2xl bg-white border border-gray-200 mb-6">
+                  <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 border border-white/10 mb-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <Zap className="w-5 h-5 text-[#C9A86C]" />
-                      <h4 className="font-semibold text-[#0A0A0B]">Comment ça fonctionne</h4>
+                      <Zap className="w-5 h-5 text-gold" />
+                      <h4 className="font-semibold text-white">Comment ça fonctionne</h4>
                     </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">{currentService.howItWorks}</p>
+                    <p className="text-sm text-white/60 leading-relaxed">{currentService.howItWorks}</p>
                   </div>
 
                   <div className="grid sm:grid-cols-3 gap-4">
                     {currentService.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${currentService.color} flex items-center justify-center`}>
+                      <div key={i} className="flex items-center gap-3 p-4 bg-white/[0.04] border border-white/10 rounded-xl border border-white/10">
+                        <div className={`w-10 h-10 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center`}>
                           <benefit.icon className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
+                        <span className="text-sm font-medium text-white/75">{benefit.text}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div className={`${currentService.bgColor} rounded-3xl p-8 lg:p-10`}>
-                  <h4 className="text-xl font-semibold text-[#0A0A0B] mb-6">
+                  <h4 className="text-xl font-semibold text-white mb-6">
                     Ce que nous proposons
                   </h4>
                   <ul className="space-y-4">
                     {currentService.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <CheckCircle className={`w-5 h-5 mt-0.5 bg-gradient-to-br ${currentService.color} text-white rounded-full`} />
-                        <span className="text-gray-700">{feature}</span>
+                        <CheckCircle className={`w-5 h-5 mt-0.5 bg-white/10 border border-white/15 text-white rounded-full`} />
+                        <span className="text-white/75">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -769,17 +701,13 @@ export default function Presentation() {
       </section>
 
       {/* Platforms */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A86C]/10 mb-4">
-              <Database className="w-4 h-4 text-[#C9A86C]" />
-              <span className="text-sm font-medium text-[#C9A86C]">Plateformes propriétaires</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4">
+            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4">
               Nos produits numériques
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
               Cinq plateformes éditées par PRECISIONS Group, conçues pour répondre aux besoins concrets du marché africain.
             </p>
           </div>
@@ -792,13 +720,13 @@ export default function Presentation() {
                 onClick={() => setActivePlatform(p.id)}
                 className={`p-5 rounded-2xl text-left transition-all duration-300 ${
                   activePlatform === p.id
-                    ? `bg-gradient-to-br ${p.color} text-white shadow-lg`
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
+                    ? `bg-white/10 border border-white/15 text-white `
+                    : 'bg-white/[0.04] text-white/75 hover:bg-white/10 border border-white/10'
                 }`}
               >
                 <p.icon className="w-8 h-8 mb-3" />
-                <div className="font-bold">{p.title}</div>
-                <div className={`text-xs mt-1 ${activePlatform === p.id ? 'opacity-90' : 'text-gray-500'}`}>
+                <div className="font-semibold tracking-tight">{p.title}</div>
+                <div className={`text-xs mt-1 ${activePlatform === p.id ? 'opacity-90' : 'text-white/50'}`}>
                   {p.tagline}
                 </div>
               </button>
@@ -809,53 +737,51 @@ export default function Presentation() {
           {currentPlatform && (
             <motion.div
               key={currentPlatform.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 {/* Left - description & how it works */}
                 <div>
                   <div className="flex items-center gap-4 mb-5">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${currentPlatform.color} flex items-center justify-center`}>
+                    <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center`}>
                       <currentPlatform.icon className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl lg:text-3xl font-bold text-[#0A0A0B]">{currentPlatform.title}</h3>
-                      <p className="text-[#C9A86C] font-medium">{currentPlatform.tagline}</p>
+                      <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight text-white">{currentPlatform.title}</h3>
+                      <p className="text-gold font-medium">{currentPlatform.tagline}</p>
                     </div>
                   </div>
 
-                  <p className="text-base text-gray-600 mb-5">{currentPlatform.description}</p>
+                  <p className="text-base text-white/60 mb-5">{currentPlatform.description}</p>
 
-                  <div className="p-5 rounded-2xl bg-gray-50 border border-gray-200 mb-6">
+                  <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 mb-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <Zap className="w-5 h-5 text-[#C9A86C]" />
-                      <h4 className="font-semibold text-[#0A0A0B]">Comment ça fonctionne</h4>
+                      <Zap className="w-5 h-5 text-gold" />
+                      <h4 className="font-semibold text-white">Comment ça fonctionne</h4>
                     </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">{currentPlatform.howItWorks}</p>
+                    <p className="text-sm text-white/60 leading-relaxed">{currentPlatform.howItWorks}</p>
                   </div>
 
                   <div className="grid sm:grid-cols-3 gap-4 mb-8">
                     {currentPlatform.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${currentPlatform.color} flex items-center justify-center`}>
+                      <div key={i} className="flex items-center gap-3 p-4 bg-white/[0.04] border border-white/10 rounded-xl border border-white/10">
+                        <div className={`w-10 h-10 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center`}>
                           <benefit.icon className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
+                        <span className="text-sm font-medium text-white/75">{benefit.text}</span>
                       </div>
                     ))}
                   </div>
 
                   {currentPlatform.status === 'live' ? (
                     <a href={currentPlatform.url} target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90">
+                      <Button className="rounded-full px-8 bg-white text-black hover:bg-white/85">
                         Visiter {currentPlatform.title}
                         <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </a>
                   ) : (
-                    <Button disabled className="rounded-full px-8 bg-gray-400 text-white cursor-not-allowed opacity-70">
+                    <Button disabled className="rounded-full px-8 bg-white/20 text-white cursor-not-allowed opacity-70">
                       Site en construction
                     </Button>
                   )}
@@ -864,31 +790,31 @@ export default function Presentation() {
                 {/* Right - features + tech stack */}
                 <div>
                   <div className={`${currentPlatform.bgColor} rounded-3xl p-8 lg:p-10 mb-6`}>
-                    <h4 className="text-xl font-semibold text-[#0A0A0B] mb-6">
+                    <h4 className="text-xl font-semibold text-white mb-6">
                       Fonctionnalités clés
                     </h4>
                     <ul className="space-y-4">
                       {currentPlatform.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-3">
-                          <CheckCircle className={`w-5 h-5 mt-0.5 bg-gradient-to-br ${currentPlatform.color} text-white rounded-full`} />
-                          <span className="text-gray-700">{feature}</span>
+                          <CheckCircle className={`w-5 h-5 mt-0.5 bg-white/10 border border-white/15 text-white rounded-full`} />
+                          <span className="text-white/75">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="p-8 rounded-3xl bg-[#0A0A0B]">
+                  <div className="p-8 rounded-3xl bg-white/[0.04] border border-white/10">
                     <div className="flex items-center gap-2 mb-6">
-                      <Code2 className="w-5 h-5 text-[#C9A86C]" />
+                      <Code2 className="w-5 h-5 text-gold" />
                       <h4 className="text-xl font-semibold text-white">Stack technique</h4>
                     </div>
                     <div className="space-y-3">
                       {currentPlatform.techStack.map((tech, i) => (
                         <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                          <tech.icon className="w-5 h-5 text-[#C9A86C] mt-0.5 flex-shrink-0" />
+                          <tech.icon className="w-5 h-5 text-gold mt-0.5 flex-shrink-0" />
                           <div>
                             <div className="text-sm font-semibold text-white">{tech.name}</div>
-                            <div className="text-xs text-gray-400">{tech.role}</div>
+                            <div className="text-xs text-white/40">{tech.role}</div>
                           </div>
                         </div>
                       ))}
@@ -902,18 +828,15 @@ export default function Presentation() {
       </section>
 
       {/* Process */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
+              className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
               Notre méthodologie
             </motion.h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
               Une approche éprouvée pour des réponses tactiques et pertinentes à vos enjeux.
             </p>
           </div>
@@ -922,19 +845,15 @@ export default function Presentation() {
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="bg-white rounded-2xl p-8 h-full border border-gray-100">
-                  <div className="text-5xl font-bold text-[#C9A86C]/30 mb-4">{step.number}</div>
-                  <h3 className="text-xl font-semibold text-[#0A0A0B] mb-2">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+                <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-8 h-full border border-white/10">
+                  <div className="text-5xl font-semibold tracking-tight text-gold/30 mb-4">{step.number}</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-white/60">{step.description}</p>
                 </div>
                 {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gray-200" />
+                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-white/10" />
                 )}
               </motion.div>
             ))}
@@ -943,34 +862,27 @@ export default function Presentation() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-[#0A0A0B]">
+      <section className="py-24 border-y border-white/10">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl lg:text-4xl font-bold text-white mb-6"
+            className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6"
           >
             Travaillons ensemble
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-gray-400 mb-8"
+            className="text-lg text-white/40 mb-8"
           >
             Contactez-nous pour une consultation gratuite et découvrez comment nos services
             et nos plateformes peuvent accélérer votre développement.
           </motion.p>
           <Link to={createPageUrl('Contact')}>
-            <Button className="rounded-full px-8 py-6 bg-[#C9A86C] hover:bg-[#B8975B] text-[#0A0A0B] font-semibold text-lg">
+            <Button className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/85 font-semibold text-lg">
               Planifier un appel découverte
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

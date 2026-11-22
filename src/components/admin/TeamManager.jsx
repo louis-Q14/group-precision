@@ -1,4 +1,3 @@
-import React from 'react';
 import EntityManager from '@/components/admin/EntityManager';
 
 const FIELDS = [

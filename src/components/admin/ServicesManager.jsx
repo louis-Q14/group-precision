@@ -1,4 +1,3 @@
-import React from 'react';
 import EntityManager, { labelOf } from '@/components/admin/EntityManager';
 
 const CATEGORIES = [

@@ -1,252 +1,58 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import { createPageUrl } from '@/utils';
-import { motion } from 'framer-motion';
-import { 
-  Lightbulb, 
-  TrendingUp, 
-  ArrowRight,
-  Sparkles,
-  Globe,
-  Megaphone,
-  Coins,
-  Briefcase,
-  Handshake,
-  RefreshCw,
-  ShoppingCart,
-  Archive
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageContext';
+import { DOMAINS, domainCopy } from '@/components/brand/domains';
+import { Reveal, SpotlightCard } from '@/components/brand/Reveal';
 
-const getServices = (t, language) => [
-  {
-    icon: Globe,
-    title: language === 'FR' ? 'Communication Digitale' : 'Digital Communication',
-    description: language === 'FR' 
-      ? 'Stratégies digitales complètes : marketing, publicité média, social media et développement web.'
-      : 'Complete digital strategies: marketing, media advertising, social media and web development.',
-    features: language === 'FR' 
-      ? ['Marketing Digital', 'Publicité Média', 'Développement Web']
-      : ['Digital Marketing', 'Media Advertising', 'Web Development'],
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-500/10',
-    category: 'communication',
-  },
-  {
-    icon: Megaphone,
-    title: language === 'FR' ? 'Publicité & Médias' : 'Advertising & Media',
-    description: language === 'FR'
-      ? 'Campagnes publicitaires percutantes sur tous les canaux pour maximiser votre visibilité.'
-      : 'Impactful advertising campaigns across all channels to maximize your visibility.',
-    features: language === 'FR'
-      ? ['TV & Radio', 'Presse & Affichage', 'Digital Ads']
-      : ['TV & Radio', 'Press & Display', 'Digital Ads'],
-    color: 'from-rose-500 to-pink-500',
-    bgColor: 'bg-rose-500/10',
-    category: 'communication',
-  },
-  {
-    icon: Lightbulb,
-    title: language === 'FR' ? 'Conseil Stratégique' : 'Strategic Consulting',
-    description: language === 'FR'
-      ? 'Accompagnement stratégique pour définir et atteindre vos objectifs de développement.'
-      : 'Strategic support to define and achieve your development goals.',
-    features: language === 'FR'
-      ? ['Vision & Objectifs', 'Plan stratégique', 'Organisation']
-      : ['Vision & Goals', 'Strategic Plan', 'Organization'],
-    color: 'from-amber-500 to-orange-500',
-    bgColor: 'bg-amber-500/10',
-    category: 'economique',
-  },
-  {
-    icon: Coins,
-    title: language === 'FR' ? 'Financement de Projets' : 'Project Financing',
-    description: language === 'FR'
-      ? 'Recherche et préfinancement pour concrétiser vos projets de développement.'
-      : 'Funding research and pre-financing to bring your development projects to life.',
-    features: language === 'FR'
-      ? ['Recherche fonds', 'Préfinancement', 'Montage dossiers']
-      : ['Fund Research', 'Pre-financing', 'File Assembly'],
-    color: 'from-emerald-500 to-green-500',
-    bgColor: 'bg-emerald-500/10',
-    category: 'economique',
-  },
-  {
-    icon: Handshake,
-    title: language === 'FR' ? 'Relations Internationales' : 'International Relations',
-    description: language === 'FR'
-      ? 'Développez vos activités et partenariats à l\'échelle internationale.'
-      : 'Develop your activities and partnerships on an international scale.',
-    features: language === 'FR'
-      ? ['Partenariats', 'Expansion globale', 'Négociations']
-      : ['Partnerships', 'Global Expansion', 'Negotiations'],
-    color: 'from-indigo-500 to-purple-500',
-    bgColor: 'bg-indigo-500/10',
-    category: 'economique',
-  },
-  {
-    icon: RefreshCw,
-    title: language === 'FR' ? 'Accompagnement du Changement' : 'Change Management',
-    description: language === 'FR'
-      ? 'Réussissez vos transformations organisationnelles avec un accompagnement sur mesure.'
-      : 'Successfully transform your organization with tailored support.',
-    features: language === 'FR'
-      ? ['Conduite changement', 'Formation', 'Adoption']
-      : ['Change Leadership', 'Training', 'Adoption'],
-    color: 'from-purple-500 to-violet-500',
-    bgColor: 'bg-purple-500/10',
-    category: 'economique',
-  },
-  {
-    icon: ShoppingCart,
-    title: 'SombaTeka',
-    description: language === 'FR'
-      ? 'Plateforme de vente en ligne dédiée à tous — particuliers, commerçants et entreprises — pour vendre et acheter facilement en RD Congo et au-delà.'
-      : 'Online marketplace for everyone — individuals, traders and companies — to buy and sell easily in DRC and beyond.',
-    features: language === 'FR'
-      ? ['Boutiques en ligne', 'Paiements sécurisés', 'Livraison intégrée']
-      : ['Online stores', 'Secure payments', 'Integrated delivery'],
-    color: 'from-orange-500 to-amber-500',
-    bgColor: 'bg-orange-500/10',
-    category: 'plateforme',
-    badge: 'Plateforme',
-  },
-  {
-    icon: Archive,
-    title: 'HARCHIVE',
-    description: language === 'FR'
-      ? 'Plateforme d\'archivage numérique académique connectant tous les corps académiques de la RD Congo — étudiants, enseignants et institutions.'
-      : 'Academic digital archiving platform connecting all academic bodies in DRC — students, teachers and institutions.',
-    features: language === 'FR'
-      ? ['Archives académiques', 'Réseau académique RDC', 'Diplômes numériques']
-      : ['Academic archives', 'DRC academic network', 'Digital diplomas'],
-    color: 'from-teal-500 to-green-500',
-    bgColor: 'bg-teal-500/10',
-    category: 'plateforme',
-    badge: 'Plateforme',
-  },
-];
+// Grille asymétrique : les deux premiers métiers prennent plus de place
+const SPANS = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2'];
 
 export default function ServicesSection() {
-  const { t, language } = useLanguage();
-  const services = getServices(t, language);
+  const { language } = useLanguage();
+
   return (
-    <section className="py-24 lg:py-32 bg-[#FAFAFA]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0A0B]/5 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm font-medium text-[#0A0A0B]">{t('services.tagline')}</span>
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0B] mb-6"
-                        >
-                          {t('services.title')}
-                        </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-600"
-                        >
-                          {t('services.subtitle')}
-                        </motion.p>
-        </div>
+    <section className="relative bg-black text-white py-24 lg:py-32">
+      <div className="max-w-6xl mx-auto px-5 lg:px-8">
+        <Reveal className="max-w-2xl">
+          <h2 className="text-display font-semibold text-gradient">
+            {language === 'FR' ? 'Cinq métiers, une seule équipe' : 'Five lines of work, one team'}
+          </h2>
+          <p className="mt-5 text-lede text-white/60">
+            {language === 'FR'
+              ? 'Chaque projet passe par plusieurs étapes. Nous les couvrons toutes, sans multiplier les prestataires.'
+              : 'Every project goes through several stages. We cover them all, without multiplying providers.'}
+          </p>
+        </Reveal>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <div className={`group h-full bg-white rounded-3xl p-8 lg:p-10 border hover:shadow-xl transition-all duration-500 ${service.badge ? 'border-[#C9A86C]/40 hover:border-[#C9A86C]' : 'border-gray-100 hover:border-gray-200'}`}>
-                {/* Badge plateforme */}
-                {service.badge && (
-                  <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#C9A86C]/10 text-[#C9A86C] text-xs font-semibold mb-4">
-                    <span>✦</span> Plateforme Propriétaire
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          {DOMAINS.map((domain, i) => {
+            const t = domainCopy(domain, language);
+            const Icon = domain.icon;
+            return (
+              <Reveal key={domain.id} delay={i * 0.06} className={SPANS[i]}>
+                <SpotlightCard as={Link} to={`${createPageUrl('Services')}#${domain.id}`} className="block h-full p-7 lg:p-8">
+                  <div className="flex items-start justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 text-white/40 transition-all group-hover:text-white group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
                   </div>
-                )}
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-2xl ${service.bgColor} flex items-center justify-center mb-6`}>
-                  <service.icon className={`w-7 h-7 bg-gradient-to-br ${service.color} bg-clip-text text-transparent`} 
-                    style={{ stroke: `url(#${service.title})` }}
-                  />
-                  <svg width="0" height="0">
-                    <defs>
-                      <linearGradient id={service.title}>
-                        <stop offset="0%" stopColor="currentColor" />
-                        <stop offset="100%" stopColor="currentColor" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-2xl font-bold text-[#0A0A0B] mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-8">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-sm text-gray-700">
-                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.color}`} />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Link */}
-                <Link
-                  to={createPageUrl('Services')}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0A0B] group-hover:text-[#C9A86C] transition-colors"
-                >
-                  {t('services.learnMore')}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+                  <h3 className="mt-8 text-2xl font-semibold tracking-tight">{t.name}</h3>
+                  <p className="mt-1 text-white/80">{t.pitch}</p>
+                  <p className="mt-4 text-sm text-white/55 leading-relaxed">{t.text}</p>
+                  {i === 0 && (
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {t.services.map((s) => (
+                        <li key={s} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">{s}</li>
+                      ))}
+                    </ul>
+                  )}
+                </SpotlightCard>
+              </Reveal>
+            );
+          })}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Link to={createPageUrl('Services')}>
-            <Button 
-              size="lg" 
-              className="rounded-full px-8 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white"
-            >
-              {t('services.viewAll')}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

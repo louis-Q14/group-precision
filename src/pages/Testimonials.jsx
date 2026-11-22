@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import PageHero from '@/components/brand/PageHero';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Star, Send, CheckCircle, Quote } from 'lucide-react';
+import { Star, Send, CheckCircle, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -56,75 +57,41 @@ export default function Testimonials() {
   return (
     <main>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm text-white">{language === 'FR' ? 'Témoignages' : 'Testimonials'}</span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
-            {language === 'FR' ? 'Ce que disent nos clients' : 'What our clients say'}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto"
-          >
-            {language === 'FR' 
-              ? 'Découvrez les retours de nos clients et partagez votre expérience avec nous.'
-              : 'Discover our clients\' feedback and share your experience with us.'}
-          </motion.p>
-        </div>
-      </section>
+      <PageHero
+        title={language === 'FR' ? 'Témoignages' : 'Testimonials'}
+        lede={language === 'FR'
+          ? 'Ce que nos clients disent de notre travail, et de quoi partager votre propre expérience.'
+          : 'What our clients say about our work, and a form to share your own experience.'}
+      />
 
       {/* Testimonials Grid */}
       {testimonials.length > 0 && (
-        <section className="py-20 bg-[#FAFAFA]">
+        <section className="py-20">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[#0A0A0B] mb-12 text-center">
+            <h2 className="text-2xl font-semibold tracking-tight text-white mb-12 text-center">
               {language === 'FR' ? 'Témoignages de nos clients' : 'Client Testimonials'}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                  className="bg-white/[0.04] border border-white/10 rounded-2xl p-6  border border-white/10"
                 >
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating || 5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#C9A86C] text-[#C9A86C]" />
+                      <Star key={i} className="w-4 h-4 fill-gold-400 text-gold" />
                     ))}
                   </div>
-                  <Quote className="w-8 h-8 text-[#C9A86C]/30 mb-3" />
-                  <p className="text-gray-700 mb-6 leading-relaxed">
+                  <Quote className="w-8 h-8 text-gold/30 mb-3" />
+                  <p className="text-white/75 mb-6 leading-relaxed">
                     "{testimonial.content}"
                   </p>
                   <div className="border-t pt-4">
-                    <div className="font-semibold text-[#0A0A0B]">
+                    <div className="font-semibold text-white">
                       {testimonial.author_name}
                     </div>
                     {(testimonial.position || testimonial.company) && (
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-white/50">
                         {testimonial.position}{testimonial.position && testimonial.company && ', '}{testimonial.company}
                       </div>
                     )}
@@ -137,21 +104,19 @@ export default function Testimonials() {
       )}
 
       {/* Submit Form */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
           {submitted ? (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#FAFAFA] rounded-3xl p-12 text-center"
+              className="bg-white/[0.03] rounded-3xl p-12 text-center"
             >
-              <div className="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-6">
-                <CheckCircle className="w-10 h-10 text-green-600" />
+              <div className="w-20 h-20 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-6">
+                <CheckCircle className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[#0A0A0B] mb-4">
+              <h3 className="text-2xl font-semibold tracking-tight text-white mb-4">
                 {language === 'FR' ? 'Merci pour votre témoignage !' : 'Thank you for your testimonial!'}
               </h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-white/60 mb-8">
                 {language === 'FR' 
                   ? 'Votre avis sera publié après validation par notre équipe.'
                   : 'Your review will be published after validation by our team.'}
@@ -171,21 +136,19 @@ export default function Testimonials() {
             </motion.div>
           ) : (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
             >
               <div className="text-center mb-10">
-                <h2 className="text-2xl font-bold text-[#0A0A0B] mb-4">
+                <h2 className="text-2xl font-semibold tracking-tight text-white mb-4">
                   {language === 'FR' ? 'Partagez votre expérience' : 'Share your experience'}
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-white/60">
                   {language === 'FR' 
                     ? 'Votre avis compte pour nous et aide d\'autres clients à nous découvrir.'
                     : 'Your feedback matters to us and helps other clients discover us.'}
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="bg-[#FAFAFA] rounded-3xl p-8 lg:p-10">
+              <form onSubmit={handleSubmit} className="bg-white/[0.03] rounded-3xl p-8 lg:p-10">
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -235,8 +198,8 @@ export default function Testimonials() {
                           <Star
                             className={`w-8 h-8 ${
                               star <= formData.rating
-                                ? 'fill-[#C9A86C] text-[#C9A86C]'
-                                : 'text-gray-300'
+                                ? 'fill-gold-400 text-gold'
+                                : 'text-white/30'
                             }`}
                           />
                         </button>
@@ -259,7 +222,7 @@ export default function Testimonials() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-14 rounded-xl bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white text-lg"
+                    className="w-full h-14 rounded-xl bg-white text-black hover:bg-white/85 text-lg"
                   >
                     {isSubmitting 
                       ? (language === 'FR' ? 'Envoi en cours...' : 'Sending...') 

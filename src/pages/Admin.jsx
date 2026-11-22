@@ -17,7 +17,7 @@ import FAQManager from '@/components/admin/FAQManager';
 
 function CenteredCard({ children }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-6 pt-24 pb-12">
+    <div className="min-h-screen flex items-center justify-center bg-mist px-6 py-16">
       <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg">{children}</div>
     </div>
   );
@@ -88,10 +88,10 @@ function LoginForm() {
   return (
     <CenteredCard>
       <div className="text-center mb-8">
-        <div className="w-14 h-14 mx-auto rounded-xl bg-[#C9A86C]/10 flex items-center justify-center mb-4">
-          <Shield className="w-7 h-7 text-[#C9A86C]" />
+        <div className="w-14 h-14 mx-auto rounded-xl bg-gold-400/10 flex items-center justify-center mb-4">
+          <Shield className="w-7 h-7 text-gold" />
         </div>
-        <h1 className="text-2xl font-bold text-[#0A0A0B]">Administration</h1>
+        <h1 className="text-2xl font-bold text-ink">Administration</h1>
         <p className="text-sm text-gray-600 mt-1">Connectez-vous avec votre compte administrateur.</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -133,7 +133,7 @@ export default function Admin() {
   if (!isConfigured) {
     return (
       <CenteredCard>
-        <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4 text-center">Administration indisponible</h1>
+        <h1 className="text-2xl font-bold text-ink mb-4 text-center">Administration indisponible</h1>
         <p className="text-gray-600 text-center">
           La connexion à la base de données n'est pas configurée. Renseignez VITE_SUPABASE_URL et
           VITE_SUPABASE_ANON_KEY (voir le README), puis reconstruisez le site.
@@ -144,8 +144,8 @@ export default function Admin() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A86C]" />
+      <div className="min-h-screen flex items-center justify-center bg-mist">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold-400" />
       </div>
     );
   }
@@ -159,7 +159,7 @@ export default function Admin() {
           <div className="w-16 h-16 mx-auto rounded-full bg-red-100 flex items-center justify-center mb-6">
             <Shield className="w-8 h-8 text-red-500" />
           </div>
-          <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4">Accès restreint</h1>
+          <h1 className="text-2xl font-bold text-ink mb-4">Accès restreint</h1>
           <p className="text-gray-600 mb-6">
             Le compte {user?.email} n'a pas les droits d'administrateur.
           </p>
@@ -170,17 +170,17 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] pt-28 pb-12">
+    <div className="min-h-screen bg-mist py-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4 min-w-0">
-              <div className="w-12 h-12 rounded-xl bg-[#C9A86C]/10 flex items-center justify-center shrink-0">
-                <Shield className="w-6 h-6 text-[#C9A86C]" />
+              <div className="w-12 h-12 rounded-xl bg-gold-400/10 flex items-center justify-center shrink-0">
+                <Shield className="w-6 h-6 text-gold" />
               </div>
               <div className="min-w-0">
-                <h1 className="text-2xl font-bold text-[#0A0A0B]">Administration</h1>
+                <h1 className="text-2xl font-bold text-ink">Administration</h1>
                 <p className="text-sm text-gray-600 truncate">Connecté : {user?.email}</p>
               </div>
             </div>

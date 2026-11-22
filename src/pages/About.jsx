@@ -1,9 +1,8 @@
-import React from 'react';
+import PageHero from '@/components/brand/PageHero';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
-import { 
-  Sparkles, ArrowRight, Award, Users, Globe2, Heart,
+import { ArrowRight,
   Target, Lightbulb, Handshake, Leaf
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,50 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageContext';
 import Presentation from './Presentation';
 import usePublicEntity from '@/hooks/usePublicEntity';
-
-// Équipe affichée tant qu'aucun membre n'est saisi dans l'Admin (onglet Équipe)
-const getFallbackTeam = (language) => [
-  {
-    name: 'Louis-Quatorze Kazadi',
-    position: language === 'FR' ? 'CEO & Fondateur' : 'CEO & Founder',
-    bio: '',
-    image: '/images/386c3a38d_Gemini_Generated_Image_g2ibwyg2ibwyg2ib.png',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Erick Tshamala Kazadi',
-    position: 'CEO',
-    bio: '',
-    image: '/images/3c8027f17_Image_126.png',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Serge Biona Mwenga',
-    position: language === 'FR' ? 'Genarale Manager' : 'General Manager',
-    bio: '',
-    image: '/images/d1c5dcc4f_photo_04.png',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Maitre Joel Mukuna Kalala',
-    position: language === 'FR' ? 'Conseil Juridique' : 'Legal Advisor',
-    bio: '',
-    image: '/images/79b2c13f8_Image_200.png',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  {
-    name: 'Franciss Mukwanga',
-    position: 'Chief Technology Officer',
-    bio: '',
-    image: '/images/931208f0e_Image_98.png',
-    linkedin: '#',
-    isLeadership: true,
-  },
-  ];
+import { getFallbackTeam } from '@/components/brand/team';
 
 const getValues = (language) => [
   {
@@ -109,112 +65,64 @@ export default function About() {
   
   return (
     <main>
-      {/* ===== PRESENTATION CONTENT (services + plateformes) ===== */}
-      <Presentation />
+      <PageHero
+        title={language === 'FR' ? 'À propos de PRECISIONS Group' : 'About PRECISIONS Group'}
+        lede={language === 'FR'
+          ? 'Cabinet de conseil en communication digitale et en développement économique, et éditeur de plateformes numériques, au service de la RD Congo et de l’Afrique.'
+          : 'A consultancy in digital communication and economic development, and a publisher of digital platforms, serving the DR Congo and Africa.'}
+      />
 
-      {/* ===== ABOUT CONTENT ===== */}
-      {/* Hero */}
-      <section className="pt-32 pb-20 bg-[#0A0A0B] relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-[#C9A86C]/20 rounded-full blur-[120px]" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 mb-8"
-              >
-                <Sparkles className="w-4 h-4 text-[#C9A86C]" />
-                <span className="text-sm text-white">{language === 'FR' ? 'À propos' : 'About'}</span>
-              </motion.div>
-              
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-              >
-                {language === 'FR' ? 'Nous créons l\'avenir' : 'We create the future'}
-              </motion.h1>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-gray-400 mb-8"
-              >
-                {language === 'FR' 
-                  ? 'Une équipe passionnée d\'experts qui transforme les ambitions digitales en succès mesurables.'
-                  : 'A passionate team of experts transforming digital ambitions into measurable success.'}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-wrap gap-6"
-              >
-                <div className="flex items-center gap-3">
-                  <Award className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">{language === 'FR' ? 'Top 10 Agences RD Congo' : 'Top 10 DR Congo Agencies'}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Users className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">20+ {language === 'FR' ? 'Experts' : 'Experts'}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Globe2 className="w-6 h-6 text-[#C9A86C]" />
-                  <span className="text-white">3 {language === 'FR' ? 'Bureaux' : 'Offices'}</span>
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ scale: 1.02 }}
-              className="relative cursor-pointer"
-            >
-              <div className="relative rounded-3xl overflow-hidden">
-                <motion.img
-                  src="/images/411ca2a35_travail.jpg"
-                  alt="Team"
-                  className="w-full transition-transform duration-700"
-                  whileHover={{ scale: 1.05 }}
-                />
-                <motion.div 
-                  className="absolute inset-0 rounded-3xl" 
-                  style={{
-                    boxShadow: 'inset 0 0 60px 30px rgba(10, 10, 11, 0.4)'
-                  }}
-                  whileHover={{
-                    boxShadow: 'inset 0 0 80px 40px rgba(201, 168, 108, 0.2)'
-                  }}
-                  transition={{ duration: 0.3 }}
-                />
+      {/* Qui nous sommes */}
+      <section className=" py-24 lg:py-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6">
+            <h2 className="text-title text-white">
+              {language === 'FR' ? 'Une équipe pluridisciplinaire à Kinshasa' : 'A multidisciplinary team in Kinshasa'}
+            </h2>
+            <p className="mt-6 text-lede text-white/70">
+              {language === 'FR'
+                ? 'Communicants, consultants, ingénieurs et juristes travaillent ensemble pour transformer des ambitions en résultats mesurables.'
+                : 'Communicators, consultants, engineers and lawyers work together to turn ambitions into measurable results.'}
+            </p>
+            <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-white/15 pt-6">
+              <div>
+                <dt className="text-sm text-white/60">Experts</dt>
+                <dd className="mt-1 text-subtitle text-white tabular">20+</dd>
               </div>
-            </motion.div>
+              <div>
+                <dt className="text-sm text-white/60">{language === 'FR' ? 'Bureaux' : 'Offices'}</dt>
+                <dd className="mt-1 text-subtitle text-white tabular">3</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-white/60">{language === 'FR' ? 'Plateformes' : 'Platforms'}</dt>
+                <dd className="mt-1 text-subtitle text-white tabular">5</dd>
+              </div>
+            </dl>
+          </div>
+          <div className="lg:col-span-6">
+            <img
+              src="/images/411ca2a35_travail.jpg"
+              alt={language === 'FR' ? 'L’équipe PRECISIONS au travail' : 'The PRECISIONS team at work'}
+              className="w-full rounded-lg object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
 
+      {/* Services et plateformes en détail */}
+      <Presentation />
+
       {/* Values */}
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
+              className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
               {language === 'FR' ? 'Nos valeurs' : 'Our Values'}
             </motion.h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
               {language === 'FR' 
                 ? 'Les principes qui guident chacune de nos actions et décisions.'
                 : 'The principles that guide each of our actions and decisions.'}
@@ -225,17 +133,13 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#C9A86C]/10 flex items-center justify-center mb-6">
-                  <value.icon className="w-8 h-8 text-[#C9A86C]" />
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-white/10 flex items-center justify-center mb-6">
+                  <value.icon className="w-8 h-8 text-gold" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#0A0A0B] mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-3">{value.title}</h3>
+                <p className="text-white/60">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -243,40 +147,33 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
+              className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
               {language === 'FR' ? 'Notre histoire' : 'Our Story'}
             </motion.h2>
           </div>
 
           <div className="relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 hidden lg:block" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 hidden lg:block" />
             
             <div className="space-y-12">
               {timeline.map((item, index) => (
                 <motion.div
                   key={item.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className={`flex flex-col lg:flex-row items-center gap-8 ${
                     index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
                   }`}
                 >
                   <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                    <Badge className="mb-2 bg-[#C9A86C] text-white border-0">{item.year}</Badge>
-                    <h3 className="text-xl font-semibold text-[#0A0A0B] mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
+                    <Badge className="mb-2 bg-white/10 text-white border-0">{item.year}</Badge>
+                    <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                    <p className="text-white/60">{item.description}</p>
                   </div>
-                  <div className="w-4 h-4 rounded-full bg-[#0A0A0B] relative z-10 hidden lg:block" />
+                  <div className="w-4 h-4 rounded-full bg-white/[0.04] border border-white/10 relative z-10 hidden lg:block" />
                   <div className="flex-1" />
                 </motion.div>
               ))}
@@ -286,18 +183,15 @@ export default function About() {
       </section>
 
       {/* Team */}
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-4"
+              className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
               {language === 'FR' ? 'Notre équipe' : 'Our Team'}
             </motion.h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
               {language === 'FR' 
                 ? 'Des experts passionnés qui donnent vie à vos projets.'
                 : 'Passionate experts who bring your projects to life.'}
@@ -308,16 +202,10 @@ export default function About() {
             {team.map((member, index) => (
               <motion.div
                 key={member.id ?? member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
                 className="cursor-pointer max-w-[250px] mx-auto"
               >
                 <motion.div 
-                  className="relative overflow-hidden rounded-2xl mb-4 shadow-lg group"
-                  whileHover={{ scale: 1.02 }}
+                  className="relative overflow-hidden rounded-2xl mb-4  group"
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   {member.image ? (
@@ -328,16 +216,16 @@ export default function About() {
                     />
                   ) : (
                     // Membre sans photo : initiales sur fond doré
-                    <div className="w-full h-[306px] flex items-center justify-center bg-gradient-to-br from-[#C9A86C] to-[#8B7340] text-white text-5xl font-bold">
+                    <div className="w-full h-[306px] flex items-center justify-center bg-white/10 border border-white/15 text-white text-5xl font-semibold tracking-tight">
                       {member.name?.split(' ').map((part) => part[0]).slice(0, 2).join('')}
                     </div>
                   )}
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-t from-gold-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </motion.div>
-                <h3 className="text-xl font-semibold text-[#0A0A0B]">{member.name}</h3>
-                <p className="text-gray-600">{member.position}</p>
+                <h3 className="text-xl font-semibold text-white">{member.name}</h3>
+                <p className="text-white/60">{member.position}</p>
               </motion.div>
             ))}
           </div>
@@ -345,36 +233,17 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A86C]/10 mb-6"
-          >
-            <Heart className="w-4 h-4 text-[#C9A86C]" />
-            <span className="text-sm font-medium text-[#0A0A0B]">
-              {language === 'FR' ? 'Rejoignez l\'aventure' : 'Join the Adventure'}
-            </span>
-          </motion.div>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl lg:text-4xl font-bold text-[#0A0A0B] mb-6"
+            className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6"
           >
             {language === 'FR' ? 'Envie de faire partie de l\'équipe ?' : 'Want to be part of the team?'}
           </motion.h2>
           
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-600 mb-8"
+            className="text-lg text-white/60 mb-8"
           >
             {language === 'FR' 
               ? 'Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre équipe.'
@@ -382,7 +251,7 @@ export default function About() {
           </motion.p>
           
           <Link to={createPageUrl('Contact')}>
-            <Button className="rounded-full px-8 py-6 bg-[#0A0A0B] hover:bg-[#0A0A0B]/90 text-white text-lg">
+            <Button className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/85 text-lg">
               {language === 'FR' ? 'Voir nos offres' : 'See our offers'}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>

@@ -1,188 +1,116 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { createPageUrl } from '@/utils';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Globe, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/components/LanguageContext';
 
-const getNavItems = (t, language) => [
-  { name: t('nav.home'), href: 'Home' },
-  { name: t('nav.services'), href: 'Services' },
-  { name: t('nav.portfolio'), href: 'Portfolio' },
-  { name: t('nav.about'), href: 'About' },
-  { name: t('nav.blog'), href: 'Blog' },
+const getNavItems = (language) => [
+  { name: language === 'FR' ? 'Le groupe' : 'The group', href: 'About' },
+  { name: language === 'FR' ? 'Nos métiers' : 'What we do', href: 'Services' },
+  { name: language === 'FR' ? 'Réalisations' : 'Projects', href: 'Portfolio' },
+  { name: language === 'FR' ? 'Actualités' : 'News', href: 'Blog' },
   { name: language === 'FR' ? 'Témoignages' : 'Testimonials', href: 'Testimonials' },
-  { name: t('nav.contact'), href: 'Contact' },
 ];
 
-export default function Header() {
-  const { language, setLanguage, t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
-  
-  const navItems = getNavItems(t, language);
+function LanguageToggle({ language, setLanguage }) {
+  return (
+    <div className="flex items-center text-sm" role="group" aria-label="Langue / Language">
+      {['FR', 'EN'].map((code) => (
+        <button
+          key={code}
+          type="button"
+          onClick={() => setLanguage(code)}
+          aria-pressed={language === code}
+          className={`px-1.5 py-1 ${language === code ? 'text-white font-semibold' : 'text-white/45 hover:text-white'}`}
+        >
+          {code}
+        </button>
+      ))}
+    </div>
+  );
+}
 
+export default function Header() {
+  const { language, setLanguage } = useLanguage();
+  const { pathname } = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navItems = getNavItems(language);
+  const isActive = (href) => pathname.toLowerCase() === createPageUrl(href);
+
+  useEffect(() => setIsMenuOpen(false), [pathname]);
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    if (!isMenuOpen) return undefined;
+    const onKey = (e) => e.key === 'Escape' && setIsMenuOpen(false);
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.05)]'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link to={createPageUrl('Home')} className="relative z-10">
-              <motion.div whileHover={{ scale: 1.02 }}>
-                <img
-                  src="/images/97a9c9cc7_PRECISIONS_logo.png"
-                  alt="Precisions Group"
-                  className={`h-14 w-auto max-w-[240px] object-contain transition-all duration-300 ${
-                    isScrolled ? '' : 'invert'
-                  }`}
-                />
-              </motion.div>
-            </Link>
+    <header className="sticky top-0 z-50 bg-black/85 backdrop-blur-xl text-white border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-8">
+        <Link to="/" className="shrink-0" aria-label="PRECISIONS Group, accueil">
+          <img src="/images/97a9c9cc7_PRECISIONS_logo.png" alt="PRECISIONS Group" className="h-5 w-auto invert" />
+        </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={createPageUrl(item.href)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    isScrolled
-                      ? 'text-gray-600 hover:text-[#0A0A0B] hover:bg-gray-100'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right Actions */}
-            <div className="hidden lg:flex items-center gap-3">
-              {/* Language Switcher */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className={`gap-2 ${
-                      isScrolled ? 'text-gray-600 hover:text-[#0A0A0B]' : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    <Globe className="w-4 h-4" />
-                    {language}
-                    <ChevronDown className="w-3 h-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="min-w-[100px]">
-                  <DropdownMenuItem onClick={() => setLanguage('FR')} className={language === 'FR' ? 'bg-gray-100' : ''}>
-                    🇫🇷 Français
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage('EN')} className={language === 'EN' ? 'bg-gray-100' : ''}>
-                    🇬🇧 English
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* CTA Button */}
-              <Link to={createPageUrl('Contact')}>
-                <Button
-                  className={`rounded-full px-6 transition-all duration-300 ${
-                    isScrolled
-                      ? 'bg-[#0A0A0B] text-white hover:bg-[#0A0A0B]/90'
-                      : 'bg-white text-[#0A0A0B] hover:bg-white/90'
-                  }`}
-                >
-                  {t('nav.startProject')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-[#0A0A0B]' : 'text-white'
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Navigation principale">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              to={createPageUrl(item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className={`text-[0.95rem] transition-colors ${
+                isActive(item.href) ? 'text-white' : 'text-white/60 hover:text-white'
               }`}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </motion.header>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 lg:hidden"
+        <div className="hidden lg:flex items-center gap-6">
+          <LanguageToggle language={language} setLanguage={setLanguage} />
+          <Link
+            to={createPageUrl('Contact')}
+            className="inline-flex items-center h-9 px-4 rounded-full bg-white text-black text-sm font-medium hover:bg-white/85 transition-colors"
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
-            <motion.nav
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-[300px] bg-white shadow-2xl"
+            {language === 'FR' ? 'Nous écrire' : 'Write to us'}
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-expanded={isMenuOpen}
+          aria-controls="menu-mobile"
+          aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          className="lg:hidden -mr-2 p-2"
+        >
+          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Menu mobile : se déplie sous la barre, sans recouvrir l'écran */}
+      {isMenuOpen && (
+        <nav id="menu-mobile" className="lg:hidden border-t border-white/10 bg-black h-[calc(100dvh-4rem)] overflow-y-auto px-5 py-6 flex flex-col" aria-label="Navigation mobile">
+          {[{ name: language === 'FR' ? 'Accueil' : 'Home', href: 'Home' }, ...navItems, { name: 'Contact', href: 'Contact' }].map((item) => (
+            <Link
+              key={item.href}
+              to={item.href === 'Home' ? '/' : createPageUrl(item.href)}
+              className="py-3 text-2xl font-semibold tracking-tight border-b border-white/10"
             >
-              <div className="p-6 pt-24 space-y-2">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      to={createPageUrl(item.href)}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-lg font-medium text-gray-800 hover:text-[#C9A86C] hover:bg-gray-50 rounded-xl transition-all"
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
-                <div className="pt-6 mt-6 border-t">
-                  <Link to={createPageUrl('Contact')} onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full rounded-full bg-[#0A0A0B] text-white">
-                      {t('nav.startProject')}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+              {item.name}
+            </Link>
+          ))}
+          <div className="mt-auto pt-8 flex items-center justify-between">
+            <LanguageToggle language={language} setLanguage={setLanguage} />
+            <a href="mailto:contact@precisions.group" className="text-white/70 underline underline-offset-4">contact@precisions.group</a>
+          </div>
+        </nav>
+      )}
+    </header>
   );
 }
