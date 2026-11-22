@@ -1,7 +1,8 @@
 import PageHero from '@/components/brand/PageHero';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Star, Send, CheckCircle, Quote } from 'lucide-react';
+import { Send, CheckCircle, Quote } from 'lucide-react';
+import FacetStar from '@/components/brand/FacetStar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,6 +16,7 @@ export default function Testimonials() {
   const { language } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hoverRating, setHoverRating] = useState(0);
   const [formData, setFormData] = useState({
     author_name: '',
     position: '',
@@ -78,8 +80,8 @@ export default function Testimonials() {
                   className="bg-white/[0.04] border border-white/10 rounded-2xl p-6  border border-white/10"
                 >
                   <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating || 5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-gold-400 text-gold" />
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <FacetStar key={n} active={n <= (testimonial.rating || 5)} className={`w-5 h-5 ${n <= (testimonial.rating || 5) ? 'text-white' : 'text-white/25'}`} />
                     ))}
                   </div>
                   <Quote className="w-8 h-8 text-gold/30 mb-3" />
@@ -105,7 +107,7 @@ export default function Testimonials() {
 
       {/* Submit Form */}
       <section className="py-20">
-        <div className="max-w-2xl mx-auto px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
           {submitted ? (
             <motion.div
               className="bg-white/[0.03] rounded-3xl p-12 text-center"
@@ -138,7 +140,7 @@ export default function Testimonials() {
             <motion.div
             >
               <div className="text-center mb-10">
-                <h2 className="text-2xl font-semibold tracking-tight text-white mb-4">
+                <h2 className="text-title font-semibold text-gradient mb-4">
                   {language === 'FR' ? 'Partagez votre expérience' : 'Share your experience'}
                 </h2>
                 <p className="text-white/60">
@@ -148,7 +150,7 @@ export default function Testimonials() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="bg-white/[0.03] rounded-3xl p-8 lg:p-10">
+              <form onSubmit={handleSubmit} className="rounded-3xl glass p-8 sm:p-10 lg:p-14">
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -187,23 +189,25 @@ export default function Testimonials() {
 
                   <div className="space-y-2">
                     <Label>{language === 'FR' ? 'Note' : 'Rating'}</Label>
-                    <div className="flex gap-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <button
-                          key={star}
-                          type="button"
-                          onClick={() => handleChange('rating', star)}
-                          className="p-1 transition-transform hover:scale-110"
-                        >
-                          <Star
-                            className={`w-8 h-8 ${
-                              star <= formData.rating
-                                ? 'fill-gold-400 text-gold'
-                                : 'text-white/30'
-                            }`}
-                          />
-                        </button>
-                      ))}
+                    <div className="flex items-center gap-1" role="radiogroup" aria-label={language === 'FR' ? 'Note sur 5' : 'Rating out of 5'} onMouseLeave={() => setHoverRating(0)}>
+                      {[1, 2, 3, 4, 5].map((star) => {
+                        const lit = star <= (hoverRating || formData.rating);
+                        return (
+                          <button
+                            key={star}
+                            type="button"
+                            role="radio"
+                            aria-checked={formData.rating === star}
+                            aria-label={`${star} / 5`}
+                            onClick={() => handleChange('rating', star)}
+                            onMouseEnter={() => setHoverRating(star)}
+                            className={`p-1.5 rounded-lg transition-colors ${lit ? 'text-white' : 'text-white/25 hover:text-white/50'}`}
+                          >
+                            <FacetStar active={lit} className="w-14 h-14" />
+                          </button>
+                        );
+                      })}
+                      <span className="ml-3 text-sm text-white/50 tabular">{hoverRating || formData.rating} / 5</span>
                     </div>
                   </div>
 
