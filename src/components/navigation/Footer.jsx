@@ -94,7 +94,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-5 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-[minmax(0,1fr)] sm:grid-cols-2 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-4">
-            <img src="/images/97a9c9cc7_PRECISIONS_logo.png" alt="PRECISIONS Group" className="h-5 w-auto invert" />
+            <img src="/images/precision-logo.png" alt="PRECISION Group" className="h-6 w-auto invert" />
             <p className="mt-6 max-w-sm">{copy.about}</p>
             <address className="mt-6 not-italic leading-relaxed">
               100, av. Colonel Ebeya et TSF<br />

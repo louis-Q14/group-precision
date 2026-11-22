@@ -61,7 +61,7 @@ function CoverImage({ article, className }) {
   // Article sans image : aplat bleu nuit avec le logo
   return (
     <div className={`${className} bg-white/[0.04] border border-white/10 relative overflow-hidden`} aria-hidden="true">
-      <img src="/images/97a9c9cc7_PRECISIONS_logo.png" alt="" className="absolute inset-0 m-auto w-1/2 invert opacity-80" />
+      <img src="/images/precision-logo.png" alt="" className="absolute inset-0 m-auto w-1/2 invert opacity-80" />
     </div>
   );
 }

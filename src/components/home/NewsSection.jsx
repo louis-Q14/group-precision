@@ -40,7 +40,7 @@ export default function NewsSection() {
                     <img src={post.cover_image} alt="" className="h-full w-full object-cover" loading="lazy" />
                   ) : (
                     <div className="h-full w-full flex items-center justify-center">
-                      <img src="/images/97a9c9cc7_PRECISIONS_logo.png" alt="" className="w-1/2 invert opacity-40" />
+                      <img src="/images/precision-logo.png" alt="" className="w-1/2 invert opacity-40" />
                     </div>
                   )}
                 </div>

@@ -53,7 +53,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-black/85 backdrop-blur-xl text-white border-b border-white/10">
       <div className="max-w-6xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-8">
         <Link to="/" className="shrink-0" aria-label="PRECISIONS Group, accueil">
-          <img src="/images/97a9c9cc7_PRECISIONS_logo.png" alt="PRECISIONS Group" className="h-5 w-auto invert" />
+          <img src="/images/precision-logo.png" alt="PRECISION Group" className="h-6 w-auto invert" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="Navigation principale">
