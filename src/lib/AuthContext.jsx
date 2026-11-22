@@ -1,154 +1,100 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
-import { appParams } from '@/lib/app-params';
-import { createAxiosClient } from '@base44/sdk/dist/utils/axios-client';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
-const AuthContext = createContext();
+/**
+ * Session de l'administrateur (Supabase Auth, email + mot de passe).
+ * Le site public n'exige aucune connexion : seul l'Admin s'en sert.
+ *
+ * isAdmin est calculé par la fonction SQL public.is_admin() (table public.admins),
+ * c'est donc la base qui décide, pas le navigateur.
+ */
+const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
-  const [isLoadingPublicSettings, setIsLoadingPublicSettings] = useState(true);
-  const [authError, setAuthError] = useState(null);
-  const [appPublicSettings, setAppPublicSettings] = useState(null); // Contains only { id, public_settings }
+export function AuthProvider({ children }) {
+  const [session, setSession] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(isSupabaseConfigured);
 
-  useEffect(() => {
-    checkAppState();
+  const refreshAdminFlag = useCallback(async (currentSession) => {
+    if (!currentSession) {
+      setIsAdmin(false);
+      return;
+    }
+    const { data, error } = await supabase.rpc('is_admin');
+    if (error) {
+      console.error('Vérification du rôle admin impossible :', error);
+      setIsAdmin(false);
+    } else {
+      setIsAdmin(Boolean(data));
+    }
   }, []);
 
-  const checkAppState = async () => {
+  useEffect(() => {
+    if (!supabase) return undefined;
+    let active = true;
+
+    supabase.auth.getSession().then(async ({ data }) => {
+      if (!active) return;
+      setSession(data.session);
+      await refreshAdminFlag(data.session);
+      if (active) setIsLoading(false);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+      // Pas d'appel Supabase directement dans ce callback (recommandation Supabase) :
+      // on le diffère pour éviter un blocage.
+      setTimeout(() => {
+        if (active) refreshAdminFlag(newSession);
+      }, 0);
+    });
+
+    return () => {
+      active = false;
+      listener.subscription.unsubscribe();
+    };
+  }, [refreshAdminFlag]);
+
+  const signIn = async (email, password) => {
+    if (!supabase) throw new Error('Service momentanément indisponible.');
+    setIsLoading(true);
     try {
-      setIsLoadingPublicSettings(true);
-      setAuthError(null);
-      
-      // First, check app public settings (with token if available)
-      // This will tell us if auth is required, user not registered, etc.
-      const appClient = createAxiosClient({
-        baseURL: `${appParams.serverUrl}/api/apps/public`,
-        headers: {
-          'X-App-Id': appParams.appId
-        },
-        token: appParams.token, // Include token if available
-        interceptResponses: true
-      });
-      
-      try {
-        const publicSettings = await appClient.get(`/prod/public-settings/by-id/${appParams.appId}`);
-        setAppPublicSettings(publicSettings);
-        
-        // If we got the app public settings successfully, check if user is authenticated
-        if (appParams.token) {
-          await checkUserAuth();
-        } else {
-          setIsLoadingAuth(false);
-          setIsAuthenticated(false);
-        }
-        setIsLoadingPublicSettings(false);
-      } catch (appError) {
-        console.error('App state check failed:', appError);
-        
-        // Handle app-level errors
-        if (appError.status === 403 && appError.data?.extra_data?.reason) {
-          const reason = appError.data.extra_data.reason;
-          if (reason === 'auth_required') {
-            setAuthError({
-              type: 'auth_required',
-              message: 'Authentication required'
-            });
-          } else if (reason === 'user_not_registered') {
-            setAuthError({
-              type: 'user_not_registered',
-              message: 'User not registered for this app'
-            });
-          } else {
-            setAuthError({
-              type: reason,
-              message: appError.message
-            });
-          }
-        } else {
-          setAuthError({
-            type: 'unknown',
-            message: appError.message || 'Failed to load app'
-          });
-        }
-        setIsLoadingPublicSettings(false);
-        setIsLoadingAuth(false);
-      }
-    } catch (error) {
-      console.error('Unexpected error:', error);
-      setAuthError({
-        type: 'unknown',
-        message: error.message || 'An unexpected error occurred'
-      });
-      setIsLoadingPublicSettings(false);
-      setIsLoadingAuth(false);
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      setSession(data.session);
+      await refreshAdminFlag(data.session);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const checkUserAuth = async () => {
-    try {
-      // Now check if the user is authenticated
-      setIsLoadingAuth(true);
-      const currentUser = await base44.auth.me();
-      setUser(currentUser);
-      setIsAuthenticated(true);
-      setIsLoadingAuth(false);
-    } catch (error) {
-      console.error('User auth check failed:', error);
-      setIsLoadingAuth(false);
-      setIsAuthenticated(false);
-      
-      // If user auth fails, it might be an expired token
-      if (error.status === 401 || error.status === 403) {
-        setAuthError({
-          type: 'auth_required',
-          message: 'Authentication required'
-        });
-      }
-    }
-  };
-
-  const logout = (shouldRedirect = true) => {
-    setUser(null);
-    setIsAuthenticated(false);
-    
-    if (shouldRedirect) {
-      // Use the SDK's logout method which handles token cleanup and redirect
-      base44.auth.logout(window.location.href);
-    } else {
-      // Just remove the token without redirect
-      base44.auth.logout();
-    }
-  };
-
-  const navigateToLogin = () => {
-    // Use the SDK's redirectToLogin method
-    base44.auth.redirectToLogin(window.location.href);
+  const signOut = async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setSession(null);
+    setIsAdmin(false);
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      isAuthenticated, 
-      isLoadingAuth,
-      isLoadingPublicSettings,
-      authError,
-      appPublicSettings,
-      logout,
-      navigateToLogin,
-      checkAppState
-    }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        user: session?.user ?? null,
+        isAuthenticated: Boolean(session),
+        isAdmin,
+        isLoading,
+        isConfigured: isSupabaseConfigured,
+        signIn,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth doit être utilisé dans un AuthProvider');
   return context;
-};
+}

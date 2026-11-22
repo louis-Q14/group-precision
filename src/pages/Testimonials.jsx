@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { db } from '@/api/db';
+import usePublicEntity from '@/hooks/usePublicEntity';
 import { useLanguage } from '@/components/LanguageContext';
 
 export default function Testimonials() {
@@ -22,10 +22,8 @@ export default function Testimonials() {
     rating: 5,
   });
 
-  const { data: testimonials = [] } = useQuery({
-    queryKey: ['testimonials'],
-    queryFn: () => base44.entities.Testimonial.filter({ is_approved: true }, '-created_date'),
-  });
+  // Seuls les témoignages approuvés dans l'Admin sont lisibles (règle RLS de la table)
+  const { items: testimonials } = usePublicEntity('Testimonial', { filter: { is_approved: true } });
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -33,16 +31,26 @@ export default function Testimonials() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
-    await base44.entities.Testimonial.create({
-      ...formData,
-      is_approved: false,
-    });
-
-    toast.success(language === 'FR' ? 'Merci pour votre témoignage !' : 'Thank you for your testimonial!');
-    setSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      await db.Testimonial.submit({
+        author_name: formData.author_name.trim(),
+        position: formData.position.trim() || null,
+        company: formData.company.trim() || null,
+        content: formData.content.trim(),
+        rating: Number(formData.rating) || 5,
+        is_approved: false,
+      });
+      toast.success(language === 'FR' ? 'Merci pour votre témoignage !' : 'Thank you for your testimonial!');
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Erreur envoi témoignage:', error);
+      toast.error(language === 'FR' ? 'Une erreur est survenue. Veuillez réessayer.' : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

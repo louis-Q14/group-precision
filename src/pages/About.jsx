@@ -10,13 +10,15 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageContext';
 import Presentation from './Presentation';
+import usePublicEntity from '@/hooks/usePublicEntity';
 
-const getTeam = (language) => [
+// Équipe affichée tant qu'aucun membre n'est saisi dans l'Admin (onglet Équipe)
+const getFallbackTeam = (language) => [
   {
     name: 'Louis-Quatorze Kazadi',
     position: language === 'FR' ? 'CEO & Fondateur' : 'CEO & Founder',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/386c3a38d_Gemini_Generated_Image_g2ibwyg2ibwyg2ib.png',
+    image: '/images/386c3a38d_Gemini_Generated_Image_g2ibwyg2ibwyg2ib.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -24,7 +26,7 @@ const getTeam = (language) => [
     name: 'Erick Tshamala Kazadi',
     position: 'CEO',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/3c8027f17_Image_126.png',
+    image: '/images/3c8027f17_Image_126.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -32,7 +34,7 @@ const getTeam = (language) => [
     name: 'Serge Biona Mwenga',
     position: language === 'FR' ? 'Genarale Manager' : 'General Manager',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/d1c5dcc4f_photo_04.png',
+    image: '/images/d1c5dcc4f_photo_04.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -40,7 +42,7 @@ const getTeam = (language) => [
     name: 'Maitre Joel Mukuna Kalala',
     position: language === 'FR' ? 'Conseil Juridique' : 'Legal Advisor',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/79b2c13f8_Image_200.png',
+    image: '/images/79b2c13f8_Image_200.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -48,7 +50,7 @@ const getTeam = (language) => [
     name: 'Franciss Mukwanga',
     position: 'Chief Technology Officer',
     bio: '',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/931208f0e_Image_98.png',
+    image: '/images/931208f0e_Image_98.png',
     linkedin: '#',
     isLeadership: true,
   },
@@ -94,7 +96,14 @@ const getTimeline = (language) => [
 
 export default function About() {
   const { language } = useLanguage();
-  const team = getTeam(language);
+  const { items: teamRows, fromDatabase } = usePublicEntity('TeamMember', {
+    sortByOrder: true,
+    fallback: getFallbackTeam(language),
+  });
+  // Les fiches Admin utilisent photo_url ; le contenu de repli utilise image
+  const team = fromDatabase
+    ? teamRows.map((m) => ({ id: m.id, name: m.name, position: m.position, image: m.photo_url, linkedin: m.linkedin }))
+    : teamRows;
   const values = getValues(language);
   const timeline = getTimeline(language);
   
@@ -172,7 +181,7 @@ export default function About() {
             >
               <div className="relative rounded-3xl overflow-hidden">
                 <motion.img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69260002cce4fa45e27a5d57/411ca2a35_travail.jpg"
+                  src="/images/411ca2a35_travail.jpg"
                   alt="Team"
                   className="w-full transition-transform duration-700"
                   whileHover={{ scale: 1.05 }}
@@ -298,7 +307,7 @@ export default function About() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-3xl mx-auto">
             {team.map((member, index) => (
               <motion.div
-                key={member.name}
+                key={member.id ?? member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -311,11 +320,18 @@ export default function About() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-[306px] object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                  />
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-[306px] object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                    />
+                  ) : (
+                    // Membre sans photo : initiales sur fond doré
+                    <div className="w-full h-[306px] flex items-center justify-center bg-gradient-to-br from-[#C9A86C] to-[#8B7340] text-white text-5xl font-bold">
+                      {member.name?.split(' ').map((part) => part[0]).slice(0, 2).join('')}
+                    </div>
+                  )}
                   <motion.div 
                     className="absolute inset-0 bg-gradient-to-t from-[#C9A86C]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />

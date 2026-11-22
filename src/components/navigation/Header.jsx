@@ -55,7 +55,7 @@ export default function Header() {
             <Link to={createPageUrl('Home')} className="relative z-10">
               <motion.div whileHover={{ scale: 1.02 }}>
                 <img
-                  src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/97a9c9cc7_PRECISIONS_logo.png"
+                  src="/images/97a9c9cc7_PRECISIONS_logo.png"
                   alt="Precisions Group"
                   className={`h-14 w-auto max-w-[240px] object-contain transition-all duration-300 ${
                     isScrolled ? '' : 'invert'

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Shield, LogOut } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Shield, LogOut, LogIn, FileDown } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth } from '@/lib/AuthContext';
 
 import LeadsManager from '@/components/admin/LeadsManager';
 import ProjectsManager from '@/components/admin/ProjectsManager';
@@ -13,40 +15,134 @@ import BlogManager from '@/components/admin/BlogManager';
 import TeamManager from '@/components/admin/TeamManager';
 import FAQManager from '@/components/admin/FAQManager';
 
-export default function Admin() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function CenteredCard({ children }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-6 pt-24 pb-12">
+      <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg">{children}</div>
+    </div>
+  );
+}
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+/** Télécharge la présentation Word générée par l'Edge Function generate-presentation-doc. */
+function DownloadPresentationButton() {
+  const { session } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const checkAuth = async () => {
+  const handleDownload = async () => {
+    setIsLoading(true);
     try {
-      const currentUser = await base44.auth.me();
-      
-      if (currentUser && currentUser.role === 'admin') {
-        setUser(currentUser);
-        setLoading(false);
-      } else if (currentUser) {
-        setError('not_admin');
-        setLoading(false);
-      } else {
-        window.location.href = `https://precisions.group/login?from_url=${encodeURIComponent(window.location.href)}`;
-      }
+      // fetch direct (et non functions.invoke) pour récupérer le fichier binaire intact
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-presentation-doc`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session?.access_token}`,
+          apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+        },
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const url = URL.createObjectURL(await response.blob());
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'PRECISIONS_Group_Presentation.docx';
+      link.click();
+      URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Auth error:', error);
-      window.location.href = `https://precisions.group/login?from_url=${encodeURIComponent(window.location.href)}`;
+      console.error('Téléchargement de la présentation impossible :', error);
+      toast.error('Impossible de générer la présentation');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleLogout = async () => {
-    await base44.auth.logout();
-    window.location.href = '/';
+  return (
+    <Button onClick={handleDownload} variant="outline" className="gap-2" disabled={isLoading}>
+      <FileDown className="w-4 h-4" />
+      {isLoading ? 'Génération…' : 'Présentation (.docx)'}
+    </Button>
+  );
+}
+
+function LoginForm() {
+  const { signIn } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    setError('');
+    setIsSubmitting(true);
+    try {
+      await signIn(email.trim(), password);
+    } catch (err) {
+      // Message volontairement générique : on ne révèle pas si l'email existe
+      console.error('Connexion échouée :', err);
+      setError('Email ou mot de passe incorrect.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  if (loading) {
+  return (
+    <CenteredCard>
+      <div className="text-center mb-8">
+        <div className="w-14 h-14 mx-auto rounded-xl bg-[#C9A86C]/10 flex items-center justify-center mb-4">
+          <Shield className="w-7 h-7 text-[#C9A86C]" />
+        </div>
+        <h1 className="text-2xl font-bold text-[#0A0A0B]">Administration</h1>
+        <p className="text-sm text-gray-600 mt-1">Connectez-vous avec votre compte administrateur.</p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <Label htmlFor="admin-email">Email</Label>
+          <Input
+            id="admin-email"
+            type="email"
+            autoComplete="username"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="admin-password">Mot de passe</Label>
+          <Input
+            id="admin-password"
+            type="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
+        <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
+          <LogIn className="w-4 h-4" />
+          {isSubmitting ? 'Connexion…' : 'Se connecter'}
+        </Button>
+      </form>
+    </CenteredCard>
+  );
+}
+
+export default function Admin() {
+  const { isConfigured, isLoading, isAuthenticated, isAdmin, user, signOut } = useAuth();
+
+  if (!isConfigured) {
+    return (
+      <CenteredCard>
+        <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4 text-center">Administration indisponible</h1>
+        <p className="text-gray-600 text-center">
+          La connexion à la base de données n'est pas configurée. Renseignez VITE_SUPABASE_URL et
+          VITE_SUPABASE_ANON_KEY (voir le README), puis reconstruisez le site.
+        </p>
+      </CenteredCard>
+    );
+  }
+
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A86C]" />
@@ -54,56 +150,47 @@ export default function Admin() {
     );
   }
 
-  if (error === 'not_admin') {
+  if (!isAuthenticated) return <LoginForm />;
+
+  if (!isAdmin) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-6">
-        <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg text-center">
+      <CenteredCard>
+        <div className="text-center">
           <div className="w-16 h-16 mx-auto rounded-full bg-red-100 flex items-center justify-center mb-6">
             <Shield className="w-8 h-8 text-red-500" />
           </div>
-          
-          <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4">
-            Accès restreint
-          </h1>
-          
+          <h1 className="text-2xl font-bold text-[#0A0A0B] mb-4">Accès restreint</h1>
           <p className="text-gray-600 mb-6">
-            Vous n'avez pas les droits d'administrateur. Seuls les administrateurs peuvent accéder à cette section.
+            Le compte {user?.email} n'a pas les droits d'administrateur.
           </p>
-          <Button 
-            onClick={() => window.location.href = '/'}
-            variant="outline"
-            className="w-full"
-          >
-            Retour au site
-          </Button>
+          <Button onClick={signOut} variant="outline" className="w-full">Se déconnecter</Button>
         </div>
-      </div>
+      </CenteredCard>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] py-12">
+    <div className="min-h-screen bg-[#FAFAFA] pt-28 pb-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#C9A86C]/10 flex items-center justify-center">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4 min-w-0">
+              <div className="w-12 h-12 rounded-xl bg-[#C9A86C]/10 flex items-center justify-center shrink-0">
                 <Shield className="w-6 h-6 text-[#C9A86C]" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <h1 className="text-2xl font-bold text-[#0A0A0B]">Administration</h1>
-                <p className="text-sm text-gray-600">Bienvenue, {user?.full_name}</p>
+                <p className="text-sm text-gray-600 truncate">Connecté : {user?.email}</p>
               </div>
             </div>
-            <Button 
-              onClick={handleLogout} 
-              variant="outline" 
-              className="gap-2"
-            >
-              <LogOut className="w-4 h-4" />
-              Déconnexion
-            </Button>
+            <div className="flex flex-wrap gap-2 justify-end shrink-0">
+              <DownloadPresentationButton />
+              <Button onClick={signOut} variant="outline" className="gap-2">
+                <LogOut className="w-4 h-4" />
+                Déconnexion
+              </Button>
+            </div>
           </div>
         </div>
 

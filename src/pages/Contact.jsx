@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Sparkles, ArrowRight, Mail, Phone, MapPin, Clock,
@@ -12,7 +12,10 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { toast } from 'sonner';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
+import { invokeFunction, FunctionError } from '@/api/functions';
+import { SupabaseNotConfiguredError } from '@/lib/supabase';
+import usePublicEntity from '@/hooks/usePublicEntity';
 
 const contactInfo = [
   {
@@ -41,7 +44,8 @@ const contactInfo = [
   },
 ];
 
-const faqs = [
+// Questions affichées tant qu'aucune FAQ n'est saisie dans l'Admin (onglet FAQ)
+const FALLBACK_FAQS = [
   {
     question: 'Quel est le délai moyen pour un projet ?',
     answer: 'Le délai dépend de la complexité du projet. Un site vitrine prend généralement 4-6 semaines, tandis qu\'une application web complexe peut nécessiter 3-6 mois. Nous établissons un planning détaillé lors de la phase de cadrage.',
@@ -64,7 +68,18 @@ const faqs = [
   },
 ];
 
+// Message montré au visiteur : celui de la fonction d'envoi (ex. « Adresse email invalide »)
+// ou de la configuration ; les erreurs techniques de la base restent génériques.
+const GENERIC_ERROR = 'Une erreur est survenue. Veuillez réessayer.';
+const getErrorMessage = (error) =>
+  (error instanceof FunctionError || error instanceof SupabaseNotConfiguredError) && error.message
+    ? error.message
+    : GENERIC_ERROR;
+
 export default function Contact() {
+  const { items: faqs } = usePublicEntity('FAQ', { sortByOrder: true, fallback: FALLBACK_FAQS });
+  // true quand la demande est déjà enregistrée mais que l'email a échoué
+  const leadSavedRef = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -83,30 +98,34 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
+    // Les champs optionnels vides ('') sont retirés : ils ne respectent pas les listes
+    // de valeurs autorisées de la table leads (budget, type de projet)
+    const cleanData = Object.fromEntries(
+      Object.entries(formData)
+        .map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])
+        .filter(([, value]) => value !== '')
+    );
+
     try {
-      console.log('Création du lead...');
-      await base44.entities.Lead.create({
-        ...formData,
-        source: 'contact_page',
-        status: 'new',
-      });
-      console.log('Lead créé avec succès');
-
-      console.log('Envoi de l\'email...');
-      const emailResponse = await base44.functions.invoke('sendContactEmail', formData);
-      console.log('Réponse email:', emailResponse);
-
-      if (emailResponse.data?.success === false) {
-        throw new Error(emailResponse.data?.error || 'Erreur lors de l\'envoi de l\'email');
+      // Si un envoi précédent a déjà enregistré la demande (seul l'email avait échoué),
+      // on ne la recrée pas : on renvoie uniquement l'email, pour éviter les doublons.
+      // (Pas de modification ici : elle est réservée aux admins par les règles de la base.)
+      if (!leadSavedRef.current) {
+        await db.Lead.submit({ ...cleanData, source: 'contact_page' });
+        leadSavedRef.current = true;
       }
 
+      await invokeFunction('send-contact-email', cleanData);
+
       toast.success('Message envoyé avec succès !');
+      leadSavedRef.current = false;
       setSubmitted(true);
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
-      toast.error(`Erreur: ${error.message || 'Veuillez réessayer.'}`);
+      toast.error(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }
@@ -388,7 +407,7 @@ export default function Contact() {
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
-                key={index}
+                key={faq.id ?? index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -398,7 +417,7 @@ export default function Contact() {
                   <AccordionTrigger className="hover:no-underline py-6 text-left">
                     <span className="font-semibold text-[#0A0A0B]">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-gray-600">
+                  <AccordionContent className="pb-6 text-gray-600 whitespace-pre-line">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

@@ -1,37 +1,54 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, Trash2, Star } from 'lucide-react';
+import { CheckCircle, XCircle, Star } from 'lucide-react';
+import ConfirmDeleteButton from '@/components/admin/ConfirmDeleteButton';
 import { toast } from 'sonner';
 
 export default function TestimonialsManager() {
   const queryClient = useQueryClient();
 
-  const { data: testimonials = [], isLoading } = useQuery({
+  const { data: testimonials = [], isLoading, isError, refetch } = useQuery({
     queryKey: ['testimonials'],
-    queryFn: () => base44.entities.Testimonial.list('-created_date'),
+    queryFn: () => db.Testimonial.list('-created_at'),
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Testimonial.update(id, data),
+    mutationFn: ({ id, data }) => db.Testimonial.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['testimonials']);
+      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
       toast.success('Témoignage mis à jour');
+    },
+    onError: (error) => {
+      console.error('Erreur mise à jour témoignage:', error);
+      toast.error('Impossible de mettre à jour le témoignage');
     },
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Testimonial.delete(id),
+    mutationFn: (id) => db.Testimonial.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['testimonials']);
+      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
       toast.success('Témoignage supprimé');
+    },
+    onError: (error) => {
+      console.error('Erreur suppression témoignage:', error);
+      toast.error('Impossible de supprimer le témoignage');
     },
   });
 
   if (isLoading) return <div>Chargement...</div>;
+  if (isError) {
+    return (
+      <Card className="p-6 text-center">
+        <p className="text-gray-600 mb-4">Impossible de charger les témoignages.</p>
+        <Button variant="outline" onClick={() => refetch()}>Réessayer</Button>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-6">
@@ -77,13 +94,11 @@ export default function TestimonialsManager() {
                     Retirer
                   </Button>
                 )}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => deleteMutation.mutate(testimonial.id)}
-                >
-                  <Trash2 className="w-4 h-4 text-red-500" />
-                </Button>
+                <ConfirmDeleteButton
+                  itemLabel={testimonial.author_name}
+                  disabled={deleteMutation.isPending}
+                  onConfirm={() => deleteMutation.mutate(testimonial.id)}
+                />
               </div>
             </div>
             <p className="text-gray-700 mb-2">{testimonial.content}</p>

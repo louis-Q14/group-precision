@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
 import { useLanguage } from '@/components/LanguageContext';
 import LogoMarquee from './LogoMarquee';
 
@@ -116,25 +116,33 @@ function CodeEditor() {
 }
 
 export default function HeroSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState('code');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    await base44.entities.Lead.create({
-      email,
-      full_name: 'Hero Form Lead',
-      source: 'hero_form',
-      status: 'new',
-    });
-    toast.success(t('contact.form.successMessage'));
-    setEmail('');
-    setIsSubmitting(false);
+    try {
+      await db.Lead.submit({
+        email,
+        full_name: 'Hero Form Lead',
+        source: 'hero_form',
+        status: 'new',
+      });
+      toast.success(t('contact.form.successMessage'));
+      setEmail('');
+    } catch (error) {
+      console.error('Erreur formulaire hero:', error);
+      toast.error(language === 'FR'
+        ? 'Une erreur est survenue. Veuillez réessayer.'
+        : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

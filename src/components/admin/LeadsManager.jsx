@@ -1,41 +1,62 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Mail, Phone, Building, Trash2 } from 'lucide-react';
+import { Mail, Phone, Building } from 'lucide-react';
+import ConfirmDeleteButton from '@/components/admin/ConfirmDeleteButton';
 import { toast } from 'sonner';
 
 export default function LeadsManager() {
   const queryClient = useQueryClient();
   const [filterStatus, setFilterStatus] = useState('all');
 
-  const { data: leads = [], isLoading } = useQuery({
+  const { data: leads = [], isLoading, isError, refetch } = useQuery({
     queryKey: ['leads'],
-    queryFn: () => base44.entities.Lead.list('-created_date'),
+    queryFn: () => db.Lead.list('-created_at'),
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Lead.update(id, data),
+    mutationFn: ({ id, data }) => db.Lead.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['leads']);
+      queryClient.invalidateQueries({ queryKey: ['leads'] });
       toast.success('Lead mis à jour');
+    },
+    onError: (error) => {
+      console.error('Erreur mise à jour lead:', error);
+      toast.error('Impossible de mettre à jour le lead');
     },
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Lead.delete(id),
+    mutationFn: (id) => db.Lead.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['leads']);
+      queryClient.invalidateQueries({ queryKey: ['leads'] });
       toast.success('Lead supprimé');
+    },
+    onError: (error) => {
+      console.error('Erreur suppression lead:', error);
+      toast.error('Impossible de supprimer le lead');
     },
   });
 
-  const filteredLeads = filterStatus === 'all' 
-    ? leads 
-    : leads.filter(l => l.status === filterStatus);
+  // Un lead sans statut est traité comme « nouveau »
+  const statusOf = (lead) => lead.status || 'new';
+
+  const filteredLeads = filterStatus === 'all'
+    ? leads
+    : leads.filter(l => statusOf(l) === filterStatus);
+
+  const statusLabels = {
+    new: 'Nouveau',
+    contacted: 'Contacté',
+    qualified: 'Qualifié',
+    proposal: 'Proposition',
+    won: 'Gagné',
+    lost: 'Perdu',
+  };
 
   const statusColors = {
     new: 'bg-blue-100 text-blue-800',
@@ -47,6 +68,14 @@ export default function LeadsManager() {
   };
 
   if (isLoading) return <div>Chargement...</div>;
+  if (isError) {
+    return (
+      <Card className="p-6 text-center">
+        <p className="text-gray-600 mb-4">Impossible de charger les leads.</p>
+        <Button variant="outline" onClick={() => refetch()}>Réessayer</Button>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-6">
@@ -93,23 +122,22 @@ export default function LeadsManager() {
                   )}
                 </div>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => deleteMutation.mutate(lead.id)}
-              >
-                <Trash2 className="w-4 h-4 text-red-500" />
-              </Button>
+              <ConfirmDeleteButton
+                itemLabel={lead.full_name || lead.email}
+                disabled={deleteMutation.isPending}
+                onConfirm={() => deleteMutation.mutate(lead.id)}
+              />
             </div>
 
             <p className="text-gray-600 mb-3">{lead.message}</p>
 
             <div className="flex items-center gap-3">
-              <Badge className={statusColors[lead.status]}>{lead.status}</Badge>
+              <Badge className={statusColors[statusOf(lead)]}>{statusLabels[statusOf(lead)] ?? statusOf(lead)}</Badge>
               {lead.interest && <Badge variant="outline">{lead.interest}</Badge>}
               {lead.budget_range && <Badge variant="outline">{lead.budget_range}</Badge>}
               <Select
-                value={lead.status}
+                value={statusOf(lead)}
+                disabled={updateMutation.isPending}
                 onValueChange={(status) => 
                   updateMutation.mutate({ id: lead.id, data: { status } })
                 }

@@ -1,20 +1,40 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { Card } from '@/components/ui/card';
+import EntityManager, { labelOf } from '@/components/admin/EntityManager';
+
+const CATEGORIES = [
+  { value: 'general', label: 'Général' },
+  { value: 'services', label: 'Services' },
+  { value: 'pricing', label: 'Tarifs' },
+  { value: 'process', label: 'Méthode' },
+  { value: 'technical', label: 'Technique' },
+];
+
+const FIELDS = [
+  { name: 'question', label: 'Question', type: 'text', required: true },
+  { name: 'answer', label: 'Réponse', type: 'textarea', rows: 5, required: true },
+  { name: 'category', label: 'Catégorie', type: 'select', options: CATEGORIES, half: true },
+  { name: 'display_order', label: "Ordre d'affichage", type: 'number', half: true },
+];
+
+const renderItem = (faq) => ({
+  title: faq.question,
+  description: faq.answer,
+  badges: [
+    faq.category && labelOf(CATEGORIES, faq.category),
+    typeof faq.display_order === 'number' ? `Ordre ${faq.display_order}` : null,
+  ],
+});
 
 export default function FAQManager() {
-  const { data: faqs = [], isLoading } = useQuery({
-    queryKey: ['faq'],
-    queryFn: () => base44.entities.FAQ.list(),
-  });
-
-  if (isLoading) return <div>Chargement...</div>;
-
   return (
-    <Card className="p-6">
-      <h2 className="text-xl font-bold mb-6">FAQ ({faqs.length})</h2>
-      <p className="text-gray-600">Gestion FAQ à venir...</p>
-    </Card>
+    <EntityManager
+      entity="FAQ"
+      title="FAQ"
+      singular="question"
+      feminine
+      fields={FIELDS}
+      sortByOrder
+      renderItem={renderItem}
+    />
   );
 }

@@ -6,7 +6,7 @@ import { ArrowRight, Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Youtube 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
 import { useLanguage } from '@/components/LanguageContext';
 
 const footerLinks = {
@@ -41,24 +41,32 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    await base44.entities.Lead.create({
-      email,
-      full_name: 'Newsletter Subscriber',
-      source: 'newsletter',
-      status: 'new',
-    });
-    toast.success(t('footer.newsletter.subscribe') + ' ✓');
-    setEmail('');
-    setIsSubmitting(false);
+    try {
+      await db.Lead.submit({
+        email,
+        full_name: 'Newsletter Subscriber',
+        source: 'newsletter',
+        status: 'new',
+      });
+      toast.success(t('footer.newsletter.subscribe') + ' ✓');
+      setEmail('');
+    } catch (error) {
+      console.error('Erreur inscription newsletter:', error);
+      toast.error(language === 'FR'
+        ? 'Une erreur est survenue. Veuillez réessayer.'
+        : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,7 +110,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img
-                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/97a9c9cc7_PRECISIONS_logo.png"
+                src="/images/97a9c9cc7_PRECISIONS_logo.png"
                 alt="PRECISIONS"
                 className="h-12 w-auto max-w-[240px] object-contain invert"
               />
@@ -204,7 +212,7 @@ export default function Footer() {
               title="Admin"
             >
               <img
-                src="https://media.base44.com/images/public/69260002cce4fa45e27a5d57/97a9c9cc7_PRECISIONS_logo.png"
+                src="/images/97a9c9cc7_PRECISIONS_logo.png"
                 alt="Admin"
                 className="h-8 w-auto max-w-[160px] object-contain invert hover:opacity-70 transition-opacity"
               />

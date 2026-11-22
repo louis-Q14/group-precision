@@ -1,13 +1,13 @@
 import React from 'react';
 
 const LOGOS = [
-  { name: 'ParckBox', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/9c99ecb71_ParcKBoxlogof.png' },
-  { name: 'PRECISIONS Group', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/043e3e31f_PRECISIONS.png' },
-  { name: 'SombaTeka', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/805a2e5f6_SOMBATEKA.png' },
-  { name: 'App243', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/7c4de919e_App243.png' },
-  { name: 'Architectura Studio', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/a160b3eb1_ARCHITECTURASTUDIO1.png' },
-  { name: 'IMPALA', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/5d0342421_IMPALA_logo.png' },
-  { name: 'OrbitalInvest', src: 'https://media.base44.com/images/public/69260002cce4fa45e27a5d57/304b0f5c2_Orbitallnvest.png' },
+  { name: 'ParckBox', src: '/images/9c99ecb71_ParcKBoxlogof.png' },
+  { name: 'PRECISIONS Group', src: '/images/043e3e31f_PRECISIONS.png' },
+  { name: 'SombaTeka', src: '/images/805a2e5f6_SOMBATEKA.png' },
+  { name: 'App243', src: '/images/7c4de919e_App243.png' },
+  { name: 'Architectura Studio', src: '/images/a160b3eb1_ARCHITECTURASTUDIO1.png' },
+  { name: 'IMPALA', src: '/images/5d0342421_IMPALA_logo.png' },
+  { name: 'OrbitalInvest', src: '/images/304b0f5c2_Orbitallnvest.png' },
 ];
 
 export default function LogoMarquee() {

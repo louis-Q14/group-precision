@@ -1,6 +1,7 @@
 #env
 .env
 .env.*
+!.env.example
 
 # Logs
 logs
@@ -27,5 +28,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
-base44/.app.jsonc
+# Supabase CLI
+supabase/.temp
+supabase/.branches

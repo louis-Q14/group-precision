@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { db } from '@/api/db';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -8,8 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { Plus, Edit2 } from 'lucide-react';
+import ConfirmDeleteButton from '@/components/admin/ConfirmDeleteButton';
 import { toast } from 'sonner';
+
+const EDITABLE_FIELDS = ['title', 'client', 'description', 'image_url', 'category', 'industry'];
 
 export default function ProjectsManager() {
   const queryClient = useQueryClient();
@@ -17,62 +20,95 @@ export default function ProjectsManager() {
   const [editingProject, setEditingProject] = useState(null);
   const [formData, setFormData] = useState({});
 
-  const { data: projects = [], isLoading } = useQuery({
+  const { data: projects = [], isLoading, isError, refetch } = useQuery({
     queryKey: ['projects'],
-    queryFn: () => base44.entities.Project.list('-created_date'),
+    queryFn: () => db.Project.list('-created_at'),
   });
 
+  const closeDialog = () => {
+    setDialogOpen(false);
+    setEditingProject(null);
+    setFormData({});
+  };
+
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.Project.create(data),
+    mutationFn: (data) => db.Project.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['projects']);
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast.success('Projet créé');
-      setDialogOpen(false);
-      setFormData({});
+      closeDialog();
+    },
+    onError: (error) => {
+      console.error('Erreur création projet:', error);
+      toast.error('Impossible de créer le projet');
     },
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Project.update(id, data),
+    mutationFn: ({ id, data }) => db.Project.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['projects']);
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast.success('Projet mis à jour');
-      setDialogOpen(false);
-      setEditingProject(null);
-      setFormData({});
+      closeDialog();
+    },
+    onError: (error) => {
+      console.error('Erreur mise à jour projet:', error);
+      toast.error('Impossible de mettre à jour le projet');
     },
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Project.delete(id),
+    mutationFn: (id) => db.Project.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['projects']);
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast.success('Projet supprimé');
+    },
+    onError: (error) => {
+      console.error('Erreur suppression projet:', error);
+      toast.error('Impossible de supprimer le projet');
     },
   });
 
+  const isSaving = createMutation.isPending || updateMutation.isPending;
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSaving) return;
+    // On n'envoie que les champs du formulaire : pas les champs système (id, created_at…)
+    // ni les champs non modifiables ici (gallery, metrics…), qui restent intacts lors d'un update
+    const data = Object.fromEntries(
+      EDITABLE_FIELDS
+        .filter((field) => field in formData)
+        .map((field) => [field, formData[field]])
+    );
     if (editingProject) {
-      updateMutation.mutate({ id: editingProject.id, data: formData });
+      updateMutation.mutate({ id: editingProject.id, data });
     } else {
-      createMutation.mutate(formData);
+      createMutation.mutate(data);
     }
   };
 
   const openDialog = (project = null) => {
     setEditingProject(project);
-    setFormData(project || {});
+    setFormData(project ? { ...project } : {});
     setDialogOpen(true);
   };
 
   if (isLoading) return <div>Chargement...</div>;
+  if (isError) {
+    return (
+      <Card className="p-6 text-center">
+        <p className="text-gray-600 mb-4">Impossible de charger les projets.</p>
+        <Button variant="outline" onClick={() => refetch()}>Réessayer</Button>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">Projets ({projects.length})</h2>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <Dialog open={dialogOpen} onOpenChange={(open) => (open ? setDialogOpen(true) : closeDialog())}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()}>
               <Plus className="w-4 h-4 mr-2" />
@@ -149,8 +185,8 @@ export default function ProjectsManager() {
                   </Select>
                 </div>
               </div>
-              <Button type="submit" className="w-full">
-                {editingProject ? 'Mettre à jour' : 'Créer'}
+              <Button type="submit" className="w-full" disabled={isSaving}>
+                {isSaving ? 'Enregistrement...' : editingProject ? 'Mettre à jour' : 'Créer'}
               </Button>
             </form>
           </DialogContent>
@@ -169,9 +205,11 @@ export default function ProjectsManager() {
                 <Button variant="ghost" size="icon" onClick={() => openDialog(project)}>
                   <Edit2 className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => deleteMutation.mutate(project.id)}>
-                  <Trash2 className="w-4 h-4 text-red-500" />
-                </Button>
+                <ConfirmDeleteButton
+                  itemLabel={project.title}
+                  disabled={deleteMutation.isPending}
+                  onConfirm={() => deleteMutation.mutate(project.id)}
+                />
               </div>
             </div>
             {project.description && (

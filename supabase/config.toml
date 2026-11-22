@@ -1,0 +1,13 @@
+# Configuration de la CLI Supabase (https://supabase.com/docs/guides/cli)
+# Après `supabase link --project-ref <ref>`, déployer avec :
+#   supabase db push
+#   supabase functions deploy send-contact-email
+#   supabase functions deploy generate-presentation-doc
+project_id = "precisions-group"
+
+# Les deux fonctions exigent un jeton Supabase valide (clé publique du site ou session admin).
+[functions.send-contact-email]
+verify_jwt = true
+
+[functions.generate-presentation-doc]
+verify_jwt = true
