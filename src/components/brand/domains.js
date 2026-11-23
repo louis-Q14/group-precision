@@ -1,7 +1,7 @@
 import { Megaphone, TrendingUp, MonitorSmartphone, GraduationCap, Compass } from 'lucide-react';
 
 /**
- * Les cinq métiers de PRECISIONS Group : source unique pour l'accueil, les services,
+ * Les cinq métiers de PRECISION Group : source unique pour l'accueil, les services,
  * les filtres et les en-têtes. Chaque métier a sa couleur (tailwind.config.js) et son pictogramme.
  *
  * Les classes sont écrites en entier (pas de concaténation) pour que Tailwind les détecte.
@@ -52,13 +52,13 @@ export const DOMAINS = [
       name: 'Digital et numérique',
       pitch: 'Outiller votre quotidien',
       text: 'Sites et applications sur mesure, assistance aux utilisateurs et nos six plateformes.',
-      services: ['Développement web', 'Assistance aux utilisateurs', 'Plateformes SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243, OrbitalInvest'],
+      services: ['Développement web', 'Assistance aux utilisateurs', 'Plateformes SombaTeka, Harchive, App243, ParckBox, Pay243, OrbitalInvest'],
     },
     EN: {
       name: 'Digital',
       pitch: 'Equip your daily work',
       text: 'Custom websites and apps, user support and our six platforms.',
-      services: ['Web development', 'User support', 'SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243 and OrbitalInvest platforms'],
+      services: ['Web development', 'User support', 'SombaTeka, Harchive, App243, ParckBox, Pay243 and OrbitalInvest platforms'],
     },
   },
   {

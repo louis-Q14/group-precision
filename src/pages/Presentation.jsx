@@ -7,7 +7,7 @@ import {
   Users, BarChart3, Globe, Megaphone, Monitor, Network, MessageSquare, Search,
   HeadphonesIcon, Coins, Briefcase, Building2, Handshake, Settings, RefreshCw,
   ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database,
-  Link2, Printer, Code2, Layers, Server, Smartphone, Cpu, Wallet
+  Link2, Printer, Code2, Layers, Server, Smartphone, Cpu, Wallet, Camera
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -385,10 +385,10 @@ const platforms = [
   {
     id: 'harchive',
     icon: Archive,
-    title: 'HARCHIVE',
+    title: 'Harchive',
     tagline: 'Archivage Académique Numérique',
     subtitle: 'Connecter tous les corps académiques de la RDC',
-    description: 'HARCHIVE est une plateforme d\'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays, de l\'université à l\'école professionnelle.',
+    description: 'Harchive est une plateforme d\'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays, de l\'université à l\'école professionnelle.',
     howItWorks: 'Chaque institution membre dispose d\'un espace sécurisé pour archiver les dossiers académiques, diplômes et attestations de ses étudiants. Les données sont vérifiables en ligne, ce qui garantit l\'authenticité des diplômes. Le réseau national permet aux institutions d\'échanger des ressources pédagogiques et de suivre le parcours académique des étudiants de la licence au doctorat.',
     techStack: [
       { name: 'React', icon: Code2, role: 'Interface institution & étudiants' },
@@ -452,11 +452,11 @@ const platforms = [
   {
     id: 'parckbox',
     icon: Printer,
-    title: 'PARCK BOX',
-    tagline: 'Imprimerie & Coworking',
-    subtitle: 'Imprimez. Réservez. Travaillez.',
-    description: 'PARCK BOX est une plateforme tout-en-un qui réunit une imprimerie en ligne et la location d\'espaces de travail. Commandez vos impressions avec devis instantané, ou réservez un bureau équipé en quelques clics, avec paiement sécurisé et suivi dans votre espace personnel.',
-    howItWorks: 'Pour l\'impression : l\'utilisateur configure son document (format, couleur, nombre d\'exemplaires, reliure) et obtient un devis instantané, puis commande et paie en ligne ; un service express 2h est disponible. Pour le coworking : l\'utilisateur choisit un bureau parmi 10 espaces équipés (individuel, réunion, événementiel), réserve à l\'heure avec remises dégressives et reçoit sa facture PDF. Tout est suivi depuis un espace personnel.',
+    title: 'ParckBox',
+    tagline: 'Imprimerie, espaces, studio et formations',
+    subtitle: 'Tous vos projets au même endroit',
+    description: 'ParckBox réunit en un seul lieu — et sur une seule plateforme en ligne — des services complémentaires : une imprimerie, des espaces de travail et de réunion à louer, un studio photo et vidéo, ainsi que des formations adaptées à l\'environnement numérique et à l\'intelligence artificielle. Que vous soyez entrepreneur, étudiant, association, créateur de contenu ou particulier préparant un grand jour, vous pouvez commander, réserver et payer en quelques clics, depuis votre ordinateur ou votre téléphone, et suivre toutes vos démarches depuis un espace personnel unique.',
+    howItWorks: 'Imprimerie : envoyez vos fichiers, choisissez vos options et obtenez immédiatement un devis ; la commande réglée et sa facture se retrouvent dans « Mon espace ». Espaces : achetez un forfait d\'heures, puis réservez quand vous le souhaitez ; chaque réservation est vérifiée automatiquement (disponibilité, absence de double réservation, forfait suffisant). Studio : location du plateau, séance photo, production vidéo ou couverture d\'événement, avec prix estimé avant validation, acompte en ligne et solde en caisse. Invitations électroniques : modèles personnalisables, réponses des invités en ligne et accueil par QR code le jour J. Formations au numérique et à l\'IA : ateliers en présentiel, sessions en ligne, parcours individuels ou programmes sur mesure.',
     techStack: [
       { name: 'React', icon: Code2, role: 'Front-end commande & réservation' },
       { name: 'Node.js / Express', icon: Server, role: 'API back-end & génération de devis' },
@@ -465,17 +465,20 @@ const platforms = [
       { name: 'PDF Generator', icon: Package, role: 'Génération de devis et factures PDF' },
     ],
     features: [
-      'Commande d\'impression en ligne avec devis instantané',
-      'Impression Noir & Blanc ou couleur, A4/A3/A5, reliures incluses',
-      'Service express 2h disponible',
-      'Location de 10 bureaux équipés (individuels, réunions, événementiels)',
-      'Réservation à l\'heure avec remises dégressives',
-      'Paiement sécurisé et facture PDF',
+      'Imprimerie : devis immédiat, configuration enregistrée, facture dans « Mon espace »',
+      'Location d\'espaces de travail et de réunion par forfaits d\'heures',
+      'Réservations vérifiées automatiquement, sans double réservation',
+      'Studio photo et vidéo : plateau, séance photo, production vidéo, couverture d\'événement',
+      'Invitations électroniques avec réponses en ligne et accueil par QR code',
+      'Formations au numérique et à l\'IA, en présentiel ou en ligne',
+      'Espace personnel installable sur Android',
+      'Paiement sécurisé par carte bancaire, solde du studio en caisse',
     ],
     benefits: [
-      { icon: Printer, text: 'Impression en ligne' },
-      { icon: Building2, text: 'Bureaux à louer' },
-      { icon: CreditCard, text: 'Paiement sécurisé' },
+      { icon: Printer, text: 'Imprimerie' },
+      { icon: Building2, text: 'Espaces à louer' },
+      { icon: Camera, text: 'Studio photo et vidéo' },
+      { icon: GraduationCap, text: 'Formations numérique et IA' },
     ],
     color: 'from-white/10 to-white/5',
     bgColor: 'bg-white/[0.04] border border-white/10',
@@ -567,13 +570,13 @@ export default function Presentation() {
                 Un cabinet, deux métiers, six plateformes
               </h2>
               <p className="text-lg text-white/60 mb-6">
-                PRECISIONS Group accompagne les entreprises, institutions et entrepreneurs dans leur
+                PRECISION Group accompagne les entreprises, institutions et entrepreneurs dans leur
                 communication digitale et leur développement économique. Notre approche conjugue
                 conseil stratégique, exécution opérationnelle et produits numériques propriétaires.
               </p>
               <p className="text-lg text-white/60 mb-8">
                 Au-delà du conseil, nous concevons et opérons nos propres plateformes —
-                SombaTeka, HARCHIVE, App243, PARCK BOX, Pay243 et OrbitalInvest — qui adressent des besoins
+                SombaTeka, Harchive, App243, ParckBox, Pay243 et OrbitalInvest — qui adressent des besoins
                 concrets du marché africain : commerce, éducation, RH, services et finance.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -729,7 +732,7 @@ export default function Presentation() {
               Nos produits numériques
             </h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Six plateformes éditées par PRECISIONS Group, conçues pour répondre aux besoins concrets du marché africain.
+              Six plateformes éditées par PRECISION Group, conçues pour répondre aux besoins concrets du marché africain.
             </p>
           </div>
 

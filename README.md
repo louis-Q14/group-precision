@@ -1,6 +1,6 @@
-# PRECISIONS Group — site web
+# PRECISION Group — site web
 
-Site vitrine de PRECISIONS Group : communication digitale, développement économique et
+Site vitrine de PRECISION Group : communication digitale, développement économique et
 plateformes digitales, avec un espace d'administration (prospects, projets, blog, équipe,
 FAQ, témoignages, services).
 
@@ -62,7 +62,7 @@ Autres commandes : `npm run build` (site de production dans `dist/`), `npm run p
    npx supabase functions deploy send-contact-email
    npx supabase functions deploy generate-presentation-doc
    npx supabase secrets set RESEND_API_KEY=re_xxx \
-       RESEND_FROM_EMAIL="PRECISIONS <noreply@precisions.group>" \
+       RESEND_FROM_EMAIL="PRECISION <noreply@precisions.group>" \
        CONTACT_TO_EMAIL=contact@precisions.group \
        ALLOWED_ORIGINS=https://precisions.group,http://localhost:5173
    ```

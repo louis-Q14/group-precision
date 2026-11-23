@@ -1,4 +1,4 @@
-// Edge Function Supabase : génère la présentation PRECISIONS Group au format Word (.docx).
+// Edge Function Supabase : génère la présentation PRECISION Group au format Word (.docx).
 // Réservée aux administrateurs (table public.admins). Le fichier est renvoyé directement
 // en téléchargement : rien n'est stocké publiquement.
 //
@@ -100,10 +100,10 @@ const platforms = [
     url: 'https://www.sombateka.com',
   },
   {
-    name: 'HARCHIVE',
+    name: 'Harchive',
     tagline: 'Archivage Académique Numérique',
     subtitle: 'Connecter tous les corps académiques de la RDC',
-    desc: "HARCHIVE est une plateforme d'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays.",
+    desc: "Harchive est une plateforme d'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays.",
     how: "Chaque institution membre dispose d'un espace sécurisé pour archiver les dossiers académiques, diplômes et attestations de ses étudiants. Les données sont vérifiables en ligne, ce qui garantit l'authenticité des diplômes. Le réseau national permet aux institutions d'échanger des ressources pédagogiques et de suivre le parcours académique des étudiants.",
     features: ["Archivage sécurisé des dossiers académiques des étudiants", "Gestion des diplômes et attestations numériques", "Réseau connectant universités, instituts et écoles de la RDC", "Vérification en ligne de l'authenticité des diplômes", "Suivi du parcours académique de la licence au doctorat", "Annuaire des enseignants et chercheurs nationaux", "Partage de ressources pédagogiques entre institutions"],
     status: 'Opérationnel',
@@ -120,10 +120,10 @@ const platforms = [
     url: 'https://app243.com',
   },
   {
-    name: 'PARCK BOX',
+    name: 'ParckBox',
     tagline: 'Imprimerie & Coworking',
     subtitle: 'Imprimez. Réservez. Travaillez.',
-    desc: "PARCK BOX est une plateforme tout-en-un qui réunit une imprimerie en ligne et la location d'espaces de travail. Commandez vos impressions avec devis instantané, ou réservez un bureau équipé en quelques clics, avec paiement sécurisé et suivi dans votre espace personnel.",
+    desc: "ParckBox est une plateforme tout-en-un qui réunit une imprimerie en ligne et la location d'espaces de travail. Commandez vos impressions avec devis instantané, ou réservez un bureau équipé en quelques clics, avec paiement sécurisé et suivi dans votre espace personnel.",
     how: "Pour l'impression, l'utilisateur configure son document (format, couleur, nombre d'exemplaires, reliure) et obtient un devis instantané, puis commande et paie en ligne ; un service express 2h est disponible. Pour le coworking, l'utilisateur choisit un bureau parmi 10 espaces équipés, réserve à l'heure avec remises dégressives et reçoit sa facture PDF.",
     features: ["Commande d'impression en ligne avec devis instantané", "Impression Noir & Blanc ou couleur, A4/A3/A5, reliures incluses", "Service express 2h disponible", "Location de 10 bureaux équipés (individuels, réunions, événementiels)", "Réservation à l'heure avec remises dégressives", "Paiement sécurisé et facture PDF"],
     status: 'Opérationnel',
@@ -182,7 +182,7 @@ Deno.serve(async (req) => {
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { after: 200 },
-      children: [new TextRun({ text: 'PRECISIONS GROUP', bold: true, size: 56, color: DARK })],
+      children: [new TextRun({ text: 'PRECISION GROUP', bold: true, size: 56, color: DARK })],
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
@@ -211,9 +211,9 @@ Deno.serve(async (req) => {
       '4. Développement Économique',
       '5. Nos plateformes propriétaires',
       '6. SombaTeka',
-      '7. HARCHIVE',
+      '7. Harchive',
       '8. App243',
-      '9. PARCK BOX',
+      '9. ParckBox',
       '10. OrbitalInvest',
       '11. Notre méthodologie',
       '12. Travaillons ensemble',
@@ -226,8 +226,8 @@ Deno.serve(async (req) => {
 
     // ===== 1. COMPANY =====
     children.push(h1('1. Présentation de l\'entreprise'));
-    children.push(body("PRECISIONS Group est un cabinet de conseil en communication digitale et développement économique, éditeur de plateformes numériques propriétaires au service de la RD Congo et de l'Afrique. Notre approche conjugue conseil stratégique, exécution opérationnelle et produits numériques propriétaires."));
-    children.push(body("Au-delà du conseil, nous concevons et opérons nos propres plateformes — SombaTeka, HARCHIVE, App243, PARCK BOX et OrbitalInvest — qui adressent des besoins concrets du marché africain : commerce, éducation, ressources humaines, services et finance."));
+    children.push(body("PRECISION Group est un cabinet de conseil en communication digitale et développement économique, éditeur de plateformes numériques propriétaires au service de la RD Congo et de l'Afrique. Notre approche conjugue conseil stratégique, exécution opérationnelle et produits numériques propriétaires."));
+    children.push(body("Au-delà du conseil, nous concevons et opérons nos propres plateformes — SombaTeka, Harchive, App243, ParckBox et OrbitalInvest — qui adressent des besoins concrets du marché africain : commerce, éducation, ressources humaines, services et finance."));
     children.push(label('Chiffres clés'));
     children.push(bullet('5 plateformes propriétaires'));
     children.push(bullet('2 domaines d\'expertise'));
@@ -237,7 +237,7 @@ Deno.serve(async (req) => {
 
     // ===== 2. EXPERTISE =====
     children.push(h1('2. Nos domaines d\'expertise'));
-    children.push(body("PRECISIONS Group structure son offre autour de deux domaines d'expertise complémentaires, couvrant l'ensemble du cycle de croissance de nos clients, de la communication à la structuration financière et à l'expansion internationale."));
+    children.push(body("PRECISION Group structure son offre autour de deux domaines d'expertise complémentaires, couvrant l'ensemble du cycle de croissance de nos clients, de la communication à la structuration financière et à l'expansion internationale."));
     children.push(spacer());
 
     // ===== 3 & 4. SERVICES =====
@@ -260,7 +260,7 @@ Deno.serve(async (req) => {
 
     // ===== 5. PLATFORMS INTRO =====
     children.push(h1('5. Nos plateformes propriétaires'));
-    children.push(body("PRECISIONS Group édite cinq plateformes numériques conçues pour répondre aux besoins concrets du marché africain. Chacune adresse un secteur distinct : commerce, éducation, ressources humaines, services de proximité et finance."));
+    children.push(body("PRECISION Group édite cinq plateformes numériques conçues pour répondre aux besoins concrets du marché africain. Chacune adresse un secteur distinct : commerce, éducation, ressources humaines, services de proximité et finance."));
     children.push(divider());
 
     // ===== 6-10. PLATFORMS =====
@@ -330,7 +330,7 @@ Deno.serve(async (req) => {
       headers: {
         ...CORS_HEADERS,
         'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'Content-Disposition': 'attachment; filename="PRECISIONS_Group_Presentation.docx"',
+        'Content-Disposition': 'attachment; filename="PRECISION_Group_Presentation.docx"',
       },
     });
   } catch (error) {

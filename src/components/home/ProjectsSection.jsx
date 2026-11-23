@@ -13,7 +13,7 @@ const PROJECTS = [
     EN: { tag: 'Agriculture, financing', text: 'A platform supporting market gardeners: access to land and short-term financing for sustainable local production.' },
   },
   {
-    name: 'HARCHIVE',
+    name: 'Harchive',
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=900&fit=crop',
     FR: { tag: 'Éducation, numérique', text: 'Plateforme qui met en relation tous les acteurs de l’éducation en République démocratique du Congo.' },
     EN: { tag: 'Education, digital', text: 'A platform connecting every education stakeholder in the Democratic Republic of the Congo.' },

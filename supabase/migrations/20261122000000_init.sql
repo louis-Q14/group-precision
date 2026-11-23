@@ -1,5 +1,5 @@
 -- =====================================================================
--- PRECISIONS Group : schéma initial de la base de données
+-- PRECISION Group : schéma initial de la base de données
 --
 -- À exécuter une fois : Supabase > SQL Editor > coller ce fichier > Run
 -- (ou `supabase db push` avec la CLI Supabase).

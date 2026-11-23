@@ -13,7 +13,7 @@ const PLATFORMS = [
     EN: { field: 'Online commerce', text: 'Online stores, payments and delivery for individuals, traders and companies.' },
   },
   {
-    name: 'HARCHIVE',
+    name: 'Harchive',
     url: 'https://harchive.net',
     domain: 'harchive.net',
     FR: { field: 'Archivage académique', text: 'Dossiers, diplômes et attestations des universités et écoles de la RDC, vérifiables en ligne.' },
@@ -28,12 +28,12 @@ const PLATFORMS = [
     EN: { field: 'Human resources', text: 'Employees, payroll, leave, time tracking and recruitment in a single app.' },
   },
   {
-    name: 'PARCK BOX',
+    name: 'ParckBox',
     logo: '/images/9c99ecb71_ParcKBoxlogof.png',
     url: 'https://parckbox.com',
     domain: 'parckbox.com',
-    FR: { field: 'Imprimerie et coworking', text: 'Impressions commandées en ligne avec devis immédiat, et bureaux équipés à réserver.' },
-    EN: { field: 'Printing and coworking', text: 'Prints ordered online with an instant quote, and equipped offices to book.' },
+    FR: { field: 'Imprimerie, espaces, studio et formations', text: 'Impressions, espaces de travail, studio photo et vidéo et formations au numérique et à l’IA, à réserver en ligne.' },
+    EN: { field: 'Printing, spaces, studio and training', text: 'Printing, workspaces, a photo and video studio and digital and AI training, all booked online.' },
   },
   {
     name: 'Pay243',

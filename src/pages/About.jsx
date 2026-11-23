@@ -44,7 +44,7 @@ const getValues = (language) => [
 ];
 
 const getTimeline = (language) => [
-  { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISIONS par Louis-Quatorze Kzd' : 'PRECISIONS founded by Louis-Quatorze Kzd' },
+  { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISION par Louis-Quatorze Kzd' : 'PRECISION founded by Louis-Quatorze Kzd' },
   { year: '2024', title: language === 'FR' ? 'Premiers clients' : 'First Clients', description: language === 'FR' ? 'Signature de nos premiers contrats en RD Congo' : 'Signing our first contracts in DR Congo' },
   { year: '2025', title: language === 'FR' ? 'Croissance' : 'Growth', description: language === 'FR' ? 'Expansion de l\'équipe et diversification des services' : 'Team expansion and service diversification' },
   { year: '2025', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '20+ experts, présence en RD Congo, projets internationaux' : '20+ experts, DR Congo presence, international projects' },
@@ -66,7 +66,7 @@ export default function About() {
   return (
     <main>
       <PageHero
-        title={language === 'FR' ? 'À propos de PRECISIONS Group' : 'About PRECISIONS Group'}
+        title={language === 'FR' ? 'À propos de PRECISION Group' : 'About PRECISION Group'}
         lede={language === 'FR'
           ? 'Cabinet de conseil en communication digitale et en développement économique, et éditeur de plateformes numériques, au service de la RD Congo et de l’Afrique.'
           : 'A consultancy in digital communication and economic development, and a publisher of digital platforms, serving the DR Congo and Africa.'}
@@ -102,7 +102,7 @@ export default function About() {
           <div className="lg:col-span-6">
             <img
               src="/images/411ca2a35_travail.jpg"
-              alt={language === 'FR' ? 'L’équipe PRECISIONS au travail' : 'The PRECISIONS team at work'}
+              alt={language === 'FR' ? 'L’équipe PRECISION au travail' : 'The PRECISION team at work'}
               className="w-full rounded-lg object-cover"
               loading="lazy"
             />

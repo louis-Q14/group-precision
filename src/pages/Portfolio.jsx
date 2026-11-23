@@ -56,8 +56,8 @@ function ImageCarousel({ images, title }) {
 const projects = [
   {
     id: 1,
-    title: 'HARCHIVE',
-    client: 'HARCHIVE',
+    title: 'Harchive',
+    client: 'Harchive',
     category: 'web',
     industry: 'tech',
     description: 'Plateforme innovante visant à mettre en communication tous les acteurs de l\'éducation en République Démocratique du Congo et bien plus encore.',
@@ -69,7 +69,7 @@ const projects = [
       { label: 'Universités', value: 'RDC' },
     ],
     testimonial: 'Une solution révolutionnaire pour l\'éducation en RDC.',
-    testimonialAuthor: 'Équipe HARCHIVE',
+    testimonialAuthor: 'Équipe Harchive',
     technologies: ['Web', 'Mobile', 'Cloud'],
     websiteUrl: 'https://www.harchive.net',
   },

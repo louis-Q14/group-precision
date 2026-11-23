@@ -3,7 +3,7 @@
 // Secrets à définir (Supabase > Edge Functions > Secrets, ou `supabase secrets set`) :
 //   RESEND_API_KEY     clé API Resend (obligatoire)
 //   RESEND_FROM_EMAIL  expéditeur sur un domaine vérifié chez Resend,
-//                      ex. « PRECISIONS <noreply@precisions.group> »
+//                      ex. « PRECISION <noreply@precisions.group> »
 //   CONTACT_TO_EMAIL   destinataire (défaut : contact@precisions.group)
 //   ALLOWED_ORIGINS    origines autorisées, séparées par des virgules,
 //                      ex. « https://precisions.group,http://localhost:5173 » (défaut : *)
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
         from: FROM_EMAIL,
         to: TO_EMAIL,
         reply_to: email,
-        subject: `[PRECISIONS] Nouveau message de ${singleLine(full_name)} - ${singleLine(interest) || 'Non spécifié'}`,
+        subject: `[PRECISION] Nouveau message de ${singleLine(full_name)} - ${singleLine(interest) || 'Non spécifié'}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #0A0A0B; border-bottom: 3px solid #C9A86C; padding-bottom: 10px;">

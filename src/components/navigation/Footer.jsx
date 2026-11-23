@@ -8,9 +8,9 @@ import { DOMAINS, domainCopy } from '@/components/brand/domains';
 
 const PLATFORMS = [
   { name: 'SombaTeka', url: 'https://www.sombateka.com' },
-  { name: 'HARCHIVE', url: 'https://harchive.net' },
+  { name: 'Harchive', url: 'https://harchive.net' },
   { name: 'App243', url: 'https://app243.com' },
-  { name: 'PARCK BOX', url: 'https://parckbox.com' },
+  { name: 'ParckBox', url: 'https://parckbox.com' },
   { name: 'Pay243', url: 'https://pay243.com' },
   { name: 'OrbitalInvest', url: null },
 ];
@@ -169,7 +169,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm text-white/55">
-          <p>© {new Date().getFullYear()} PRECISIONS Group. {copy.rights}</p>
+          <p>© {new Date().getFullYear()} PRECISION Group. {copy.rights}</p>
           <Link to={createPageUrl('MentionsLegales')} className="hover:text-white">{copy.legal}</Link>
         </div>
       </div>

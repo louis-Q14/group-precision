@@ -1,4 +1,6 @@
 import PageHero from '@/components/brand/PageHero';
+import ServiceStack from '@/components/services/ServiceStack';
+import ServiceDeck from '@/components/services/ServiceDeck';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -6,7 +8,7 @@ import {
   Lightbulb, TrendingUp, Target, Zap, Shield, Clock,
   Users, BarChart3, Globe, Megaphone, Monitor, Network,
   MessageSquare, Search, HeadphonesIcon, Coins, Briefcase,
-  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer, Wallet
+  Building2, Handshake, Settings, RefreshCw, ShoppingCart, Archive, GraduationCap, Package, CreditCard, BookOpen, Database, Link2, Printer, Wallet, Camera
 } from 'lucide-react';
 
 const serviceCategories = [
@@ -355,9 +357,9 @@ const serviceCategories = [
       {
         id: 'harchive',
         icon: Archive,
-        title: 'HARCHIVE — Archivage Académique Numérique',
+        title: 'Harchive — Archivage Académique Numérique',
         subtitle: 'Connecter tous les corps académiques de la RDC',
-        description: 'HARCHIVE est une plateforme d\'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays.',
+        description: 'Harchive est une plateforme d\'archivage numérique dédiée au monde académique de la RD Congo. Elle centralise et sécurise les données des étudiants, enseignants et institutions, tout en créant un réseau national reliant tous les corps académiques du pays.',
         features: [
           'Archivage sécurisé des dossiers académiques des étudiants',
           'Gestion des diplômes et attestations numériques',
@@ -400,21 +402,24 @@ const serviceCategories = [
       {
         id: 'parckbox',
         icon: Printer,
-        title: 'PARCK BOX — Imprimerie & Coworking',
-        subtitle: 'Imprimez. Réservez. Travaillez.',
-        description: 'PARCK BOX est une plateforme tout-en-un qui réunit une imprimerie en ligne et la location d\'espaces de travail. Commandez vos impressions avec devis instantané, ou réservez un bureau équipé en quelques clics, avec paiement sécurisé et suivi dans votre espace.',
+        title: 'ParckBox — Imprimerie, espaces, studio et formations',
+        subtitle: 'Tous vos projets au même endroit',
+        description: 'ParckBox réunit en un seul lieu — et sur une seule plateforme en ligne — des services complémentaires : une imprimerie, des espaces de travail et de réunion à louer, un studio photo et vidéo, ainsi que des formations adaptées à l\'environnement numérique et à l\'intelligence artificielle. Que vous soyez entrepreneur, étudiant, association, créateur de contenu ou particulier préparant un grand jour, vous pouvez commander, réserver et payer en quelques clics, depuis votre ordinateur ou votre téléphone, et suivre toutes vos démarches depuis un espace personnel unique.',
         features: [
-          'Commande d\'impression en ligne avec devis instantané',
-          'Impression Noir & Blanc ou couleur, A4/A3/A5, reliures incluses',
-          'Service express 2h disponible',
-          'Location de 10 bureaux équipés (individuels, réunions, événementiels)',
-          'Réservation à l\'heure avec remises dégressives',
-          'Paiement sécurisé et facture PDF',
+          'Imprimerie : devis immédiat, configuration enregistrée, facture dans « Mon espace »',
+          'Location d\'espaces de travail et de réunion par forfaits d\'heures',
+          'Réservations vérifiées automatiquement, sans double réservation',
+          'Studio photo et vidéo : plateau, séance photo, production vidéo, couverture d\'événement',
+          'Invitations électroniques avec réponses en ligne et accueil par QR code',
+          'Formations au numérique et à l\'IA, en présentiel ou en ligne',
+          'Espace personnel installable sur Android',
+          'Paiement sécurisé par carte bancaire, solde du studio en caisse',
         ],
         benefits: [
-          { icon: Printer, text: 'Impression en ligne' },
-          { icon: Building2, text: 'Bureaux à louer' },
-          { icon: CreditCard, text: 'Paiement sécurisé' },
+          { icon: Printer, text: 'Imprimerie' },
+          { icon: Building2, text: 'Espaces à louer' },
+          { icon: Camera, text: 'Studio photo et vidéo' },
+          { icon: GraduationCap, text: 'Formations numérique et IA' },
         ],
         color: 'from-digital to-digital-700',
         bgColor: 'bg-digital-50',
@@ -488,22 +493,36 @@ const PLATFORM_LINKS = {
   pay243: 'https://pay243.com',
 };
 
+const PLATFORM_LOGOS = {
+  sombateka: '/images/805a2e5f6_SOMBATEKA.png',
+  app243: '/images/7c4de919e_App243.png',
+  parckbox: '/images/9c99ecb71_ParcKBoxlogof.png',
+  orbitalinvest: '/images/304b0f5c2_Orbitallnvest.png',
+};
+
 export default function Services() {
   const { hash } = useLocation();
   const [activeCategory, setActiveCategory] = useState('communication');
   const [activeService, setActiveService] = useState('strategie');
 
   useEffect(() => {
-    const target = HASH_TARGETS[hash.replace('#', '')];
+    const id = hash.replace('#', '');
+    const target = HASH_TARGETS[id];
     if (target) {
       setActiveCategory(target[0]);
       setActiveService(target[1]);
+      return;
+    }
+    // Lien direct vers un service ou une plateforme : /services#parckbox
+    const category = serviceCategories.find((c) => c.services.some((sv) => sv.id === id));
+    if (category) {
+      setActiveCategory(category.id);
+      setActiveService(id);
     }
   }, [hash]);
 
   const currentCategory = serviceCategories.find(c => c.id === activeCategory);
-  const currentService = currentCategory?.services.find(s => s.id === activeService);
-  const platformUrl = currentService && PLATFORM_LINKS[currentService.id];
+  const CardsLayout = currentCategory?.id === 'plateformes' ? ServiceStack : ServiceDeck;
 
   return (
     <main className="bg-black text-white">
@@ -512,10 +531,10 @@ export default function Services() {
         lede="Communication, financement, digital, formation et conseil : le détail de ce que nous prenons en charge, service par service."
       />
 
-      <section>
+      {/* Services et plateformes : cartes beige empilées sur le fond noir du site */}
+      <section className="py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
-          {/* Catégories */}
-          <div className="flex flex-wrap gap-2 py-8" role="tablist" aria-label="Catégories de services">
+          <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Catégories de services">
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
@@ -527,7 +546,9 @@ export default function Services() {
                   setActiveService(category.services[0].id);
                 }}
                 className={`inline-flex items-center h-11 px-5 rounded-full border transition-colors ${
-                  activeCategory === category.id ? 'bg-white text-black border-white' : 'border-white/15 bg-white/5 text-white/70 hover:text-white hover:border-white/30'
+                  activeCategory === category.id
+                    ? 'bg-white text-black border-white'
+                    : 'border-white/15 bg-white/5 text-white/70 hover:text-white hover:border-white/30'
                 }`}
               >
                 {category.title}
@@ -536,61 +557,40 @@ export default function Services() {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-x-10 gap-y-10 pb-24">
-            {/* Services de la catégorie */}
-            <nav className="lg:col-span-4" aria-label={currentCategory?.title}>
-              <p className="text-white/55">{currentCategory?.description}</p>
-              <ul className="mt-6 rounded-2xl glass p-2">
-                {currentCategory?.services.map((service) => (
-                  <li key={service.id}>
-                    <button
-                      type="button"
-                      onClick={() => setActiveService(service.id)}
-                      aria-current={activeService === service.id ? 'true' : undefined}
-                      className={`w-full text-left px-4 py-3 rounded-xl flex items-center justify-between gap-4 transition-colors ${
-                        activeService === service.id ? 'bg-white/10 font-medium text-white' : 'text-white/60 hover:text-white hover:bg-white/5'
-                      }`}
-                    >
-                      {service.title.split(' — ')[0]}
-                      {activeService === service.id && <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_white] shrink-0" aria-hidden="true" />}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <div className="mt-14 mb-12 text-center">
+            <h2 className="text-display font-semibold text-gradient">{currentCategory?.title}</h2>
+            <p className="mt-3 text-white/60 max-w-xl mx-auto">{currentCategory?.description}</p>
+            <p className="mt-2 text-sm text-white/40 hidden lg:block">
+              {currentCategory?.id === 'plateformes' ? 'Cliquez sur une carte pour l’amener au premier plan.' : 'Cliquez sur une carte pour l’ouvrir.'}
+            </p>
+          </div>
 
-            {/* Service choisi */}
-            {currentService && (
-              <article key={currentService.id} className="lg:col-span-7 lg:col-start-6 rounded-3xl glass p-7 lg:p-10">
-                <h2 className="text-title font-semibold text-gradient">{currentService.title}</h2>
-                <p className="mt-4 text-lg font-medium">{currentService.subtitle}</p>
-                <p className="mt-4 text-lede text-white/60 max-w-2xl">{currentService.description}</p>
-
-                <h3 className="mt-10 text-sm text-white/45">Ce que nous proposons</h3>
-                <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-                  {currentService.features.map((feature) => (
-                    <li key={feature} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white/85">{feature}</li>
-                  ))}
-                </ul>
-
-
-                <div className="mt-10">
-                  {platformUrl ? (
-                    <a href={platformUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center h-12 px-6 rounded-full bg-white text-black font-medium hover:bg-white/85">
-                      Visiter {currentService.title.split(' — ')[0]}
+          {currentCategory && (
+            /* Plateformes : pile de cartes ; services : éventail horizontal */
+            <CardsLayout
+              key={currentCategory.id}
+              services={currentCategory.services}
+              activeId={activeService}
+              onSelect={setActiveService}
+              logos={PLATFORM_LOGOS}
+              renderAction={(service) => {
+                const url = PLATFORM_LINKS[service.id];
+                const btn = 'inline-flex items-center h-12 px-6 rounded-xl bg-white text-[#1A1A1A] font-medium shadow-sm ring-1 ring-black/5 hover:bg-white/80 transition-colors';
+                if (url) {
+                  return (
+                    <a href={url} target="_blank" rel="noopener noreferrer" className={btn}>
+                      Visiter {service.title.split(' — ')[0]}
                       <span className="sr-only"> (nouvel onglet)</span>
                     </a>
-                  ) : currentService.id === 'orbitalinvest' ? (
-                    <p className="text-white/45">Site en construction</p>
-                  ) : (
-                    <Link to={createPageUrl('Contact')} className="inline-flex items-center h-12 px-6 rounded-full bg-white text-black font-medium hover:bg-white/85">
-                      Discuter de votre projet
-                    </Link>
-                  )}
-                </div>
-              </article>
-            )}
-          </div>
+                  );
+                }
+                if (service.id === 'orbitalinvest') {
+                  return <span className="text-[#1A1A1A]/50">Site en construction</span>;
+                }
+                return <Link to={createPageUrl('Contact')} className={btn}>Discuter de votre projet</Link>;
+              }}
+            />
+          )}
         </div>
       </section>
 

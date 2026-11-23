@@ -43,7 +43,7 @@ function DownloadPresentationButton() {
       const url = URL.createObjectURL(await response.blob());
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'PRECISIONS_Group_Presentation.docx';
+      link.download = 'PRECISION_Group_Presentation.docx';
       link.click();
       URL.revokeObjectURL(url);
     } catch (error) {
