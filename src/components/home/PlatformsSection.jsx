@@ -95,7 +95,7 @@ export default function PlatformsSection() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="h-9 flex items-center">
                         {platform.logo ? (
-                          <img src={platform.logo} alt={platform.name} className="h-8 w-auto max-w-[170px] object-contain object-left invert mix-blend-screen" />
+                          <img src={platform.logo} alt={platform.name} className="h-8 w-auto max-w-[170px] object-contain object-left invert mix-blend-screen light:invert-0 light:mix-blend-multiply" />
                         ) : (
                           <span className="text-2xl font-semibold tracking-tight">{platform.name}</span>
                         )}

@@ -3,6 +3,7 @@ import Footer from '@/components/navigation/Footer';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { LanguageProvider, useLanguage } from '@/components/LanguageContext';
+import { ThemeProvider, useTheme } from '@/components/ThemeContext';
 
 function SkipLink() {
   const { language } = useLanguage();
@@ -16,16 +17,22 @@ function SkipLink() {
   );
 }
 
-export default function Layout({ children, currentPageName }) {
-  // Site public en thème sombre ; l'Admin reste en clair pour la saisie
-  const dark = currentPageName !== 'Admin';
+function Shell({ children, currentPageName }) {
+  const { theme } = useTheme();
+  // Site public en thème sombre ou clair, au choix du visiteur ; l'Admin reste neutre pour la saisie
+  const isPublic = currentPageName !== 'Admin';
+  const dark = isPublic && theme === 'dark';
+  const light = isPublic && theme === 'light';
   useEffect(() => {
-    document.documentElement.classList.toggle('theme-dark', dark);
-  }, [dark]);
+    const root = document.documentElement;
+    root.classList.toggle('theme-dark', dark);
+    root.classList.toggle('theme-light', light);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#ECE7E0' : '#000000');
+  }, [dark, light]);
 
   return (
     <LanguageProvider>
-      <div className={`min-h-screen flex flex-col ${dark ? 'bg-black text-white' : 'bg-mist'}`}>
+      <div className={`min-h-screen flex flex-col ${isPublic ? 'bg-black text-white' : 'bg-mist'}`}>
         <SkipLink />
         <Header />
         <div id="contenu" className="flex-1">
@@ -35,5 +42,13 @@ export default function Layout({ children, currentPageName }) {
         <Toaster position="top-right" richColors theme={dark ? 'dark' : 'light'} />
       </div>
     </LanguageProvider>
+  );
+}
+
+export default function Layout(props) {
+  return (
+    <ThemeProvider>
+      <Shell {...props} />
+    </ThemeProvider>
   );
 }

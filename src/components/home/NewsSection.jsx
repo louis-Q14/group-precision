@@ -35,12 +35,12 @@ export default function NewsSection() {
           {posts.map((post) => (
             <article key={post.id} className="group">
               <Link to={{ pathname: blogUrl, search: `?article=${encodeURIComponent(post.slug || post.id)}` }} className="block">
-                <div className="aspect-[16/10] rounded-2xl border border-white/10 bg-neutral-900 overflow-hidden">
+                <div className="aspect-[16/10] rounded-2xl border border-white/10 bg-neutral-900 light:bg-[#DDD5CA] overflow-hidden">
                   {post.cover_image ? (
                     <img src={post.cover_image} alt="" className="h-full w-full object-cover" loading="lazy" />
                   ) : (
                     <div className="h-full w-full flex items-center justify-center">
-                      <img src="/images/precision-logo.png" alt="" className="w-1/2 invert opacity-40" />
+                      <img src="/images/precision-logo.png" alt="" className="w-1/2 invert light:invert-0 opacity-40" />
                     </div>
                   )}
                 </div>

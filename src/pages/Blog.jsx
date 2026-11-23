@@ -50,7 +50,7 @@ const markdownComponents = {
   a: (props) => <a className="text-gold underline hover:no-underline" target="_blank" rel="noopener noreferrer" {...props} />,
   blockquote: (props) => <blockquote className="border-l-4 border-white/30 pl-4 italic text-white/60 my-6" {...props} />,
   code: (props) => <code className="bg-white/[0.07] rounded px-1.5 py-0.5 text-sm" {...props} />,
-  pre: (props) => <pre className="bg-white/[0.04] border border-white/10 text-gray-100 rounded-xl p-4 overflow-x-auto my-6 text-sm" {...props} />,
+  pre: (props) => <pre className="bg-white/[0.04] border border-white/10 text-gray-100 light:text-[#1A1A1A] rounded-xl p-4 overflow-x-auto my-6 text-sm" {...props} />,
   img: ({ alt, ...props }) => <img alt={alt ?? ''} className="rounded-xl my-6 w-full" {...props} />,
 };
 
@@ -61,7 +61,7 @@ function CoverImage({ article, className }) {
   // Article sans image : aplat bleu nuit avec le logo
   return (
     <div className={`${className} bg-white/[0.04] border border-white/10 relative overflow-hidden`} aria-hidden="true">
-      <img src="/images/precision-logo.png" alt="" className="absolute inset-0 m-auto w-1/2 invert opacity-80" />
+      <img src="/images/precision-logo.png" alt="" className="absolute inset-0 m-auto w-1/2 invert light:invert-0 opacity-80" />
     </div>
   );
 }

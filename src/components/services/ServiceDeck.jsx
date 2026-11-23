@@ -13,17 +13,17 @@ const HEIGHT = 580;
 const SPINE = 58; // largeur d'une tranche fermée
 const GAP = 8;
 
-const CARD = 'bg-[#ECE7E0] text-[#1A1A1A]';
+const CARD = 'palette-fixed card-palette bg-[rgb(var(--k-bg))] text-[rgb(var(--k-ink))]';
 
 function Features({ service }) {
   const { language } = useLanguage();
   return (
-    <div className="rounded-xl bg-white p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
+    <div className="rounded-xl bg-[rgb(var(--k-panel))] text-[rgb(var(--k-panel-ink))] p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
       <p className="text-sm font-medium">{language === 'EN' ? 'What we offer' : 'Ce que nous proposons'}</p>
-      <ul className="mt-4 divide-y divide-[#1A1A1A]/[0.07] text-[0.85rem] leading-snug">
+      <ul className="mt-4 divide-y divide-[rgb(var(--k-panel-ink)/0.07)] text-[0.85rem] leading-snug">
         {service.features.map((f) => (
           <li key={f} className="flex gap-2.5 py-2.5">
-            <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#1A1A1A]/60" aria-hidden="true" />
+            <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[rgb(var(--k-panel-ink)/0.6)]" aria-hidden="true" />
             <span>{f}</span>
           </li>
         ))}
@@ -36,7 +36,7 @@ function Benefits({ service }) {
   return (
     <ul className="flex flex-wrap gap-2">
       {service.benefits.map((b) => (
-        <li key={b.text} className="inline-flex items-center gap-2 rounded-full bg-[#151515] px-3.5 py-1.5 text-[0.8rem] text-white">
+        <li key={b.text} className="inline-flex items-center gap-2 rounded-full bg-[rgb(var(--k-solid))] px-3.5 py-1.5 text-[0.8rem] text-[rgb(var(--k-on-solid))]">
           <b.icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
           {b.text}
         </li>
@@ -49,14 +49,14 @@ function Header({ service, size = 'lg' }) {
   const Icon = service.icon;
   return (
     <div className="flex items-start gap-4">
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#151515] text-white">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[rgb(var(--k-solid))] text-[rgb(var(--k-on-solid))]">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <div className="min-w-0">
         <h3 className={`${size === 'lg' ? 'text-[2.4rem]' : 'text-3xl'} font-semibold leading-[1.05] tracking-[-0.04em]`}>
           {service.title}
         </h3>
-        <p className="mt-2 text-[#1A1A1A]/55">{service.subtitle}</p>
+        <p className="mt-2 text-[rgb(var(--k-ink)/0.55)]">{service.subtitle}</p>
       </div>
     </div>
   );
@@ -103,12 +103,12 @@ export default function ServiceDeck({ services, activeId, onSelect, renderAction
                 aria-expanded={active}
                 aria-label={active ? service.title : `${language === 'EN' ? 'Open:' : 'Ouvrir :'} ${service.title}`}
                 tabIndex={active ? -1 : 0}
-                className={`absolute inset-y-0 left-0 flex flex-col items-center justify-between py-6 transition-opacity duration-200 hover:bg-black/[0.03] ${
+                className={`absolute inset-y-0 left-0 flex flex-col items-center justify-between py-6 transition-opacity duration-200 hover:bg-[rgb(var(--k-ink)/0.04)] ${
                   active ? 'pointer-events-none opacity-0' : 'opacity-100'
                 }`}
                 style={{ width: SPINE }}
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#151515] text-white">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[rgb(var(--k-solid))] text-[rgb(var(--k-on-solid))]">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span
@@ -117,7 +117,7 @@ export default function ServiceDeck({ services, activeId, onSelect, renderAction
                 >
                   {service.title}
                 </span>
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 shadow-sm">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[rgb(var(--k-panel)/0.7)] shadow-sm">
                   <Plus className="h-4 w-4" aria-hidden="true" />
                 </span>
               </button>
@@ -134,7 +134,7 @@ export default function ServiceDeck({ services, activeId, onSelect, renderAction
                 <Header service={service} />
                 <div className="mt-8 grid grid-cols-[1fr_1.15fr] gap-6">
                   <div className="flex flex-col">
-                    <p className="text-[0.95rem] leading-relaxed text-[#1A1A1A]/75">{service.description}</p>
+                    <p className="text-[0.95rem] leading-relaxed text-[rgb(var(--k-ink)/0.75)]">{service.description}</p>
                     <div className="mt-6"><Benefits service={service} /></div>
                     <div className="mt-8">{renderAction(service)}</div>
                   </div>
@@ -163,8 +163,8 @@ export default function ServiceDeck({ services, activeId, onSelect, renderAction
               </button>
               {active && (
                 <div className="px-5 pb-6">
-                  <p className="text-[#1A1A1A]/55">{service.subtitle}</p>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-[#1A1A1A]/75">{service.description}</p>
+                  <p className="text-[rgb(var(--k-ink)/0.55)]">{service.subtitle}</p>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-[rgb(var(--k-ink)/0.75)]">{service.description}</p>
                   <div className="mt-5"><Benefits service={service} /></div>
                   <div className="mt-5"><Features service={service} /></div>
                   <div className="mt-6">{renderAction(service)}</div>

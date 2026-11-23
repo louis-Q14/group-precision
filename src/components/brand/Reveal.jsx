@@ -38,7 +38,7 @@ export function SpotlightCard({ children, className = '', as: Tag = 'div', ...pr
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: 'radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.09), transparent 60%)' }}
+        style={{ background: 'radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgb(var(--c-white) / var(--spot)), transparent 60%)' }}
       />
       <div className="relative h-full">{children}</div>
     </Tag>

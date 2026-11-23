@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { createPageUrl } from '@/utils';
 import { useLanguage } from '@/components/LanguageContext';
+import { useTheme } from '@/components/ThemeContext';
 
 const getNavItems = (language) => [
   { name: language === 'FR' ? 'Le groupe' : 'The group', href: 'About' },
@@ -30,6 +31,26 @@ function LanguageToggle({ language, setLanguage }) {
   );
 }
 
+function ThemeToggle({ language }) {
+  const { theme, toggleTheme } = useTheme();
+  const toLight = theme === 'dark';
+  const label = language === 'EN'
+    ? (toLight ? 'Switch to light theme' : 'Switch to dark theme')
+    : (toLight ? 'Passer au thème clair' : 'Passer au thème sombre');
+  const Icon = toLight ? Sun : Moon;
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={label}
+      title={label}
+      className="flex h-9 w-9 items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+    >
+      <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+    </button>
+  );
+}
+
 export default function Header() {
   const { language, setLanguage } = useLanguage();
   const { pathname } = useLocation();
@@ -53,7 +74,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-black/85 backdrop-blur-xl text-white border-b border-white/10">
       <div className="max-w-6xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-8">
         <Link to="/" className="shrink-0" aria-label="PRECISION Group, accueil">
-          <img src="/images/precision-logo.png" alt="PRECISION Group" className="h-6 w-auto invert" />
+          <img src="/images/precision-logo.png" alt="PRECISION Group" className="h-6 w-auto invert light:invert-0" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="Navigation principale">
@@ -71,7 +92,8 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle language={language} />
           <LanguageToggle language={language} setLanguage={setLanguage} />
           <Link
             to={createPageUrl('Contact')}
@@ -81,6 +103,8 @@ export default function Header() {
           </Link>
         </div>
 
+        <div className="lg:hidden flex items-center gap-1">
+        <ThemeToggle language={language} />
         <button
           type="button"
           onClick={() => setIsMenuOpen((open) => !open)}
@@ -91,6 +115,7 @@ export default function Header() {
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
+        </div>
       </div>
 
       {/* Menu mobile : se déplie sous la barre, sans recouvrir l'écran */}

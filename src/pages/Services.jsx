@@ -622,7 +622,7 @@ export default function Services() {
               logos={PLATFORM_LOGOS}
               renderAction={(service) => {
                 const url = PLATFORM_LINKS[service.id];
-                const btn = 'inline-flex items-center h-12 px-6 rounded-xl bg-white text-[#1A1A1A] font-medium shadow-sm ring-1 ring-black/5 hover:bg-white/80 transition-colors';
+                const btn = 'inline-flex items-center h-12 px-6 rounded-xl bg-[rgb(var(--k-panel))] text-[rgb(var(--k-panel-ink))] font-medium shadow-sm ring-1 ring-black/5 hover:opacity-80 transition-opacity';
                 if (url) {
                   return (
                     <a href={url} target="_blank" rel="noopener noreferrer" className={btn}>
@@ -632,7 +632,7 @@ export default function Services() {
                   );
                 }
                 if (service.id === 'orbitalinvest') {
-                  return <span className="text-[#1A1A1A]/50">{ui.soon}</span>;
+                  return <span className="text-[rgb(var(--k-ink)/0.5)]">{ui.soon}</span>;
                 }
                 return <Link to={createPageUrl('Contact')} className={btn}>{ui.discuss}</Link>;
               }}

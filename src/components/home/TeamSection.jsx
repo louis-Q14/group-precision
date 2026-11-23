@@ -43,7 +43,7 @@ export default function TeamSection() {
         <ul className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {team.map((person, i) => (
             <Reveal as="li" key={person.id ?? person.name} delay={i * 0.06}>
-              <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-neutral-900">
+              <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 light:bg-[#DDD5CA]">
                 {person.image && (
                   <img
                     src={person.image}

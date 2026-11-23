@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
@@ -16,6 +18,10 @@ module.exports = {
         'lede': ['1.1875rem', { lineHeight: '1.6' }],
       },
       colors: {
+        // Blanc et noir suivent le thème : en clair, « white » devient l'encre
+        // et « black » le beige, ce qui bascule toutes les pages d'un coup.
+        white: 'rgb(var(--c-white) / <alpha-value>)',
+        black: 'rgb(var(--c-black) / <alpha-value>)',
         // Identité PRECISIONS en noir et blanc, comme le logo.
         // Les anciens noms (navy, gold, métiers) sont conservés et pointent vers des gris,
         // pour que toutes les pages existantes basculent en monochrome.
@@ -122,5 +128,9 @@ module.exports = {
       }
     }
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // light:… s'applique seulement quand le thème clair est actif
+    plugin(({ addVariant }) => addVariant('light', '.theme-light &')),
+  ],
 }

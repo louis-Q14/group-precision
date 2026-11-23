@@ -12,8 +12,8 @@ import { useLanguage } from '@/components/LanguageContext';
 const PEEK = 76;     // hauteur visible du bandeau de chaque carte en attente
 const HEIGHT = 700;  // hauteur d'une carte ouverte
 
-// Palette crème et beige
-const CARD = 'bg-[#ECE7E0] text-[#1A1A1A]';
+// Palette crème et beige (inversée en noir dans le thème clair, voir .card-palette)
+const CARD = 'palette-fixed card-palette bg-[rgb(var(--k-bg))] text-[rgb(var(--k-ink))]';
 
 const shortName = (title) => title.split(' — ')[0];
 const tagline = (title) => title.split(' — ')[1];
@@ -23,15 +23,15 @@ function AppWindow({ service, logo, className = '' }) {
   const { language } = useLanguage();
   const Icon = service.icon;
   return (
-    <div className={`rounded-tl-xl bg-[#151515] pl-1.5 pt-1.5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)] ${className}`}>
+    <div className={`rounded-tl-xl bg-[rgb(var(--k-solid))] pl-1.5 pt-1.5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)] ${className}`}>
       <div className="flex h-full overflow-hidden rounded-tl-lg">
-        <aside className="hidden sm:block w-[38%] shrink-0 bg-[#151515] p-5 text-white">
+        <aside className="hidden sm:block w-[38%] shrink-0 bg-[rgb(var(--k-solid))] p-5 text-[rgb(var(--k-on-solid))]">
           <div className="flex h-9 items-center">
             {logo ? (
-              <img src={logo} alt="" className="h-6 w-auto max-w-full object-contain object-left invert" />
+              <img src={logo} alt="" className="h-6 w-auto max-w-full object-contain object-left invert light:invert-0" />
             ) : (
               <span className="flex items-center gap-2 text-sm font-medium">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[rgb(var(--k-on-solid)/0.1)]">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 {shortName(service.title)}
@@ -42,7 +42,7 @@ function AppWindow({ service, logo, className = '' }) {
             {service.benefits.map((b, i) => (
               <li
                 key={b.text}
-                className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 ${i === 0 ? 'bg-white/10 text-white' : 'text-white/55'}`}
+                className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 ${i === 0 ? 'bg-[rgb(var(--k-on-solid)/0.1)] text-[rgb(var(--k-on-solid))]' : 'text-[rgb(var(--k-on-solid)/0.55)]'}`}
               >
                 <b.icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 {b.text}
@@ -50,13 +50,13 @@ function AppWindow({ service, logo, className = '' }) {
             ))}
           </ul>
         </aside>
-        <div className="flex-1 bg-white p-6 text-[#1A1A1A]">
+        <div className="flex-1 bg-[rgb(var(--k-panel))] p-6 text-[rgb(var(--k-panel-ink))]">
           <p className="text-sm font-medium">{language === 'EN' ? 'What we offer' : 'Ce que nous proposons'}</p>
-          <p className="text-xs text-[#1A1A1A]/45">{shortName(service.title)}</p>
-          <ul className="mt-5 divide-y divide-[#1A1A1A]/[0.07] text-[0.82rem] leading-snug">
+          <p className="text-xs text-[rgb(var(--k-panel-ink)/0.45)]">{shortName(service.title)}</p>
+          <ul className="mt-5 divide-y divide-[rgb(var(--k-panel-ink)/0.07)] text-[0.82rem] leading-snug">
             {service.features.map((f) => (
               <li key={f} className="flex gap-2.5 py-2">
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#1A1A1A]/60" aria-hidden="true" />
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[rgb(var(--k-panel-ink)/0.6)]" aria-hidden="true" />
                 <span>{f}</span>
               </li>
             ))}
@@ -71,9 +71,9 @@ function CardBody({ service, action }) {
   return (
     <div className="max-w-[46%] px-10">
       <h3 className="text-[3.4rem] font-semibold leading-[1] tracking-[-0.045em]">{shortName(service.title)}</h3>
-      {tagline(service.title) && <p className="mt-2 text-[#1A1A1A]/55">{tagline(service.title)}</p>}
+      {tagline(service.title) && <p className="mt-2 text-[rgb(var(--k-ink)/0.55)]">{tagline(service.title)}</p>}
       <p className="mt-6 text-lg font-medium">{service.subtitle}</p>
-      <p className="mt-3 text-[0.95rem] leading-relaxed text-[#1A1A1A]/75">{service.description}</p>
+      <p className="mt-3 text-[0.95rem] leading-relaxed text-[rgb(var(--k-ink)/0.75)]">{service.description}</p>
       <div className="mt-7">{action}</div>
     </div>
   );
@@ -121,11 +121,11 @@ export default function ServiceStack({ services, activeId, onSelect, renderActio
                 <span className={`flex items-baseline gap-3 min-w-0 ${active ? 'sr-only' : ''}`}>
                   <span className="text-2xl font-semibold tracking-[-0.035em] truncate">{shortName(service.title)}</span>
                   {!active && tagline(service.title) && (
-                    <span className="hidden xl:inline text-sm text-[#1A1A1A]/50 truncate">{tagline(service.title)}</span>
+                    <span className="hidden xl:inline text-sm text-[rgb(var(--k-ink)/0.5)] truncate">{tagline(service.title)}</span>
                   )}
                 </span>
                 {!active && (
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/70 shadow-sm">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--k-panel)/0.7)] shadow-sm">
                     <Plus className="h-4 w-4" aria-hidden="true" />
                   </span>
                 )}
@@ -146,9 +146,9 @@ export default function ServiceStack({ services, activeId, onSelect, renderActio
           <article key={service.id} className={`overflow-hidden rounded-2xl ring-1 ring-black/5 ${CARD}`}>
             <div className="px-6 pt-8">
               <h3 className="text-4xl font-semibold leading-tight tracking-[-0.04em]">{shortName(service.title)}</h3>
-              {tagline(service.title) && <p className="mt-1 text-[#1A1A1A]/55">{tagline(service.title)}</p>}
+              {tagline(service.title) && <p className="mt-1 text-[rgb(var(--k-ink)/0.55)]">{tagline(service.title)}</p>}
               <p className="mt-5 font-medium">{service.subtitle}</p>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-[#1A1A1A]/75">{service.description}</p>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-[rgb(var(--k-ink)/0.75)]">{service.description}</p>
               <div className="mt-6">{renderAction(service)}</div>
             </div>
             <AppWindow service={service} logo={logos[service.id]} className="ml-6 mt-8" />

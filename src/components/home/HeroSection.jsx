@@ -89,7 +89,7 @@ export default function HeroSection() {
         {/* Chiffres clés */}
         <motion.dl {...enter(0.5)} className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-white/10 bg-white/10 text-left">
           {copy.figures.map((f) => (
-            <div key={f.label} className="bg-neutral-950/90 px-6 py-7">
+            <div key={f.label} className="bg-neutral-950/90 light:bg-[#F3EFE9]/90 px-6 py-7">
               <dt className="sr-only">{f.label}</dt>
               <dd className="text-4xl lg:text-5xl font-semibold tracking-tight text-gradient tabular">{f.value}</dd>
               <dd className="mt-1 text-sm text-white/55">{f.label}</dd>
