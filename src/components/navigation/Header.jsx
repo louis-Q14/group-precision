@@ -107,7 +107,7 @@ export default function Header() {
           ))}
           <div className="mt-auto pt-8 flex items-center justify-between">
             <LanguageToggle language={language} setLanguage={setLanguage} />
-            <a href="mailto:contact@precisions.group" className="text-white/70 underline underline-offset-4">contact@precisions.group</a>
+            <a href="mailto:contact@group-precision.com" className="text-white/70 underline underline-offset-4">contact@group-precision.com</a>
           </div>
         </nav>
       )}

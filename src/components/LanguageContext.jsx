@@ -259,6 +259,8 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('language', language);
+    // Langue du document, pour les lecteurs d'écran et la traduction du navigateur
+    document.documentElement.lang = language === 'EN' ? 'en' : 'fr';
   }, [language]);
 
   const t = (key) => {

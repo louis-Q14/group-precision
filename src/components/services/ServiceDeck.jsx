@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Check, Plus } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageContext';
 
 /**
  * Cartes en éventail horizontal : les cartes fermées se réduisent à une tranche
@@ -15,9 +16,10 @@ const GAP = 8;
 const CARD = 'bg-[#ECE7E0] text-[#1A1A1A]';
 
 function Features({ service }) {
+  const { language } = useLanguage();
   return (
     <div className="rounded-xl bg-white p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
-      <p className="text-sm font-medium">Ce que nous proposons</p>
+      <p className="text-sm font-medium">{language === 'EN' ? 'What we offer' : 'Ce que nous proposons'}</p>
       <ul className="mt-4 divide-y divide-[#1A1A1A]/[0.07] text-[0.85rem] leading-snug">
         {service.features.map((f) => (
           <li key={f} className="flex gap-2.5 py-2.5">
@@ -62,6 +64,7 @@ function Header({ service, size = 'lg' }) {
 
 export default function ServiceDeck({ services, activeId, onSelect, renderAction }) {
   const reduce = useReducedMotion();
+  const { language } = useLanguage();
   const deckRef = useRef(null);
   const [deckWidth, setDeckWidth] = useState(0);
 
@@ -98,7 +101,7 @@ export default function ServiceDeck({ services, activeId, onSelect, renderAction
                 type="button"
                 onClick={() => onSelect(service.id)}
                 aria-expanded={active}
-                aria-label={active ? service.title : `Ouvrir : ${service.title}`}
+                aria-label={active ? service.title : `${language === 'EN' ? 'Open:' : 'Ouvrir :'} ${service.title}`}
                 tabIndex={active ? -1 : 0}
                 className={`absolute inset-y-0 left-0 flex flex-col items-center justify-between py-6 transition-opacity duration-200 hover:bg-black/[0.03] ${
                   active ? 'pointer-events-none opacity-0' : 'opacity-100'

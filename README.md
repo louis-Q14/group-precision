@@ -62,11 +62,11 @@ Autres commandes : `npm run build` (site de production dans `dist/`), `npm run p
    npx supabase functions deploy send-contact-email
    npx supabase functions deploy generate-presentation-doc
    npx supabase secrets set RESEND_API_KEY=re_xxx \
-       RESEND_FROM_EMAIL="PRECISION <noreply@precisions.group>" \
-       CONTACT_TO_EMAIL=contact@precisions.group \
-       ALLOWED_ORIGINS=https://precisions.group,http://localhost:5173
+       RESEND_FROM_EMAIL="PRECISION <noreply@group-precision.com>" \
+       CONTACT_TO_EMAIL=contact@group-precision.com \
+       ALLOWED_ORIGINS=https://group-precision.com,http://localhost:5173
    ```
-6. **Resend** : vérifier le domaine `precisions.group` (*Domains > Add Domain*, puis ajouter
+6. **Resend** : vérifier le domaine `group-precision.com` (*Domains > Add Domain*, puis ajouter
    les enregistrements DNS SPF/DKIM indiqués). Tant que ce n'est pas fait, l'adresse de test
    `onboarding@resend.dev` ne délivre qu'au propriétaire du compte Resend.
 
@@ -79,7 +79,7 @@ L'Admin est ensuite accessible sur `/Admin`.
 ```bash
 npm ci
 npm run build                 # lit .env.local (ou .env.production) au moment du build
-rsync -av --delete dist/ user@serveur:/var/www/precisions.group/
+rsync -av --delete dist/ user@serveur:/var/www/group-precision.com/
 ```
 
 Sur le serveur : utiliser [deploy/nginx.conf](deploy/nginx.conf) puis obtenir le certificat HTTPS

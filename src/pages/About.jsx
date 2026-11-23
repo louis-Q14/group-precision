@@ -44,10 +44,10 @@ const getValues = (language) => [
 ];
 
 const getTimeline = (language) => [
-  { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISION par Louis-Quatorze Kzd' : 'PRECISION founded by Louis-Quatorze Kzd' },
-  { year: '2024', title: language === 'FR' ? 'Premiers clients' : 'First Clients', description: language === 'FR' ? 'Signature de nos premiers contrats en RD Congo' : 'Signing our first contracts in DR Congo' },
+  { year: '2024', title: language === 'FR' ? 'Fondation' : 'Foundation', description: language === 'FR' ? 'Création de PRECISION par Louis-Quatorze Kazadi' : 'PRECISION founded by Louis-Quatorze Kazadi' },
+  { year: '2024', title: language === 'FR' ? 'Premiers clients' : 'First clients', description: language === 'FR' ? 'Signature de nos premiers contrats en RD Congo' : 'Our first contracts signed in the DR Congo' },
   { year: '2025', title: language === 'FR' ? 'Croissance' : 'Growth', description: language === 'FR' ? 'Expansion de l\'équipe et diversification des services' : 'Team expansion and service diversification' },
-  { year: '2025', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '20+ experts, présence en RD Congo, projets internationaux' : '20+ experts, DR Congo presence, international projects' },
+  { year: '2025', title: language === 'FR' ? 'Aujourd\'hui' : 'Today', description: language === 'FR' ? '20+ experts, présence en RD Congo, projets internationaux' : '20+ experts, a presence in the DR Congo and international projects' },
 ];
 
 export default function About() {
@@ -101,7 +101,7 @@ export default function About() {
           </div>
           <div className="lg:col-span-6">
             <img
-              src="/images/411ca2a35_travail.jpg"
+              src="/images/equipe-kinshasa.jpg"
               alt={language === 'FR' ? 'L’équipe PRECISION au travail' : 'The PRECISION team at work'}
               className="w-full rounded-lg object-cover"
               loading="lazy"
@@ -120,7 +120,7 @@ export default function About() {
             <motion.h2
               className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
-              {language === 'FR' ? 'Nos valeurs' : 'Our Values'}
+              {language === 'FR' ? 'Nos valeurs' : 'Our values'}
             </motion.h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
               {language === 'FR' 
@@ -153,7 +153,7 @@ export default function About() {
             <motion.h2
               className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
-              {language === 'FR' ? 'Notre histoire' : 'Our Story'}
+              {language === 'FR' ? 'Notre histoire' : 'Our story'}
             </motion.h2>
           </div>
 
@@ -189,7 +189,7 @@ export default function About() {
             <motion.h2
               className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
-              {language === 'FR' ? 'Notre équipe' : 'Our Team'}
+              {language === 'FR' ? 'Notre équipe' : 'Our team'}
             </motion.h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
               {language === 'FR' 

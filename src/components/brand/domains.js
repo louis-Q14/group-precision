@@ -93,8 +93,8 @@ export const DOMAINS = [
     EN: {
       name: 'Consulting',
       pitch: 'Decide with a clear vision',
-      text: 'Strategy, organisation, specialist expertise and international relations.',
-      services: ['Strategic consulting', 'Organisation and management', 'Specialist consulting', 'International relations'],
+      text: 'Strategy, organization, specialist expertise and international relations.',
+      services: ['Strategic consulting', 'Organization and management', 'Specialist consulting', 'International relations'],
     },
   },
 ];

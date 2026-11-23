@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useLanguage } from '@/components/LanguageContext';
+import { localizePresentation } from '@/components/services/presentationEN';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
@@ -11,14 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const companyStats = [
-  { value: '6', label: 'Plateformes propriétaires' },
-  { value: '3', label: 'Domaines d\'expertise' },
-  { value: '20+', label: 'Services spécialisés' },
-  { value: '100%', label: 'Sur mesure' },
-];
-
-const serviceCategories = [
+const baseCategories = [
   {
     id: 'communication',
     title: 'Communication Digitale',
@@ -347,7 +342,7 @@ const serviceCategories = [
   }
 ];
 
-const platforms = [
+const basePlatforms = [
   {
     id: 'sombateka',
     icon: ShoppingCart,
@@ -541,14 +536,79 @@ const platforms = [
   },
 ];
 
-const processSteps = [
-  { number: '01', title: 'Écoute', description: 'Compréhension approfondie de vos enjeux et objectifs' },
-  { number: '02', title: 'Stratégie', description: 'Élaboration de solutions tactiques pertinentes' },
-  { number: '03', title: 'Création', description: 'Conception et production des dispositifs' },
-  { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
-];
+const PROCESS = {
+  FR: [
+    { number: '01', title: 'Écoute', description: 'Compréhension approfondie de vos enjeux et objectifs' },
+    { number: '02', title: 'Stratégie', description: 'Élaboration de solutions tactiques pertinentes' },
+    { number: '03', title: 'Création', description: 'Conception et production des dispositifs' },
+    { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
+  ],
+  EN: [
+    { number: '01', title: 'Listening', description: 'An in-depth understanding of your challenges and goals' },
+    { number: '02', title: 'Strategy', description: 'Designing relevant, tactical solutions' },
+    { number: '03', title: 'Creation', description: 'Designing and producing the campaigns and tools' },
+    { number: '04', title: 'Roll-out', description: 'Implementation and continuous optimization' },
+  ],
+};
+
+const TEXT = {
+  FR: {
+    overviewTitle: 'Un cabinet, deux métiers, six plateformes',
+    overview1: 'PRECISION Group accompagne les entreprises, institutions et entrepreneurs dans leur communication digitale et leur développement économique. Notre approche conjugue conseil stratégique, exécution opérationnelle et produits numériques propriétaires.',
+    overview2: 'Au-delà du conseil, nous concevons et opérons nos propres plateformes — SombaTeka, Harchive, App243, ParckBox, Pay243 et OrbitalInvest — qui adressent des besoins concrets du marché africain : commerce, éducation, RH, services et finance.',
+    tags: ['Conseil', 'Exécution', 'Produits numériques', 'Sur mesure'],
+    platformsCount: 'Plateformes',
+    servicesTitle: 'Expertises et prestations',
+    servicesSub: 'Deux domaines d’expertise, vingt services spécialisés pour accompagner votre croissance de bout en bout.',
+    services: 'services',
+    howItWorks: 'Comment ça fonctionne',
+    whatWeOffer: 'Ce que nous proposons',
+    productsTitle: 'Nos produits numériques',
+    productsSub: 'Six plateformes éditées par PRECISION Group, conçues pour répondre aux besoins concrets du marché africain.',
+    visit: 'Visiter',
+    soon: 'Site en construction',
+    keyFeatures: 'Fonctionnalités clés',
+    techStack: 'Stack technique',
+    methodTitle: 'Notre méthodologie',
+    methodSub: 'Une approche éprouvée pour des réponses tactiques et pertinentes à vos enjeux.',
+    ctaTitle: 'Travaillons ensemble',
+    ctaText: 'Contactez-nous pour une consultation gratuite et découvrez comment nos services et nos plateformes peuvent accélérer votre développement.',
+    ctaButton: 'Planifier un appel découverte',
+  },
+  EN: {
+    overviewTitle: 'One firm, two areas of expertise, six platforms',
+    overview1: 'PRECISION Group supports companies, institutions and entrepreneurs with their digital communication and economic development. Our approach combines strategic consulting, hands-on delivery and our own digital products.',
+    overview2: 'Beyond consulting, we design and run our own platforms — SombaTeka, Harchive, App243, ParckBox, Pay243 and OrbitalInvest — which meet concrete needs of the African market: commerce, education, HR, services and finance.',
+    tags: ['Consulting', 'Delivery', 'Digital products', 'Tailor-made'],
+    platformsCount: 'Platforms',
+    servicesTitle: 'Expertise and services',
+    servicesSub: 'Two areas of expertise and twenty specialized services to support your growth from start to finish.',
+    services: 'services',
+    howItWorks: 'How it works',
+    whatWeOffer: 'What we offer',
+    productsTitle: 'Our digital products',
+    productsSub: 'Six platforms published by PRECISION Group, built to meet the concrete needs of the African market.',
+    visit: 'Visit',
+    soon: 'Website coming soon',
+    keyFeatures: 'Key features',
+    techStack: 'Tech stack',
+    methodTitle: 'Our methodology',
+    methodSub: 'A proven approach for relevant, tactical answers to your challenges.',
+    ctaTitle: 'Let’s work together',
+    ctaText: 'Contact us for a free consultation and find out how our services and platforms can accelerate your development.',
+    ctaButton: 'Book a discovery call',
+  },
+};
 
 export default function Presentation() {
+  const { language } = useLanguage();
+  const en = language === 'EN';
+  const tx = en ? TEXT.EN : TEXT.FR;
+  const processSteps = en ? PROCESS.EN : PROCESS.FR;
+  const { categories: serviceCategories, platforms } = useMemo(
+    () => (en ? localizePresentation(baseCategories, basePlatforms) : { categories: baseCategories, platforms: basePlatforms }),
+    [en],
+  );
   const [activeCategory, setActiveCategory] = useState('communication');
   const [activeService, setActiveService] = useState('strategie');
   const [activePlatform, setActivePlatform] = useState('sombateka');
@@ -567,20 +627,16 @@ export default function Presentation() {
             <motion.div
             >
               <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6">
-                Un cabinet, deux métiers, six plateformes
+                {tx.overviewTitle}
               </h2>
               <p className="text-lg text-white/60 mb-6">
-                PRECISION Group accompagne les entreprises, institutions et entrepreneurs dans leur
-                communication digitale et leur développement économique. Notre approche conjugue
-                conseil stratégique, exécution opérationnelle et produits numériques propriétaires.
+                {tx.overview1}
               </p>
               <p className="text-lg text-white/60 mb-8">
-                Au-delà du conseil, nous concevons et opérons nos propres plateformes —
-                SombaTeka, Harchive, App243, ParckBox, Pay243 et OrbitalInvest — qui adressent des besoins
-                concrets du marché africain : commerce, éducation, RH, services et finance.
+                {tx.overview2}
               </p>
               <div className="flex flex-wrap gap-3">
-                {['Conseil', 'Exécution', 'Produits numériques', 'Sur mesure'].map((tag) => (
+                {tx.tags.map((tag) => (
                   <span key={tag} className="px-4 py-2 rounded-full bg-white/[0.07] text-sm font-medium text-white/75">
                     {tag}
                   </span>
@@ -601,7 +657,7 @@ export default function Presentation() {
               <div className="p-6 rounded-2xl bg-white/10 border border-white/15 text-white">
                 <Database className="w-8 h-8 mb-3" />
                 <div className="text-2xl font-semibold tracking-tight">{platforms.length}</div>
-                <div className="text-sm opacity-90">Plateformes</div>
+                <div className="text-sm opacity-90">{tx.platformsCount}</div>
               </div>
             </motion.div>
           </div>
@@ -613,10 +669,10 @@ export default function Presentation() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4">
-              Expertises & prestations
+              {tx.servicesTitle}
             </h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Deux domaines d'expertise, vingt services spécialisés pour accompagner votre croissance de bout en bout.
+              {tx.servicesSub}
             </p>
           </div>
 
@@ -638,7 +694,7 @@ export default function Presentation() {
                 <category.icon className="w-6 h-6" />
                 <div className="text-left">
                   <div className="font-semibold">{category.title}</div>
-                  <div className="text-xs opacity-70">{category.services.length} services</div>
+                  <div className="text-xs opacity-70">{category.services.length} {tx.services}</div>
                 </div>
               </button>
             ))}
@@ -688,7 +744,7 @@ export default function Presentation() {
                   <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 border border-white/10 mb-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Zap className="w-5 h-5 text-gold" />
-                      <h4 className="font-semibold text-white">Comment ça fonctionne</h4>
+                      <h4 className="font-semibold text-white">{tx.howItWorks}</h4>
                     </div>
                     <p className="text-sm text-white/60 leading-relaxed">{currentService.howItWorks}</p>
                   </div>
@@ -707,7 +763,7 @@ export default function Presentation() {
 
                 <div className={`${currentService.bgColor} rounded-3xl p-8 lg:p-10`}>
                   <h4 className="text-xl font-semibold text-white mb-6">
-                    Ce que nous proposons
+                    {tx.whatWeOffer}
                   </h4>
                   <ul className="space-y-4">
                     {currentService.features.map((feature, i) => (
@@ -729,10 +785,10 @@ export default function Presentation() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4">
-              Nos produits numériques
+              {tx.productsTitle}
             </h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Six plateformes éditées par PRECISION Group, conçues pour répondre aux besoins concrets du marché africain.
+              {tx.productsSub}
             </p>
           </div>
 
@@ -782,7 +838,7 @@ export default function Presentation() {
                   <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 mb-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Zap className="w-5 h-5 text-gold" />
-                      <h4 className="font-semibold text-white">Comment ça fonctionne</h4>
+                      <h4 className="font-semibold text-white">{tx.howItWorks}</h4>
                     </div>
                     <p className="text-sm text-white/60 leading-relaxed">{currentPlatform.howItWorks}</p>
                   </div>
@@ -802,13 +858,13 @@ export default function Presentation() {
                   {currentPlatform.status === 'live' ? (
                     <a href={currentPlatform.url} target="_blank" rel="noopener noreferrer">
                       <Button className="rounded-full px-8 bg-white text-black hover:bg-white/85">
-                        Visiter {currentPlatform.title}
+                        {tx.visit} {currentPlatform.title}
                         <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </a>
                   ) : (
                     <Button disabled className="rounded-full px-8 bg-white/20 text-white cursor-not-allowed opacity-70">
-                      Site en construction
+                      {tx.soon}
                     </Button>
                   )}
                 </div>
@@ -817,7 +873,7 @@ export default function Presentation() {
                 <div>
                   <div className={`${currentPlatform.bgColor} rounded-3xl p-8 lg:p-10 mb-6`}>
                     <h4 className="text-xl font-semibold text-white mb-6">
-                      Fonctionnalités clés
+                      {tx.keyFeatures}
                     </h4>
                     <ul className="space-y-4">
                       {currentPlatform.features.map((feature, i) => (
@@ -833,7 +889,7 @@ export default function Presentation() {
                   <div className="p-8 rounded-3xl bg-white/[0.04] border border-white/10">
                     <div className="flex items-center gap-2 mb-6">
                       <Code2 className="w-5 h-5 text-gold" />
-                      <h4 className="text-xl font-semibold text-white">Stack technique</h4>
+                      <h4 className="text-xl font-semibold text-white">{tx.techStack}</h4>
                     </div>
                     <div className="space-y-3">
                       {currentPlatform.techStack.map((tech, i) => (
@@ -862,10 +918,10 @@ export default function Presentation() {
             <motion.h2
               className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-4"
             >
-              Notre méthodologie
+              {tx.methodTitle}
             </motion.h2>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Une approche éprouvée pour des réponses tactiques et pertinentes à vos enjeux.
+              {tx.methodSub}
             </p>
           </div>
 
@@ -895,17 +951,16 @@ export default function Presentation() {
           <motion.h2
             className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6"
           >
-            Travaillons ensemble
+            {tx.ctaTitle}
           </motion.h2>
           <motion.p
             className="text-lg text-white/40 mb-8"
           >
-            Contactez-nous pour une consultation gratuite et découvrez comment nos services
-            et nos plateformes peuvent accélérer votre développement.
+            {tx.ctaText}
           </motion.p>
           <Link to={createPageUrl('Contact')}>
             <Button className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/85 font-semibold text-lg">
-              Planifier un appel découverte
+              {tx.ctaButton}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

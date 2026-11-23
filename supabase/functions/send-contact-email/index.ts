@@ -3,14 +3,14 @@
 // Secrets à définir (Supabase > Edge Functions > Secrets, ou `supabase secrets set`) :
 //   RESEND_API_KEY     clé API Resend (obligatoire)
 //   RESEND_FROM_EMAIL  expéditeur sur un domaine vérifié chez Resend,
-//                      ex. « PRECISION <noreply@precisions.group> »
-//   CONTACT_TO_EMAIL   destinataire (défaut : contact@precisions.group)
+//                      ex. « PRECISION <noreply@group-precision.com> »
+//   CONTACT_TO_EMAIL   destinataire (défaut : contact@group-precision.com)
 //   ALLOWED_ORIGINS    origines autorisées, séparées par des virgules,
-//                      ex. « https://precisions.group,http://localhost:5173 » (défaut : *)
+//                      ex. « https://group-precision.com,http://localhost:5173 » (défaut : *)
 
 const RESEND_TEST_SENDER = 'onboarding@resend.dev';
 const FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL') || RESEND_TEST_SENDER;
-const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') || 'contact@precisions.group';
+const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') || 'contact@group-precision.com';
 const ALLOWED_ORIGINS = (Deno.env.get('ALLOWED_ORIGINS') || '*')
   .split(',')
   .map((origin) => origin.trim())

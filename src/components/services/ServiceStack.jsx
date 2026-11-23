@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Check, Plus } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageContext';
 
 /**
  * Cartes empilées en cascade : seul le bandeau supérieur des cartes en attente
@@ -19,6 +20,7 @@ const tagline = (title) => title.split(' — ')[1];
 
 /** Fenêtre d'application : barre latérale sombre et panneau blanc listant l'offre. */
 function AppWindow({ service, logo, className = '' }) {
+  const { language } = useLanguage();
   const Icon = service.icon;
   return (
     <div className={`rounded-tl-xl bg-[#151515] pl-1.5 pt-1.5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)] ${className}`}>
@@ -49,7 +51,7 @@ function AppWindow({ service, logo, className = '' }) {
           </ul>
         </aside>
         <div className="flex-1 bg-white p-6 text-[#1A1A1A]">
-          <p className="text-sm font-medium">Ce que nous proposons</p>
+          <p className="text-sm font-medium">{language === 'EN' ? 'What we offer' : 'Ce que nous proposons'}</p>
           <p className="text-xs text-[#1A1A1A]/45">{shortName(service.title)}</p>
           <ul className="mt-5 divide-y divide-[#1A1A1A]/[0.07] text-[0.82rem] leading-snug">
             {service.features.map((f) => (

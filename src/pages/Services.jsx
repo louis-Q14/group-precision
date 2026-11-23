@@ -1,7 +1,9 @@
 import PageHero from '@/components/brand/PageHero';
 import ServiceStack from '@/components/services/ServiceStack';
 import ServiceDeck from '@/components/services/ServiceDeck';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useLanguage } from '@/components/LanguageContext';
+import { localizeCategories } from '@/components/services/servicesEN';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { 
@@ -270,7 +272,7 @@ const serviceCategories = [
           'Expertise technique spécialisée',
           'Benchmarks et meilleures pratiques',
           'Recommandations opérationnelles',
-          'Transfer de compétences'
+          'Transfert de compétences'
         ],
         benefits: [
           { icon: Search, text: 'Expertise pointue' },
@@ -468,12 +470,49 @@ const serviceCategories = [
   }
 ];
 
-const processSteps = [
-  { number: '01', title: 'Écoute', description: 'Compréhension approfondie de vos enjeux et objectifs' },
-  { number: '02', title: 'Stratégie', description: 'Élaboration de solutions tactiques pertinentes' },
-  { number: '03', title: 'Création', description: 'Conception et production des dispositifs' },
-  { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
-];
+const processSteps = {
+  FR: [
+    { number: '01', title: 'Écoute', description: 'Compréhension approfondie de vos enjeux et objectifs' },
+    { number: '02', title: 'Stratégie', description: 'Élaboration de solutions tactiques pertinentes' },
+    { number: '03', title: 'Création', description: 'Conception et production des dispositifs' },
+    { number: '04', title: 'Déploiement', description: 'Mise en œuvre et optimisation continue' },
+  ],
+  EN: [
+    { number: '01', title: 'Listening', description: 'An in-depth understanding of your challenges and goals' },
+    { number: '02', title: 'Strategy', description: 'Designing relevant, tactical solutions' },
+    { number: '03', title: 'Creation', description: 'Designing and producing the campaigns and tools' },
+    { number: '04', title: 'Roll-out', description: 'Implementation and continuous optimization' },
+  ],
+};
+
+const UI = {
+  FR: {
+    title: 'Nos métiers',
+    lede: 'Communication, financement, digital, formation et conseil : le détail de ce que nous prenons en charge, service par service.',
+    tabs: 'Catégories de services',
+    hintStack: 'Cliquez sur une carte pour l’amener au premier plan.',
+    hintDeck: 'Cliquez sur une carte pour l’ouvrir.',
+    visit: 'Visiter',
+    newTab: '(nouvel onglet)',
+    soon: 'Site en construction',
+    discuss: 'Discuter de votre projet',
+    method: 'Notre méthode',
+    step: 'Étape',
+  },
+  EN: {
+    title: 'What we do',
+    lede: 'Communication, financing, digital, training and consulting: what we take on, service by service.',
+    tabs: 'Service categories',
+    hintStack: 'Click a card to bring it to the front.',
+    hintDeck: 'Click a card to open it.',
+    visit: 'Visit',
+    newTab: '(opens in a new tab)',
+    soon: 'Website coming soon',
+    discuss: 'Discuss your project',
+    method: 'Our method',
+    step: 'Step',
+  },
+};
 
 // Les liens « #métier » de l'accueil et du pied de page ouvrent la bonne catégorie et le bon service
 const HASH_TARGETS = {
@@ -502,6 +541,12 @@ const PLATFORM_LOGOS = {
 
 export default function Services() {
   const { hash } = useLocation();
+  const { language } = useLanguage();
+  const ui = UI[language] || UI.FR;
+  const categories = useMemo(
+    () => (language === 'EN' ? localizeCategories(serviceCategories) : serviceCategories),
+    [language],
+  );
   const [activeCategory, setActiveCategory] = useState('communication');
   const [activeService, setActiveService] = useState('strategie');
 
@@ -521,21 +566,21 @@ export default function Services() {
     }
   }, [hash]);
 
-  const currentCategory = serviceCategories.find(c => c.id === activeCategory);
+  const currentCategory = categories.find(c => c.id === activeCategory);
   const CardsLayout = currentCategory?.id === 'plateformes' ? ServiceStack : ServiceDeck;
 
   return (
     <main className="bg-black text-white">
       <PageHero
-        title="Nos métiers"
-        lede="Communication, financement, digital, formation et conseil : le détail de ce que nous prenons en charge, service par service."
+        title={ui.title}
+        lede={ui.lede}
       />
 
       {/* Services et plateformes : cartes beige empilées sur le fond noir du site */}
       <section className="py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Catégories de services">
-            {serviceCategories.map((category) => (
+          <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label={ui.tabs}>
+            {categories.map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -561,7 +606,7 @@ export default function Services() {
             <h2 className="text-display font-semibold text-gradient">{currentCategory?.title}</h2>
             <p className="mt-3 text-white/60 max-w-xl mx-auto">{currentCategory?.description}</p>
             <p className="mt-2 text-sm text-white/40 hidden lg:block">
-              {currentCategory?.id === 'plateformes' ? 'Cliquez sur une carte pour l’amener au premier plan.' : 'Cliquez sur une carte pour l’ouvrir.'}
+              {currentCategory?.id === 'plateformes' ? ui.hintStack : ui.hintDeck}
             </p>
           </div>
 
@@ -579,15 +624,15 @@ export default function Services() {
                 if (url) {
                   return (
                     <a href={url} target="_blank" rel="noopener noreferrer" className={btn}>
-                      Visiter {service.title.split(' — ')[0]}
-                      <span className="sr-only"> (nouvel onglet)</span>
+                      {ui.visit} {service.title.split(' — ')[0]}
+                      <span className="sr-only"> {ui.newTab}</span>
                     </a>
                   );
                 }
                 if (service.id === 'orbitalinvest') {
-                  return <span className="text-[#1A1A1A]/50">Site en construction</span>;
+                  return <span className="text-[#1A1A1A]/50">{ui.soon}</span>;
                 }
-                return <Link to={createPageUrl('Contact')} className={btn}>Discuter de votre projet</Link>;
+                return <Link to={createPageUrl('Contact')} className={btn}>{ui.discuss}</Link>;
               }}
             />
           )}
@@ -597,11 +642,11 @@ export default function Services() {
       {/* Méthode : une vraie séquence, d'où la numérotation */}
       <section className="border-t border-white/10 py-24">
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
-          <h2 className="text-display font-semibold text-gradient">Notre méthode</h2>
+          <h2 className="text-display font-semibold text-gradient">{ui.method}</h2>
           <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {processSteps.map((step) => (
+            {(processSteps[language] || processSteps.FR).map((step) => (
               <li key={step.number} className="rounded-2xl glass p-6">
-                <span className="text-sm text-white/45 tabular">Étape {Number(step.number)}</span>
+                <span className="text-sm text-white/45 tabular">{ui.step} {Number(step.number)}</span>
                 <h3 className="mt-6 text-xl font-semibold tracking-tight">{step.title}</h3>
                 <p className="mt-2 text-white/60">{step.description}</p>
               </li>

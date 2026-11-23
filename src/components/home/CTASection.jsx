@@ -46,12 +46,12 @@ export default function CTASection() {
           <dl className="mt-14 pt-10 border-t border-white/10 grid sm:grid-cols-3 gap-8 text-sm">
             <div>
               <dt className="text-white/45">{copy.address}</dt>
-              <dd className="mt-1 text-white/85">100, av. Colonel Ebeya et TSF<br />Gombe, Kinshasa, RD Congo</dd>
+              <dd className="mt-1 text-white/85">100, av. Colonel Ebeya et TSF<br />Gombe, Kinshasa, {language === 'EN' ? 'DR Congo' : 'RD Congo'}</dd>
             </div>
             <div>
               <dt className="text-white/45">Email</dt>
               <dd className="mt-1">
-                <a href="mailto:contact@precisions.group" className="text-white/85 underline underline-offset-4 hover:text-white">contact@precisions.group</a>
+                <a href="mailto:contact@group-precision.com" className="text-white/85 underline underline-offset-4 hover:text-white">contact@group-precision.com</a>
               </dd>
             </div>
             <div>

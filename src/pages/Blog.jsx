@@ -16,7 +16,7 @@ const getCategories = (language) => [
   { id: 'insights', name: 'Insights' },
   { id: 'tutorials', name: language === 'FR' ? 'Tutoriels' : 'Tutorials' },
   { id: 'news', name: language === 'FR' ? 'Actualités' : 'News' },
-  { id: 'case-study', name: language === 'FR' ? 'Études de cas' : 'Case Studies' },
+  { id: 'case-study', name: language === 'FR' ? 'Études de cas' : 'Case studies' },
 ];
 
 // Fiche BlogPost (Admin) -> objet utilisé par la page

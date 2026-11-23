@@ -33,7 +33,7 @@ function App() {
                 element={<LayoutWrapper currentPageName={path}><Page /></LayoutWrapper>}
               />
             ))}
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="*" element={<LayoutWrapper currentPageName="NotFound"><PageNotFound /></LayoutWrapper>} />
           </Routes>
         </Router>
         <Toaster />

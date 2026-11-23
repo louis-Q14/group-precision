@@ -7,6 +7,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { useLanguage } from '@/components/LanguageContext';
 
 // Composant pour le carrousel d'images animé
 function ImageCarousel({ images, title }) {
@@ -44,6 +45,8 @@ function ImageCarousel({ images, title }) {
         {images.map((_, idx) => (
           <button
             key={idx}
+            type="button"
+            aria-label={`${idx + 1} / ${images.length}`}
             onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
             className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-white w-4' : 'bg-white/50'}`}
           />
@@ -53,7 +56,7 @@ function ImageCarousel({ images, title }) {
   );
 }
 
-const projects = [
+const baseProjects = [
   {
     id: 1,
     title: 'Harchive',
@@ -106,23 +109,65 @@ const projects = [
   },
 ];
 
-const categories = [
-  { id: 'all', name: 'Tous les projets' },
-  { id: 'web', name: 'Web' },
-  { id: 'mobile', name: 'Mobile' },
-  { id: 'branding', name: 'Branding' },
-  { id: 'marketing', name: 'Marketing' },
-];
+// Version anglaise des projets, indexée par identifiant
+const PROJECTS_EN = {
+  1: {
+    description: 'An innovative platform connecting everyone involved in education in the Democratic Republic of the Congo, and much more.',
+    challenge: 'Connecting the different players in the Congolese education system on a single platform.',
+    solution: 'A collaborative platform that lets teachers, students, parents and institutions communicate effectively.',
+    results: [
+      { label: 'Users', value: 'Ongoing' },
+      { label: 'Universities', value: 'DRC' },
+    ],
+    testimonial: 'A groundbreaking solution for education in the DRC.',
+    testimonialAuthor: 'Harchive team',
+  },
+  2: {
+    description: 'A platform supporting market gardeners with access to land and short-term financing, to boost local agriculture and promote sustainable production.',
+    challenge: 'Giving market gardeners easy access to farmland and to financing suited to their needs.',
+    solution: 'A platform connecting market gardeners with landowners and microfinance institutions for short-term financing.',
+    results: [
+      { label: 'Sector', value: 'Agriculture' },
+      { label: 'Impact', value: 'Sustainable' },
+    ],
+    testimonial: 'An initiative that is changing the daily lives of local farmers.',
+    testimonialAuthor: 'Terreau Fertile team',
+  },
+};
 
-const industries = [
-  { id: 'all', name: 'Toutes industries' },
-  { id: 'tech', name: 'Tech' },
-  { id: 'finance', name: 'Finance' },
-  { id: 'retail', name: 'Retail' },
-  { id: 'healthcare', name: 'Santé' },
-];
+const TEXT = {
+  FR: {
+    title: 'Réalisations',
+    lede: 'Des projets menés pour nos clients et pour le groupe, de la communication aux plateformes.',
+    categories: { all: 'Tous les projets', web: 'Web', mobile: 'Mobile', branding: 'Image de marque', marketing: 'Marketing' },
+    industries: { all: 'Tous les secteurs', tech: 'Tech', finance: 'Finance', retail: 'Commerce', healthcare: 'Santé' },
+    challenge: 'Le défi',
+    solution: 'Notre solution',
+    visit: 'Visiter le site',
+    ctaTitle: 'Votre projet pourrait être le prochain',
+    ctaText: 'Discutons de vos ambitions et voyons comment nous pouvons créer ensemble quelque chose d’exceptionnel.',
+    ctaButton: 'Démarrer votre projet',
+  },
+  EN: {
+    title: 'Our work',
+    lede: 'Projects delivered for our clients and for the group, from communication to platforms.',
+    categories: { all: 'All projects', web: 'Web', mobile: 'Mobile', branding: 'Branding', marketing: 'Marketing' },
+    industries: { all: 'All sectors', tech: 'Tech', finance: 'Finance', retail: 'Retail', healthcare: 'Healthcare' },
+    challenge: 'The challenge',
+    solution: 'Our solution',
+    visit: 'Visit the website',
+    ctaTitle: 'Your project could be next',
+    ctaText: 'Let’s talk about your ambitions and see how we can build something exceptional together.',
+    ctaButton: 'Start your project',
+  },
+};
 
 export default function Portfolio() {
+  const { language } = useLanguage();
+  const tx = TEXT[language] || TEXT.FR;
+  const projects = language === 'EN' ? baseProjects.map((p) => ({ ...p, ...PROJECTS_EN[p.id] })) : baseProjects;
+  const categories = Object.entries(tx.categories).map(([id, name]) => ({ id, name }));
+  const industries = Object.entries(tx.industries).map(([id, name]) => ({ id, name }));
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeIndustry, setActiveIndustry] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -137,8 +182,8 @@ export default function Portfolio() {
     <main>
       {/* Hero */}
       <PageHero
-        title="Réalisations"
-        lede="Des projets menés pour nos clients et pour le groupe, de la communication aux plateformes."
+        title={tx.title}
+        lede={tx.lede}
       />
 
       {/* Filters & Projects */}
@@ -266,11 +311,11 @@ export default function Portfolio() {
                 
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div>
-                    <h3 className="font-semibold text-white mb-2">Le défi</h3>
+                    <h3 className="font-semibold text-white mb-2">{tx.challenge}</h3>
                     <p className="text-white/60">{selectedProject.challenge}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-2">Notre solution</h3>
+                    <h3 className="font-semibold text-white mb-2">{tx.solution}</h3>
                     <p className="text-white/60">{selectedProject.solution}</p>
                   </div>
                 </div>
@@ -305,7 +350,7 @@ export default function Portfolio() {
                     className="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.04] border border-white/10 text-white rounded-full hover:bg-white/85 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Visiter le site
+                    {tx.visit}
                   </a>
                 )}
                 </div>
@@ -320,16 +365,16 @@ export default function Portfolio() {
           <motion.h2
             className="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6"
           >
-            Votre projet pourrait être le prochain
+            {tx.ctaTitle}
           </motion.h2>
           <motion.p
             className="text-lg text-white/60 mb-8"
           >
-            Discutons de vos ambitions et voyons comment nous pouvons créer ensemble quelque chose d'exceptionnel.
+            {tx.ctaText}
           </motion.p>
           <Link to={createPageUrl('Contact')}>
             <Button className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/85 text-lg">
-              Démarrer votre projet
+              {tx.ctaButton}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

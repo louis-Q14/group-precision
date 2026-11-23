@@ -99,9 +99,9 @@ export default function Footer() {
             <p className="mt-6 max-w-sm">{copy.about}</p>
             <address className="mt-6 not-italic leading-relaxed">
               100, av. Colonel Ebeya et TSF<br />
-              Gombe, Kinshasa, RD Congo<br />
-              <a href="mailto:contact@precisions.group" className="text-white underline underline-offset-4">
-                contact@precisions.group
+              Gombe, Kinshasa, {language === 'EN' ? 'DR Congo' : 'RD Congo'}<br />
+              <a href="mailto:contact@group-precision.com" className="text-white underline underline-offset-4">
+                contact@group-precision.com
               </a>
             </address>
           </div>
