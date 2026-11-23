@@ -14,6 +14,7 @@ const PLATFORMS = [
   },
   {
     name: 'Harchive',
+    logo: '/images/harchive-logo.png',
     url: 'https://harchive.net',
     domain: 'harchive.net',
     FR: { field: 'Archivage académique', text: 'Dossiers, diplômes et attestations des universités et écoles de la RDC, vérifiables en ligne.' },
@@ -37,6 +38,7 @@ const PLATFORMS = [
   },
   {
     name: 'Pay243',
+    logo: '/images/pay243-logo.png',
     url: 'https://pay243.com',
     domain: 'pay243.com',
     FR: { field: 'Portefeuille électronique', text: 'Un portefeuille électronique pour régler facilement vos achats en ligne.' },

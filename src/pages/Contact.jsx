@@ -95,6 +95,10 @@ const TEXT = {
     title: 'Parlons de votre projet',
     lede: 'Décrivez votre besoin : nous revenons vers vous avec une première lecture et les bons interlocuteurs. Le premier échange est gratuit.',
     details: 'Nos coordonnées',
+    detailsNote: 'Une question rapide ? Écrivez-nous ou appelez-nous directement.',
+    required: 'Les champs marqués d’un * sont obligatoires. Réponse sous 24 h ouvrées.',
+    aboutYou: 'Vous',
+    yourProject: 'Votre projet',
     sentToast: 'Message envoyé avec succès !',
     sent: 'Message envoyé !',
     sentText: 'Merci pour votre message. Notre équipe vous contactera dans les 24 h.',
@@ -123,6 +127,10 @@ const TEXT = {
     title: 'Let’s talk about your project',
     lede: 'Tell us what you need: we will come back to you with a first assessment and the right people. The first conversation is free.',
     details: 'Contact details',
+    detailsNote: 'A quick question? Email or call us directly.',
+    required: 'Fields marked * are required. We reply within one business day.',
+    aboutYou: 'About you',
+    yourProject: 'Your project',
     sentToast: 'Message sent successfully!',
     sent: 'Message sent!',
     sentText: 'Thank you for your message. Our team will get back to you within 24 hours.',
@@ -225,55 +233,45 @@ export default function Contact() {
         lede={tx.lede}
       />
 
-      {/* Contact Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-16">
-            {/* Contact Info */}
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-semibold tracking-tight text-white mb-8">
-                {tx.details}
-              </h2>
-              
-              <div className="space-y-6 mb-12">
+      {/* Coordonnées + formulaire, réunis dans une seule carte */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          <div className="grid lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            {/* Coordonnées */}
+            <aside className="border-b border-white/10 bg-white/[0.03] p-8 lg:border-b-0 lg:border-r lg:p-9">
+              <h2 className="text-xl font-semibold tracking-tight text-white">{tx.details}</h2>
+              <p className="mt-3 text-sm text-white/55">{tx.detailsNote}</p>
+
+              <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
                 {contactInfo.map((info) => (
-                  <motion.div
-                    key={info.title}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-5 h-5 text-gold" />
+                  <li key={info.title} className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white/10">
+                      <info.icon className="h-[18px] w-[18px] text-white" aria-hidden="true" />
                     </div>
-                    <div>
-                      <div className="text-sm text-white/50 mb-1">{info.title}</div>
-                      {info.link ? (
-                        <a href={info.link} className="font-medium text-white hover:text-white transition-colors">
+                    <div className="min-w-0">
+                      <div className="text-sm text-white/50">{info.title}</div>
+                      {info.link && info.link !== '#' ? (
+                        <a href={info.link} className="mt-0.5 block text-[15px] font-medium text-white [overflow-wrap:anywhere] underline-offset-4 hover:underline">
                           {info.value}
                         </a>
                       ) : (
-                        <div className="font-medium text-white">{info.value}</div>
+                        <div className="mt-0.5 text-[15px] font-medium text-white">{info.value}</div>
                       )}
                     </div>
-                  </motion.div>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </aside>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
+            {/* Formulaire */}
+            <div className="p-8 lg:p-12">
               {submitted ? (
-                <motion.div
-                  className="bg-white/[0.03] rounded-3xl p-12 text-center"
-                >
-                  <div className="w-20 h-20 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-6">
-                    <CheckCircle className="w-10 h-10 text-white" />
+                <div className="flex h-full flex-col items-center justify-center py-12 text-center">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/10">
+                    <CheckCircle className="h-8 w-8 text-white" aria-hidden="true" />
                   </div>
-                  <h3 className="text-2xl font-semibold tracking-tight text-white mb-4">
-                    {tx.sent}
-                  </h3>
-                  <p className="text-white/60 mb-8">
-                    {tx.sentText}
-                  </p>
+                  <h2 className="mb-3 text-2xl font-semibold tracking-tight text-white">{tx.sent}</h2>
+                  <p className="mb-8 max-w-md text-white/60">{tx.sentText}</p>
                   <Button
                     onClick={() => {
                       setSubmitted(false);
@@ -287,114 +285,122 @@ export default function Contact() {
                   >
                     {tx.another}
                   </Button>
-                </motion.div>
+                </div>
               ) : (
-                <motion.form
-                  onSubmit={handleSubmit}
-                  className="bg-white/[0.03] rounded-3xl p-8 lg:p-12"
-                >
-                  <h2 className="text-2xl font-semibold tracking-tight text-white mb-8">
-                    {tx.formTitle}
-                  </h2>
+                <form onSubmit={handleSubmit}>
+                  <h2 className="text-2xl font-semibold tracking-tight text-white">{tx.formTitle}</h2>
+                  <p className="mt-2 text-sm text-white/55">{tx.required}</p>
 
-                  <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="full_name">{tx.fullName}</Label>
-                      <Input
-                        id="full_name"
-                        value={formData.full_name}
-                        onChange={(e) => handleChange('full_name', e.target.value)}
-                        required
-                        className="h-12 rounded-xl"
-                        placeholder="Jean Mukendi"
-                      />
+                  <fieldset className="mt-10">
+                    <legend className="text-sm font-medium text-white/50">{tx.aboutYou}</legend>
+                    <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="full_name">{tx.fullName}</Label>
+                        <Input
+                          id="full_name"
+                          value={formData.full_name}
+                          onChange={(e) => handleChange('full_name', e.target.value)}
+                          required
+                          autoComplete="name"
+                          className="h-12 rounded-lg"
+                          placeholder="Jean Mukendi"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">{tx.email}</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleChange('email', e.target.value)}
+                          required
+                          autoComplete="email"
+                          className="h-12 rounded-lg"
+                          placeholder="jean@entreprise.cd"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">{tx.phone}</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => handleChange('phone', e.target.value)}
+                          autoComplete="tel"
+                          className="h-12 rounded-lg"
+                          placeholder="+243 800 000 000"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="company">{tx.company}</Label>
+                        <Input
+                          id="company"
+                          value={formData.company}
+                          onChange={(e) => handleChange('company', e.target.value)}
+                          autoComplete="organization"
+                          className="h-12 rounded-lg"
+                          placeholder={tx.companyPh}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">{tx.email}</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange('email', e.target.value)}
-                        required
-                        className="h-12 rounded-xl"
-                        placeholder="jean@entreprise.cd"
-                      />
+                  </fieldset>
+
+                  <fieldset className="mt-10 border-t border-white/10 pt-10">
+                    <legend className="sr-only">{tx.yourProject}</legend>
+                    <p className="text-sm font-medium text-white/50" aria-hidden="true">{tx.yourProject}</p>
+                    <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="interest">{tx.projectType}</Label>
+                        <Select value={formData.interest} onValueChange={(v) => handleChange('interest', v)} required>
+                          <SelectTrigger id="interest" className="h-12 rounded-lg">
+                            <SelectValue placeholder={tx.select} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {Object.entries(tx.interests).map(([value, label]) => (
+                              <SelectItem key={value} value={value}>{label}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="budget_range">{tx.budget}</Label>
+                        <Select value={formData.budget_range} onValueChange={(v) => handleChange('budget_range', v)}>
+                          <SelectTrigger id="budget_range" className="h-12 rounded-lg">
+                            <SelectValue placeholder={tx.select} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {BUDGET_VALUES.map((value, i) => (
+                              <SelectItem key={value} value={value}>{tx.budgets[i]}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2 sm:col-span-2">
+                        <Label htmlFor="message">{tx.message}</Label>
+                        <Textarea
+                          id="message"
+                          value={formData.message}
+                          onChange={(e) => handleChange('message', e.target.value)}
+                          required
+                          className="min-h-[180px] rounded-lg"
+                          placeholder={tx.messagePh}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">{tx.phone}</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleChange('phone', e.target.value)}
-                        className="h-12 rounded-xl"
-                        placeholder="+243 800 000 000"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company">{tx.company}</Label>
-                      <Input
-                        id="company"
-                        value={formData.company}
-                        onChange={(e) => handleChange('company', e.target.value)}
-                        className="h-12 rounded-xl"
-                        placeholder={tx.companyPh}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>{tx.projectType}</Label>
-                      <Select value={formData.interest} onValueChange={(v) => handleChange('interest', v)} required>
-                        <SelectTrigger className="h-12 rounded-xl">
-                          <SelectValue placeholder={tx.select} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {Object.entries(tx.interests).map(([value, label]) => (
-                            <SelectItem key={value} value={value}>{label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>{tx.budget}</Label>
-                      <Select value={formData.budget_range} onValueChange={(v) => handleChange('budget_range', v)}>
-                        <SelectTrigger className="h-12 rounded-xl">
-                          <SelectValue placeholder={tx.select} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {BUDGET_VALUES.map((value, i) => (
-                            <SelectItem key={value} value={value}>{tx.budgets[i]}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  </fieldset>
+
+                  <div className="mt-10 flex flex-col-reverse gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="max-w-sm text-sm text-white/50">{tx.consent}</p>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="h-12 w-full shrink-0 rounded-full bg-white px-8 text-base text-black hover:bg-white/85 sm:w-auto"
+                    >
+                      {isSubmitting ? tx.sending : tx.submit}
+                      <Send className="ml-2 h-4 w-4" aria-hidden="true" />
+                    </Button>
                   </div>
-
-                  <div className="space-y-2 mb-8">
-                    <Label htmlFor="message">{tx.message}</Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => handleChange('message', e.target.value)}
-                      required
-                      className="min-h-[150px] rounded-xl"
-                      placeholder={tx.messagePh}
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-14 rounded-xl bg-white text-black hover:bg-white/85 text-lg"
-                  >
-                    {isSubmitting ? tx.sending : tx.submit}
-                    <Send className="w-5 h-5 ml-2" />
-                  </Button>
-
-                  <p className="text-sm text-white/50 mt-4 text-center">
-                    {tx.consent}
-                  </p>
-                </motion.form>
+                </form>
               )}
             </div>
           </div>

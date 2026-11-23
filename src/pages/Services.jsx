@@ -534,8 +534,10 @@ const PLATFORM_LINKS = {
 
 const PLATFORM_LOGOS = {
   sombateka: '/images/805a2e5f6_SOMBATEKA.png',
+  harchive: '/images/harchive-logo.png',
   app243: '/images/7c4de919e_App243.png',
   parckbox: '/images/9c99ecb71_ParcKBoxlogof.png',
+  pay243: '/images/pay243-logo.png',
   orbitalinvest: '/images/304b0f5c2_Orbitallnvest.png',
 };
 
